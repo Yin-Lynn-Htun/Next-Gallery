@@ -4,7 +4,7 @@ import PrimaryButton from '../PrimaryButton'
 
 const NavBar = () => {
     return (
-        <div className="text-white bg-blue-300/0 w-full sticky top-0 left-0 h-24 px-5 flex justify-between items-center">
+        <div className="text-white bg-blue-300/0 w-full sticky top-0 left-0 h-24 px-5 flex justify-between items-center z-10">
             <div className="flex items-center ">
                 <Image
                     src={'/static/images/logo.svg'}
