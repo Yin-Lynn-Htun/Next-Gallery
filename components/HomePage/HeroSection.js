@@ -3,6 +3,18 @@ import SecondaryButton from '../SecondaryButton'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 
+const contextVariants = {
+    hidden: {
+        y: -300,
+        opacity: 0,
+    },
+    visible: {
+        y: 0,
+        opacity: 1,
+        transition: { duration: 1.2 },
+    },
+}
+
 const HeroSection = () => {
     return (
         <>
@@ -18,9 +30,9 @@ const HeroSection = () => {
             <div className="flex items-center justify-center text-white">
                 <div className="flex-1 self-start px-10 mt-40 leading-10">
                     <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1.2 }}
+                        variants={contextVariants}
+                        initial="hidden"
+                        animate="visible"
                     >
                         <h1 className="font-bold text-6xl ">
                             Discover, collect, and sell extraordinary
