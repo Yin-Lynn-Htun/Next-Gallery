@@ -7,6 +7,27 @@ import SecondaryButton from '../../components/SecondaryButton'
 import Link from 'next/dist/client/link'
 import ArtItems from '../../components/ArtItems'
 import { dummy_arts } from '../../dummy_data'
+import { motion } from 'framer-motion'
+
+const MotionLink = ({ href, children }) => {
+    return (
+        <Link href={href}>
+            <motion.a
+                className="text-xl"
+                whileHover={{
+                    color: '#fdae8f',
+                    scale: 1.2,
+                    transition: {
+                        type: 'spring',
+                        stiffness: '300',
+                    },
+                }}
+            >
+                {children}
+            </motion.a>
+        </Link>
+    )
+}
 
 const Artist = () => {
     return (
@@ -53,21 +74,10 @@ const Artist = () => {
                     </section>
 
                     <section className="flex w-full my-10 justify-center gap-10 text-xl">
-                        <Link href="/">
-                            <a>Collection</a>
-                        </Link>
-
-                        <Link href="/">
-                            <a>Creations</a>
-                        </Link>
-
-                        <Link href="/">
-                            <a>Auctions</a>
-                        </Link>
-
-                        <Link href="/">
-                            <a>About Me</a>
-                        </Link>
+                        <MotionLink href="/">Home</MotionLink>
+                        <MotionLink href="/">Creations </MotionLink>
+                        <MotionLink href="/">Auctions </MotionLink>
+                        <MotionLink href="/">About Me </MotionLink>
                     </section>
 
                     <ArtItems artistProfile arts={dummy_arts} />
