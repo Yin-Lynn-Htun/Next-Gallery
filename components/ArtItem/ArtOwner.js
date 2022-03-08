@@ -14,9 +14,9 @@ const ArtOwner = ({ name, owner, src }) => {
                     objectFit="cover"
                 />
             </div>
-            <h1 className="text-2xl font-bold">{name}</h1>
-            <h5>
-                <span className="text-[#8393AF]"> Owned by</span> {owner}
+            <h1 className="text-2xl font-bold w-max">{name}</h1>
+            <h5 className=" w-max">
+                <span className="text-text-blue">Owned by</span> {owner}
             </h5>
         </div>
     )

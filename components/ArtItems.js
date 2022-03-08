@@ -40,11 +40,11 @@ const dummy_arts = [
     },
 ]
 
-const ArtItems = () => {
+const ArtItems = ({ artistProfile }) => {
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-5 justify-between">
             {dummy_arts.map((art) => (
-                <ArtItem key={art.id} {...art} />
+                <ArtItem key={art.id} {...art} artistProfile={artistProfile} />
             ))}
         </div>
     )

@@ -22,8 +22,8 @@ const NavBar = () => {
                 <Link href={'/arts'} passHref>
                     <a className="mx-3">Explore</a>
                 </Link>
-                <Link href={'/'} passHref>
-                    <a className="mx-3">Trending</a>
+                <Link href={'/artists/asdf'} passHref>
+                    <a className="mx-3">Artists</a>
                 </Link>
                 <Link href={'/'} passHref>
                     <a className="mx-3 mr-5">Contact Us</a>
