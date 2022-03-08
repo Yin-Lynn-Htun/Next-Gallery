@@ -6,6 +6,7 @@ import { AiFillSetting } from 'react-icons/ai'
 import SecondaryButton from '../../components/SecondaryButton'
 import Link from 'next/dist/client/link'
 import ArtItems from '../../components/ArtItems'
+import { dummy_arts } from '../../dummy_data'
 
 const Artist = () => {
     return (
@@ -69,11 +70,11 @@ const Artist = () => {
                         </Link>
                     </section>
 
-                    <ArtItems artistProfile />
+                    <ArtItems artistProfile arts={dummy_arts} />
                     <br />
-                    <ArtItems artistProfile />
+                    <ArtItems artistProfile arts={dummy_arts} />
                     <br />
-                    <ArtItems artistProfile />
+                    <ArtItems artistProfile arts={dummy_arts} />
                 </Wrapper>
             </div>
         </div>
