@@ -1,9 +1,10 @@
 import HeroSection from '../components/HomePage/HeroSection'
+import Wrapper from '../components/Wrapper'
 
 export default function Home() {
     return (
-        <div className="w-full">
+        <Wrapper>
             <HeroSection />
-        </div>
+        </Wrapper>
     )
 }
