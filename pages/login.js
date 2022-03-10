@@ -1,9 +1,9 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import Input from '../components/Input'
 import PrimaryButton from '../components/PrimaryButton'
+import Image from 'next/image'
+import Link from 'next/link'
 
-const Signup = () => {
+const Login = () => {
     return (
         <section className="w-full min-h-screen flex relative">
             <div className="flex-1 rays relative flex justify-center items-center">
@@ -16,17 +16,10 @@ const Signup = () => {
             </div>
             <div className="flex-1 p-10 text-white flex flex-col justify-center items-center ">
                 <h1 className="text-4xl py-2 font-bold mb-5 rays gradient_text w-[500px]">
-                    Sign Up
+                    Welcome back!
                 </h1>
 
-                <form className="w-[500px]" action="">
-                    <Input
-                        label={'Full Name'}
-                        name="full_name"
-                        id="full_name"
-                        type="text"
-                    />
-
+                <form className="w-[500px]">
                     <Input
                         label={'Email'}
                         name="email"
@@ -41,20 +34,13 @@ const Signup = () => {
                         type="password"
                     />
 
-                    <Input
-                        label={'Confirm Password'}
-                        name="confirm_password"
-                        id="confirm_password"
-                        type="password"
-                    />
-
-                    <PrimaryButton>Sign Up</PrimaryButton>
+                    <PrimaryButton>Login</PrimaryButton>
 
                     <p className="text-lg mt-10 border-t-2 border-gray-300 pt-2">
-                        Already have an account?
+                        Create a new account?
                         <span className="cursor-pointer ml-5 py-2 rays gradient_text text-xl">
-                            <Link href="/login">
-                                <a>Login</a>
+                            <Link href="/signup">
+                                <a>Sign Up</a>
                             </Link>
                         </span>
                     </p>
@@ -64,4 +50,4 @@ const Signup = () => {
     )
 }
 
-export default Signup
+export default Login
