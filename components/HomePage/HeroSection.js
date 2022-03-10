@@ -11,7 +11,25 @@ const contextVariants = {
     visible: {
         y: 0,
         opacity: 1,
-        transition: { duration: 1.2 },
+        transition: {
+            duration: 1.2,
+            when: 'beforeChildren',
+            staggerChildren: 1,
+        },
+    },
+}
+
+const childVariants = {
+    hidden: {
+        x: '-50vw',
+    },
+    visible: {
+        x: 0,
+        transition: {
+            duration: 1.5,
+            type: 'spring',
+            stiffness: 120,
+        },
     },
 }
 
@@ -28,12 +46,13 @@ const HeroSection = () => {
             </div>
 
             <div className="flex items-center justify-center text-white">
-                <div className="flex-1 self-start px-10 mt-40 leading-10">
-                    <motion.div
-                        variants={contextVariants}
-                        initial="hidden"
-                        animate="visible"
-                    >
+                <motion.div
+                    variants={contextVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="flex-1 self-start px-10 mt-40 leading-10"
+                >
+                    <div>
                         <h1 className="font-bold text-6xl ">
                             Discover, collect, and sell extraordinary
                             <span className="text-[#FD1C68]">ARTs</span>
@@ -42,24 +61,18 @@ const HeroSection = () => {
                             NFT is the world&apos;s first and largest NFT
                             marketplace
                         </h3>
-                    </motion.div>
-                    <motion.div
-                        initial={{ x: '-50vw' }}
-                        animate={{ x: 0 }}
-                        transition={{
-                            delay: 1.2,
-                            duration: 1.5,
-                            type: 'spring',
-                            stiffness: 120,
-                        }}
-                        className="mt-10"
-                    >
-                        <PrimaryButton large={1} _classname="mr-10">
-                            Explore
-                        </PrimaryButton>
-                        <SecondaryButton large={1}>Create</SecondaryButton>
-                    </motion.div>
-                </div>
+                    </div>
+                    <div className="mt-10 flex">
+                        <motion.div variants={childVariants}>
+                            <PrimaryButton large={1} _classname="mr-10">
+                                Explore
+                            </PrimaryButton>
+                        </motion.div>
+                        <motion.div variants={childVariants}>
+                            <SecondaryButton large={1}>Create</SecondaryButton>
+                        </motion.div>
+                    </div>
+                </motion.div>
                 <div className="flex-1">
                     <Image
                         src="/static/images/hero.svg"
