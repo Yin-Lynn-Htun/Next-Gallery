@@ -1,7 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import Input from '../components/Input'
-import PrimaryButton from '../components/PrimaryButton'
 import RegisterForm from '../components/RegisterForm'
 
 const Signup = () => {
@@ -15,7 +12,7 @@ const Signup = () => {
                     alt="abstract background"
                 />
             </div>
-            <div className="flex-1 p-10 text-white flex flex-col justify-center items-center ">
+            <div className="flex-1 p-5 text-white flex flex-col justify-center items-center ">
                 <h1 className="text-4xl py-2 font-bold mb-5 rays gradient_text w-[500px]">
                     Sign Up
                 </h1>

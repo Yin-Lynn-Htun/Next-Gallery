@@ -2,6 +2,7 @@ import React from 'react'
 
 const Input = ({ label, id, errorMessage, touched, ...props }) => {
     console.log(touched, errorMessage, 'asdf')
+    console.log(props)
     return (
         <div className="flex flex-col my-5">
             <label htmlFor={id} className="text-xl font-semibold">
