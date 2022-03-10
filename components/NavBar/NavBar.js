@@ -1,8 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import PrimaryButton from '../PrimaryButton'
 
 const NavBar = () => {
+    const router = useRouter()
+
     return (
         <div className="text-white bg-blue-300/0 w-full sticky top-0 left-0 h-24 px-5 flex justify-between items-center z-10">
             <div className="flex items-center ">
@@ -28,7 +31,9 @@ const NavBar = () => {
                 <Link href={'/'} passHref>
                     <a className="mx-3 mr-5">Contact Us</a>
                 </Link>
-                <PrimaryButton>SIGN UP</PrimaryButton>
+                <PrimaryButton onClick={() => router.push('/signup')}>
+                    SIGN UP
+                </PrimaryButton>
             </div>
         </div>
     )
