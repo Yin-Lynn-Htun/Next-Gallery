@@ -73,14 +73,19 @@ const HeroSection = () => {
                         </motion.div>
                     </div>
                 </motion.div>
-                <div className="flex-1">
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2, duration: 2 }}
+                    className="flex-1"
+                >
                     <Image
                         src="/static/images/hero.svg"
                         alt="Hero Image"
                         width={650}
                         height={650}
                     />
-                </div>
+                </motion.div>
             </div>
         </>
     )
