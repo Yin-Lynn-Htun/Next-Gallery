@@ -4,8 +4,8 @@ import { AiFillEye } from 'react-icons/ai'
 
 const AristsItem = ({ name, src, loveCount, viewCount }) => {
     return (
-        <div className="p-5 rounded-xl gap-5 h-[150px] bg-gray-600 my-5 w-max items-center grid grid-cols-[100px_200px] grid-rows-2 text-white">
-            <div className="row-span-2 w-full h-full justify-self-center relative ">
+        <div className="p-5 rounded-xl gap-5 h-[170px] border-border-blue border-2 my-10 w-max items-center grid grid-cols-[120px_200px] grid-rows-2 text-white cursor-pointer">
+            <div className="row-span-2 w-full h-[120px] justify-self-center relative outline-border-blue outline-2 outline-none rounded-full">
                 <Image
                     src={src}
                     alt="owner avatar"
