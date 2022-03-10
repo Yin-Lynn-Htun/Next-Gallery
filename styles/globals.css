@@ -7,6 +7,11 @@
     background-image: linear-gradient(207.67deg, #fdae8f 3.43%, #fd1c68 104.7%);
 }
 
+.gradient_text {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 @layer base {
     html {
         font-family: 'Urbanist', sans-serif;
