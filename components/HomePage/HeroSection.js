@@ -1,6 +1,7 @@
 import PrimaryButton from '../PrimaryButton'
 import SecondaryButton from '../SecondaryButton'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const HeroSection = () => {
     return (
@@ -26,9 +27,13 @@ const HeroSection = () => {
                     </h3>
 
                     <div className="mt-10">
-                        <PrimaryButton large={1} _classname="mr-10">
-                            Explore
-                        </PrimaryButton>
+                        <Link href={'/arts'}>
+                            <a>
+                                <PrimaryButton large={1} _classname="mr-10">
+                                    Explore
+                                </PrimaryButton>
+                            </a>
+                        </Link>
                         <SecondaryButton large={1}>Create</SecondaryButton>
                     </div>
                 </div>

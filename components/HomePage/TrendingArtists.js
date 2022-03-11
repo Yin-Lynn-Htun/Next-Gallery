@@ -1,5 +1,6 @@
 import AristsItem from '../AristsItem'
 import { dummy_artists } from '../../dummy_data'
+import Link from 'next/link'
 
 const TrendingArtist = () => {
     return (

@@ -6,9 +6,36 @@ import { AiFillSetting } from 'react-icons/ai'
 import SecondaryButton from '../../components/SecondaryButton'
 import Link from 'next/dist/client/link'
 import ArtItems from '../../components/ArtItems'
-import { dummy_arts } from '../../dummy_data'
+import { dummy_arts, dummy_artists } from '../../dummy_data'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
-const Artist = () => {
+// This function gets called at build time
+export async function getStaticPaths() {
+    // Get the paths we want to pre-render based on posts
+    const paths = dummy_artists.map((artist) => ({
+        params: { slug: `${artist.id}` },
+    }))
+
+    // We'll pre-render only these paths at build time.
+    // { fallback: false } means other routes should 404.
+    return { paths, fallback: false }
+}
+
+// This function gets called at build time
+export async function getStaticProps({ params }) {
+    // Call an external API endpoint to get posts
+    const id = params.slug
+    const artist = dummy_artists.find((artist) => artist.id === +id)
+
+    return {
+        props: {
+            artist,
+        },
+    }
+}
+
+const Artist = ({ artist }) => {
     return (
         <div className="text-white">
             {/* cover photo */}
@@ -27,7 +54,7 @@ const Artist = () => {
                         <div className="flex flex-col justify-center items-center">
                             <div className="rounded-full w-60 h-60 relative overflow-hidden -mt-32 mb-5">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"
+                                    src={artist.src}
                                     alt="avatar"
                                     objectFit="cover"
                                     // width={300}
@@ -35,8 +62,10 @@ const Artist = () => {
                                     layout="fill"
                                 />
                             </div>
-                            <h1 className="text-xl">Angelina AK</h1>
-                            <h3 className="text-text-blue">@ang_el</h3>
+                            <h1 className="text-xl">{artist.name}</h1>
+                            <h3 className="text-text-blue">
+                                {artist.username}
+                            </h3>
                         </div>
 
                         <div className="flex items-center gap-5">
