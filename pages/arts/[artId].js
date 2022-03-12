@@ -15,8 +15,39 @@ const Tag = ({ name }) => {
     )
 }
 
+const Artist = ({ id, avatar, owner, loveCount, viewCount }) => (
+    <Link href={`/artists/${id}`}>
+        <a>
+            <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
+                <div className="row-span-2 w-100">
+                    <Image
+                        src={avatar}
+                        alt="owner avatar"
+                        className="rounded-full"
+                        width={70}
+                        height={70}
+                        objectFit="cover"
+                    />
+                </div>
+                <h1 className="text-xl font-bold w-max">{owner}</h1>
+
+                <div className="flex gap-20 w-full">
+                    <div>
+                        <GiSelfLove className="text-red-500 w-10 h-10 inline mr-3" />
+                        <span className="text-white">{loveCount}</span>
+                    </div>
+                    <div>
+                        <AiFillEye className="text-blue-300 w-10 h-10 inline mr-5" />
+                        <span className="text-white">{viewCount}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </Link>
+)
+
 const ArtItem = ({
-    art: { id, src: imageSrc, name, owner, loveCount, viewCount },
+    art: { id, src: imageSrc, name, owner, loveCount, viewCount, avatar },
 }) => {
     return (
         <div className="flex-1 flex">
@@ -30,30 +61,19 @@ const ArtItem = ({
                     />
                 </div>
             </div>
-            <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll screen_with_nav  relative ">
-                <div className="flex justify-between  pt-10 py-5 sticky top-0 bg-background-main">
-                    <h1 className="text-3xl font-bold">{name}</h1>
+            <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll overflow-x-hidden screen_with_nav  relative ">
+                <div className="flex justify-between  pt-10 py-5 sticky  z-10 top-0 bg-background-main">
+                    <div className="flex flex-col ">
+                        <h1 className="text-3xl font-bold">{name}</h1>
+                        <h3 className="font-bold text-xl text-text-pink">
+                            Price: 300$
+                        </h3>
+                    </div>
                     <CtaButton name="Buy Now" />
                 </div>
 
-                <Link href={`/artists/${id}`}>
-                    <a>
-                        <h3 className="text-text-blue text-xl italic mt-2 cursor-pointer">
-                            {owner}
-                        </h3>
-                    </a>
-                </Link>
+                <Artist {...{ id, owner, loveCount, viewCount, avatar }} />
 
-                <div className="flex gap-20 my-5 w-full">
-                    <div>
-                        <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{loveCount}</span>
-                    </div>
-                    <div>
-                        <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{viewCount}</span>
-                    </div>
-                </div>
                 <div className="flex flex-wrap">
                     <Tag name="Color Painting" />
                     <Tag name="Character" />
