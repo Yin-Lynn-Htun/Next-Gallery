@@ -10,7 +10,7 @@ const NavBar = () => {
     return (
         <div>
             <Wrapper>
-                <div className="text-white h-20 px-5 flex justify-between items-center z-10">
+                <div className="text-white h-20  flex justify-between items-center z-10">
                     <div className="flex items-center ">
                         <Link href="/">
                             <a>
