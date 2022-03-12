@@ -23,8 +23,6 @@ const LoginForm = () => {
         },
         validationSchema,
     })
-    console.log('form data', formik.touched)
-    console.log('form data', formik.errors)
 
     return (
         <form className="w-[500px]" onSubmit={formik.handleSubmit}>

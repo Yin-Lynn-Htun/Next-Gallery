@@ -149,7 +149,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     const artId = params.artId
     const art = dummy_arts.find((art) => art.id === +artId)
-    console.log('sadf', artId, art)
+
     return {
         props: {
             art,
