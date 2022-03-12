@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps }) {
         router.pathname !== '/signup' && router.pathname !== '/login'
 
     return (
-        <>
-            {/* {showNav && <NavBar />} */}
+        <section className="flex flex-col min-h-screen">
+            {showNav && <NavBar />}
             <Component {...pageProps} />
-        </>
+        </section>
     )
 }
 
