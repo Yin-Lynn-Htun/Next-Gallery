@@ -25,6 +25,6 @@
 
 @layer components {
     .button-utils {
-        @apply w-[120px] font-bold text-sm px-1 py-3 text-white rounded-xl shadow-md  transition-transform  hover:-translate-y-2 active:translate-y-0.5;
+        @apply w-[120px] font-bold text-base px-1 py-3 text-white rounded-xl shadow-md;
     }
 }
