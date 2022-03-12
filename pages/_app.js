@@ -10,11 +10,7 @@ function MyApp({ Component, pageProps }) {
 
     return (
         <>
-            {showNav && (
-                <Wrapper>
-                    <NavBar />
-                </Wrapper>
-            )}
+            {/* {showNav && <NavBar />} */}
             <Component {...pageProps} />
         </>
     )

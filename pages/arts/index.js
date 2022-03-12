@@ -1,5 +1,6 @@
 import ArtItems from '../../components/ArtItems'
 import { dummy_arts } from '../../dummy_data'
+import Wrapper from '../../components/Wrapper'
 
 export async function getStaticProps() {
     return {
@@ -9,13 +10,13 @@ export async function getStaticProps() {
     }
 }
 
-export default function Home({ arts }) {
+export default function Arts({ arts }) {
     return (
-        <div className="mx-auto max-w-[1400px] px-5">
+        <Wrapper>
             <h1 className="text-white text-center text-5xl mt-10">Explore</h1>
-            <div className="mt-10 flex justify-center items-center">
+            <div className="mt-10">
                 <ArtItems arts={arts} />
             </div>
-        </div>
+        </Wrapper>
     )
 }
