@@ -3,7 +3,6 @@ import Image from 'next/image'
 import ArtOwner from '../../components/ArtItem/ArtOwner'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
-import PrimaryButton from '../../components/PrimaryButton'
 import CtaButton from '../../components/CtaButton'
 
 const Tag = ({ name }) => {
@@ -30,13 +29,13 @@ const ArtItem = () => {
             <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll screen_with_nav  relative ">
                 <div className="flex justify-between  pt-10 py-5 sticky top-0 bg-background-main">
                     <h1 className="text-3xl font-bold">Speedy Bone #2223</h1>
-                    <CtaButton />
+                    <CtaButton name="Buy Now" />
                 </div>
                 <h3 className="text-text-blue text-xl italic mt-2 cursor-pointer">
                     Mike Jason
                 </h3>
 
-                <div className="flex justify-between my-5 w-full">
+                <div className="flex gap-20 my-5 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
                         <span className="text-white">1010</span>
