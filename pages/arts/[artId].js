@@ -3,6 +3,8 @@ import Image from 'next/image'
 import ArtOwner from '../../components/ArtItem/ArtOwner'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
+import PrimaryButton from '../../components/PrimaryButton'
+import CtaButton from '../../components/CtaButton'
 
 const Tag = ({ name }) => {
     return (
@@ -25,14 +27,15 @@ const ArtItem = () => {
                     />
                 </div>
             </div>
-            <div className="basis-4/12 text-white py-10 flex flex-col pr-20 overflow-scroll screen_with_nav ">
-                <div className="flex justify-between">
+            <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll screen_with_nav  relative ">
+                <div className="flex justify-between  pt-10 py-5 sticky top-0 bg-background-main">
                     <h1 className="text-3xl font-bold">Speedy Bone #2223</h1>
-                    <button className="rays px-7 py-1 self-start">Love</button>
+                    <CtaButton />
                 </div>
                 <h3 className="text-text-blue text-xl italic mt-2 cursor-pointer">
                     Mike Jason
                 </h3>
+
                 <div className="flex justify-between my-5 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
@@ -92,12 +95,6 @@ const ArtItem = () => {
                     souls receive their food deliveries before turning into
                     Hungry Ghosts
                 </p>
-                <div className="mt-auto mb-0 border-t-2 border-pink-300">
-                    <h1 className="text-xl my-3">Price: $3000</h1>
-                    <button className="rays w-full py-3 text-base rounded-lg text-white ">
-                        Buy Now
-                    </button>
-                </div>
             </div>
         </div>
     )
