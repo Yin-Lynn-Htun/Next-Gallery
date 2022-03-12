@@ -7,9 +7,6 @@ import SecondaryButton from '../../components/SecondaryButton'
 import Link from 'next/dist/client/link'
 import ArtItems from '../../components/ArtItems'
 import { dummy_arts, dummy_artists } from '../../dummy_data'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { dummy_arts } from '../../dummy_data'
 import { motion } from 'framer-motion'
 
 const MotionLink = ({ href, children }) => {
