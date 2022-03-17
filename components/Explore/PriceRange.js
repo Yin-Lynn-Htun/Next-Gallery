@@ -44,7 +44,6 @@ const PriceRange = () => {
     }
 
     const handleClickPriceButton = (e) => {
-        console.log('sadf')
         if (!showPriceRangeForm) {
             setShowPriceRangeForm(true)
             e.stopPropagation()
@@ -80,6 +79,11 @@ const PriceRange = () => {
                             className="border-2 border-gray-400 px-4 py-2 rounded-lg"
                             type="text"
                             placeholder="To"
+                            onKeyDown={(e) => {
+                                if (e.code === 'Enter') {
+                                    handleClickApplyButton()
+                                }
+                            }}
                             onChange={(e) => setToPrice(e.target.value)}
                             value={toPrice}
                         />
