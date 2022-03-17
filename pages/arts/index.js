@@ -3,6 +3,7 @@ import { dummy_arts } from '../../dummy_data'
 import Wrapper from '../../components/Wrapper'
 import { BiSearchAlt } from 'react-icons/bi'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
+import PriceRange from '../../components/Explore/PriceRange'
 
 export async function getStaticProps() {
     return {
@@ -40,10 +41,7 @@ export default function Arts({ arts }) {
                         <option value="animation">Animation</option>
                     </select>
 
-                    <button className="ml-5 flex bg-button-blue px-5 py-2 rounded-md items-center gap-2">
-                        <AiOutlineDollarCircle />
-                        <span> Price range</span>
-                    </button>
+                    <PriceRange />
                 </div>
 
                 <div className="flex w-72 gap-2 bg-white text-black px-3 items-center rounded-md">
