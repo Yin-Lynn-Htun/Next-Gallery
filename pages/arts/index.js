@@ -4,6 +4,7 @@ import Wrapper from '../../components/Wrapper'
 import { BiSearchAlt } from 'react-icons/bi'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
 import PriceRange from '../../components/Explore/PriceRange'
+import CategoryFilter from '../../components/Explore/Category'
 
 export async function getStaticProps() {
     return {
@@ -22,25 +23,7 @@ export default function Arts({ arts }) {
 
             <div className="text-white w-full my-5 bg-red-900/0 h-12 flex justify-between items-center">
                 <div className="flex items-stretch  ">
-                    <select
-                        name="category"
-                        id="category"
-                        className="bg-button-blue rounded-md px-3"
-                    >
-                        <option
-                            className="my-10 px-3 text-xl"
-                            value="character"
-                        >
-                            Character
-                        </option>
-                        <option value="animation">Animation</option>
-                        <option value="animation">Animation</option>
-                        <option value="animation">Animation</option>
-                        <option value="animation">Animation</option>
-                        <option value="animation">Animation</option>
-                        <option value="animation">Animation</option>
-                    </select>
-
+                    <CategoryFilter />
                     <PriceRange />
                 </div>
 
