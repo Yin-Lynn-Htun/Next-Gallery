@@ -64,9 +64,11 @@ const PriceRange = () => {
             </button>
 
             {showPriceRangeForm && (
-                <div className="absolute py-3 px-5 top-full mt-5  ml-10 z-20 bg-white text-black rounded-lg  ">
+                <div className="absolute py-3 px-5 top-full mt-5 ml-5 z-20 bg-white text-black rounded-lg  ">
                     {error && <p className="text-red-400">{error}</p>}
-                    <p className="text-center py-2 font-bold">USD</p>
+                    <p className="text-center py-2 font-bold">
+                        Currency in USD $
+                    </p>
                     <div className="flex flex-col gap-3">
                         <input
                             className="border-2 border-gray-400 px-4 py-2 rounded-lg"
