@@ -15,6 +15,7 @@ module.exports = {
                 'border-blue': '#10599f',
                 'background-main': '#030812',
                 'text-pink': '#FD3E71',
+                'button-blue': '#24478c',
             },
 
             fontFamily: {
