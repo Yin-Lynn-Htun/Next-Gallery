@@ -26,6 +26,7 @@ const PriceRange = () => {
     const handleClickClearButton = () => {
         setFromPrice('')
         setToPrice('')
+        setError('')
     }
 
     return (
