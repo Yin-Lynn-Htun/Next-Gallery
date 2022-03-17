@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
+import { useRouter } from 'next/router'
 
 const PriceRange = () => {
     const [showPriceRangeForm, setShowPriceRangeForm] = useState(false)
     const [fromPrice, setFromPrice] = useState('')
     const [toPrice, setToPrice] = useState('')
     const [error, setError] = useState(null)
+
+    const router = useRouter()
+
+    const cleanStates = () => {
+        setFromPrice('')
+        setToPrice('')
+        setError('')
+    }
 
     const handleClickApplyButton = () => {
         console.log(fromPrice, toPrice)
@@ -20,13 +29,13 @@ const PriceRange = () => {
             return
         }
 
-        setError('')
+        cleanStates()
+        setShowPriceRangeForm(false)
+        router.push(`?from=${fromPrice}&to=${toPrice}`)
     }
 
     const handleClickClearButton = () => {
-        setFromPrice('')
-        setToPrice('')
-        setError('')
+        cleanStates()
     }
 
     const closePriceRangeForm = () => {
@@ -46,7 +55,7 @@ const PriceRange = () => {
     }
 
     return (
-        <div className="relative">
+        <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
                 onClick={handleClickPriceButton}
                 className="ml-5 flex bg-button-blue px-5 py-2 rounded-md items-center gap-2"
