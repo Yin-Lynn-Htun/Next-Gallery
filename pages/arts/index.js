@@ -5,6 +5,7 @@ import { BiSearchAlt } from 'react-icons/bi'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
 import PriceRange from '../../components/Explore/PriceRange'
 import CategoryFilter from '../../components/Explore/Category'
+import SearchBar from '../../components/Explore/SearchBar'
 
 export async function getStaticProps() {
     return {
@@ -27,14 +28,7 @@ export default function Arts({ arts }) {
                     <PriceRange />
                 </div>
 
-                <div className="flex w-72 gap-2 bg-white text-black px-3 items-center rounded-md">
-                    <BiSearchAlt className="w-7 h-7" />
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="bg-transparent w-full outline-none p-2"
-                    />
-                </div>
+                <SearchBar />
             </div>
 
             <div className="mt-20">
