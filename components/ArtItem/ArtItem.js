@@ -22,7 +22,9 @@ const ArtItem = (props) => {
                     objectFit="cover"
                 />
             </div>
-
+            <h1 className="text-2xl my-5 font-bold w-max text-white">
+                {props.name}
+            </h1>
             {/* {!props.artistProfile && (
                 <ArtOwner
                     id={1}

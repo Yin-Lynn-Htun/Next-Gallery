@@ -29,10 +29,26 @@ const PriceRange = () => {
         setError('')
     }
 
+    const closePriceRangeForm = () => {
+        setShowPriceRangeForm(false)
+        document.removeEventListener('click', closePriceRangeForm)
+    }
+
+    const handleClickPriceButton = (e) => {
+        console.log('sadf')
+        if (!showPriceRangeForm) {
+            setShowPriceRangeForm(true)
+            e.stopPropagation()
+            document.addEventListener('click', closePriceRangeForm)
+        } else {
+            closePriceRangeForm()
+        }
+    }
+
     return (
         <div className="relative">
             <button
-                onClick={() => setShowPriceRangeForm((prevState) => !prevState)}
+                onClick={handleClickPriceButton}
                 className="ml-5 flex bg-button-blue px-5 py-2 rounded-md items-center gap-2"
             >
                 <AiOutlineDollarCircle />
