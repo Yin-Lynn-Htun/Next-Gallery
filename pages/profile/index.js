@@ -5,7 +5,7 @@ import Wrapper from '../../components/Wrapper'
 const FormInput = ({ name, type }) => (
     <div className="flex flex-col text-white">
         <label htmlFor="item-name" className="my-3 text-lg">
-            {name ? name : 'Name'}
+            {name}
         </label>
         <input
             type={type || 'text'}
@@ -31,9 +31,7 @@ const userProfile = () => {
             <Wrapper>
                 <div className="flex my-10 w-full">
                     <div className="w-72 flex flex-col px-10">
-                        <div className="bg-red-900 w-52 h-52 mx-auto rounded-full my-2">
-                            h
-                        </div>
+                        <div className="bg-red-900 w-52 h-52 mx-auto rounded-full my-2"></div>
                         <button className="bg-blue-900 py-2 my-2">
                             Upload From Computer
                         </button>
@@ -47,22 +45,25 @@ const userProfile = () => {
                             <h1 className="bg-gray-700 text-white py-3 text-xl pl-5 w-full">
                                 Account Information
                             </h1>
-                            <div className="grid grid-cols-2 grid-rows-2 gap-3 pl-5">
+                            <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
                                 <FormInput name={'First Name'} />
-                                <FormInput />
-                                <FormInput />
-                                <FormInput />
+                                <FormInput name={'Last Name'} />
+                                <FormInput
+                                    name={'Email Address'}
+                                    type="email"
+                                />
+                                <FormInput name={'Bio'} />
                             </div>
                         </div>
                         <div className="col-span-4 my-5">
                             <h1 className="bg-gray-700 text-white py-3 text-xl pl-5 w-full">
                                 Social Information
                             </h1>
-                            <div className="grid grid-cols-2 grid-rows-2 gap-3 pl-5">
-                                <FormInput />
-                                <FormInput />
-                                <FormInput />
-                                <FormInput />
+                            <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
+                                <FormInput name={'Your Website'} />
+                                <FormInput name={'Facebook'} />
+                                <FormInput name={'Twitter'} />
+                                <FormInput name={'Instagram'} />
                             </div>
                         </div>
                         <button className="col-span-1 col-start-4 rounded-lg w-max px-7 bg-blue-900 h-10  my-5 justify-self-end">
