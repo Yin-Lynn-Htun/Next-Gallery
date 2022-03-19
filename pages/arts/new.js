@@ -1,5 +1,6 @@
 import React from 'react'
 import Wrapper from '../../components/Wrapper'
+import PrimaryButton from '../../components/PrimaryButton'
 
 const FormInput = ({ name = 'Art Name' }) => (
     <div className="flex flex-col">
@@ -19,12 +20,11 @@ const CreatArt = () => {
     return (
         <Wrapper>
             <div>
-                <div className="text-white text-3xl font-bold text-center mx-auto mb-4">
+                <div className=" rays gradient_text text-4xl font-bold text-center mx-auto mb-4">
                     Upload your item
                 </div>
-
                 <div className="flex h-[1000px] bg-red-300">
-                    <div className="h-full bg-white flex-1">
+                    <div className="h-full bg-white flex-1 p-10">
                         <div className="flex flex-col">
                             <div className="border-dashed border-2 border-black h-40 w-full bg-red-300 grid place-items-center">
                                 Image placeholder
@@ -52,13 +52,18 @@ const CreatArt = () => {
                                         <FormInput name="Price" />
                                         <FormInput name="Currency" />
                                         <div className="col-span-2">
-                                            <h1 className="my-3">Category</h1>
-                                            <button className="border-2 border-black px-4 py-1">
+                                            <h1 className="my-3">
+                                                Choose categories
+                                            </h1>
+                                            <button className="border-2 self border-black px-4 py-1">
                                                 +
                                             </button>
                                         </div>
                                     </div>
                                 </div>
+                                <PrimaryButton _classname="w-max px-5 self-center ">
+                                    Upload Your Art
+                                </PrimaryButton>
                             </div>
                         </div>
                     </div>
