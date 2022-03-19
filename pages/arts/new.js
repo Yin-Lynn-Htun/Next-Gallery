@@ -116,7 +116,7 @@ const CreatArt = () => {
                             artistProfile={true}
                             name={name || 'Enter your art Name'}
                             price={price}
-                            src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1166&q=80"
+                            src="/static/images/ImageHolder.svg"
                             loveCount={0}
                             viewCount={0}
                         />
