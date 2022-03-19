@@ -31,7 +31,7 @@ const ArtItem = (props) => {
 
             {props.preview ? (
                 <div>
-                    <p className="text-xl mb-3">Price: $ 30</p>
+                    <p className="text-xl mb-3">Price: $ {props.price}</p>
                 </div>
             ) : (
                 <div className="flex justify-between my-5 w-full">

@@ -1,29 +1,42 @@
-/* eslint-disable @next/next/no-img-element */
-import React from 'react'
+import React, { useState } from 'react'
 import Wrapper from '../../components/Wrapper'
 import PrimaryButton from '../../components/PrimaryButton'
 import SecondaryButton from '../../components/SecondaryButton'
-import Image from 'next/image'
-import { GiSelfLove } from 'react-icons/gi'
-import { AiFillEye } from 'react-icons/ai'
-import ArtButtons from '../../components/ArtItem/ArtButtons'
 import ArtItem from '../../components/ArtItem/ArtItem'
 
-const FormInput = ({ name = 'Art Name' }) => (
+const FormInput = ({ name, type, value, handleChange }) => (
     <div className="flex flex-col text-white">
         <label htmlFor="item-name" className="my-3 text-lg">
             {name}
         </label>
         <input
-            type="text"
+            type={type || 'text'}
             id="item-name"
             placeholder="Example: Monalisa"
-            className="p-3 border-black border-2 rounded-md"
+            className="p-3 border-black border-2 rounded-md text-black"
+            value={value}
+            onChange={handleChange}
         />
     </div>
 )
 
 const CreatArt = () => {
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState(0)
+    const [description, setDescription] = useState('')
+
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+
+    const handlePriceChange = (e) => {
+        setPrice(e.target.value)
+    }
+
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value)
+    }
+
     return (
         <Wrapper>
             <div>
@@ -46,11 +59,38 @@ const CreatArt = () => {
                                     <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
                                         Details
                                     </h1>
-                                    <div className="grid grid-cols-2 grid-rows-3 gap-5 px-10">
-                                        <FormInput />
-                                        <FormInput name="Price" />
+                                    <div className="grid grid-cols-2 grid-rows-[100px] gap-5 px-10">
+                                        <FormInput
+                                            name="Art Name"
+                                            value={name}
+                                            handleChange={handleNameChange}
+                                        />
+                                        <FormInput
+                                            name="Price"
+                                            value={price}
+                                            handleChange={handlePriceChange}
+                                            type={'number'}
+                                        />
                                         <div className="col-span-2">
-                                            <FormInput name="Description" />
+                                            <div className="flex flex-col text-white">
+                                                <label
+                                                    htmlFor="description"
+                                                    className="my-3 text-lg"
+                                                >
+                                                    Description
+                                                </label>
+                                                <textarea
+                                                    name="description"
+                                                    id="description"
+                                                    rows="7"
+                                                    placeholder='Example: "Monalisa is a painting by the Dutch artist Rembrandt."'
+                                                    className="resize-none rounded-md text-black p-2"
+                                                    value={description}
+                                                    onChange={
+                                                        handleDescriptionChange
+                                                    }
+                                                ></textarea>
+                                            </div>
                                         </div>
                                         <div className="col-span-2 text-white">
                                             <h1 className="my-3 text-lg">
@@ -74,7 +114,8 @@ const CreatArt = () => {
                         <ArtItem
                             preview
                             artistProfile={true}
-                            name="Art Name"
+                            name={name || 'Enter your art Name'}
+                            price={price}
                             src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1166&q=80"
                             loveCount={0}
                             viewCount={0}
