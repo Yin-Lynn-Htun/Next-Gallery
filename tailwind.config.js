@@ -15,7 +15,7 @@ module.exports = {
                 'border-blue': '#10599f',
                 'background-main': '#030812',
                 'text-pink': '#FD3E71',
-                gray: '#252525',
+                'form-gray': '#252525',
             },
 
             fontFamily: {
