@@ -29,16 +29,22 @@ const ArtItem = (props) => {
                 <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
             )}
 
-            <div className="flex justify-between my-5 w-full">
+            {props.preview ? (
                 <div>
-                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                    <span className="text-white">{props.loveCount}</span>
+                    <p className="text-xl mb-3">Price: $ 30</p>
                 </div>
-                <div>
-                    <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
-                    <span className="text-white">{props.viewCount}</span>
+            ) : (
+                <div className="flex justify-between my-5 w-full">
+                    <div>
+                        <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
+                        <span className="text-white">{props.loveCount}</span>
+                    </div>
+                    <div>
+                        <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
+                        <span className="text-white">{props.viewCount}</span>
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="mt-auto mb-0 h-full">
                 <ArtButtons />

@@ -27,8 +27,8 @@ const CreatArt = () => {
     return (
         <Wrapper>
             <div>
-                <div className=" rays gradient_text text-4xl font-bold text-center mx-auto mb-4">
-                    Upload your item
+                <div className=" text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
+                    Upload Your Art
                 </div>
                 <div className="flex h-[1000px] ">
                     <div className="h-full flex-1 p-10">
@@ -43,7 +43,7 @@ const CreatArt = () => {
 
                             <div className=" flex flex-col w-full my-8">
                                 <div className="w-full my-5">
-                                    <h1 className="bg-gray text-white py-3 text-xl px-10 w-full">
+                                    <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
                                         Details
                                     </h1>
                                     <div className="grid grid-cols-2 grid-rows-3 gap-5 px-10">
@@ -72,6 +72,7 @@ const CreatArt = () => {
                     <div className="w-[320px] text-white h-full pt-5 ">
                         <h1 className="my-5 font-bold text-2xl">Art Preview</h1>
                         <ArtItem
+                            preview
                             artistProfile={true}
                             name="Art Name"
                             src="https://images.unsplash.com/photo-1536924940846-227afb31e2a5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1166&q=80"
