@@ -19,12 +19,14 @@ const ArtItem = (props) => {
                 />
             </div>
 
-            {!props.artistProfile && (
+            {!props.artistProfile ? (
                 <ArtOwner
                     name={props.name}
                     owner={props.owner}
                     src={props.avatar}
                 />
+            ) : (
+                <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
             )}
 
             <div className="flex justify-between my-5 w-full">
