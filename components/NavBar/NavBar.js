@@ -40,8 +40,11 @@ const NavBar = () => {
                         <Link href={'/'} passHref>
                             <a className="mx-3 mr-5">Contact Us</a>
                         </Link>
-                        <PrimaryButton onClick={() => router.push('/signup')}>
+                        {/* <PrimaryButton onClick={() => router.push('/signup')}>
                             SIGN UP
+                        </PrimaryButton> */}
+                        <PrimaryButton onClick={() => router.push('/arts/new')}>
+                            Create Art
                         </PrimaryButton>
                     </div>
                 </div>
