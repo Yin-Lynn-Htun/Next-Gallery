@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Portal from '../Portal'
 import FormInput from '../FormInput'
 import Tag from '../Tag'
 import PrimaryButton from '../PrimaryButton'
 import SecondaryButton from '../SecondaryButton'
 
-const CategoryModal = () => {
+const CategoryModal = ({
+    categories,
+    handleCancelCategory,
+    handleSaveCategory,
+}) => {
+    const [name, setName] = useState('')
+    const handleNameChange = (e) => setName(e.target.value)
+
     return (
         <Portal>
             <div className="w-screen h-screen bg-[#030812ef]  fixed top-0 left-0 z-50 overflow-hidden">
@@ -16,19 +23,28 @@ const CategoryModal = () => {
                         <FormInput
                             // name={'Add Categories'}
                             placeholder={'Example: Cartoon'}
+                            value={name}
+                            handleChange={handleNameChange}
+                            focus={true}
                         />
                     </div>
                     <div className="flex flex-wrap my-5">
-                        <Tag name="3D Model" />
-                        <Tag name="3D Model" />
-                        <Tag name="3D Model" />
-                        <Tag name="3D Model" />
-                        <Tag name="3D Model" />
+                        {categories.length > 0 &&
+                            categories.map((category) => (
+                                <Tag key={category} name={category} />
+                            ))}
                     </div>
                     <div className="flex ">
                         <div className="ml-auto flex gap-3 ">
-                            <SecondaryButton> Cancel</SecondaryButton>
-                            <PrimaryButton> Save</PrimaryButton>
+                            <SecondaryButton onClick={handleCancelCategory}>
+                                Cancel
+                            </SecondaryButton>
+                            <PrimaryButton
+                                type="submit"
+                                onClick={() => handleSaveCategory(name)}
+                            >
+                                Save
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>

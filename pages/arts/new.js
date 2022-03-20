@@ -5,6 +5,7 @@ import SecondaryButton from '../../components/SecondaryButton'
 import ArtItem from '../../components/ArtItem/ArtItem'
 import FormInput from '../../components/FormInput'
 import CategoryModal from '../../components/Modals/CategoryModal'
+import Tag from '../../components/Tag'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -15,6 +16,9 @@ const CreatArt = () => {
     const [artImageSrc, setArtImageSrc] = useState(
         '/static/images/ImageHolder.svg'
     )
+
+    const [showCategoryModal, setShowCategoryModal] = useState(false)
+    const [categories, setCategories] = useState([])
     const fileInputRef = useRef(null)
 
     const handleNameChange = (e) => {
@@ -37,9 +41,28 @@ const CreatArt = () => {
         setArtImageSrc(URL.createObjectURL(file))
     }
 
+    const handleAddCategory = () => {
+        setShowCategoryModal(true)
+    }
+
+    const handleSaveCategory = (name) => {
+        if (name === '') return
+        setCategories((prevC) => [...prevC, name])
+    }
+
+    const handleCancelCategory = () => {
+        setShowCategoryModal(false)
+    }
+
     return (
         <Wrapper>
-            <CategoryModal />
+            {showCategoryModal && (
+                <CategoryModal
+                    handleSaveCategory={handleSaveCategory}
+                    handleCancelCategory={handleCancelCategory}
+                    categories={categories}
+                />
+            )}
             <div>
                 <div className="text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
                     Upload Your Art
@@ -125,9 +148,23 @@ const CreatArt = () => {
                                             <h1 className="my-3 text-lg">
                                                 Choose categories
                                             </h1>
-                                            <button className="border-2 self border-white px-4 py-1">
-                                                +
-                                            </button>
+                                            <div className="flex ">
+                                                {categories.length > 0 &&
+                                                    categories.map(
+                                                        (category) => (
+                                                            <Tag
+                                                                key={category}
+                                                                name={category}
+                                                            />
+                                                        )
+                                                    )}
+                                                <button
+                                                    className="border-2 self border-white px-4 py-1"
+                                                    onClick={handleAddCategory}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
