@@ -1,22 +1,29 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import Wrapper from '../../components/Wrapper'
+import FormInput from '../../components/FormInput'
+import ReactCrop from 'react-image-crop'
+import 'react-image-crop/dist/ReactCrop.css'
 
-const FormInput = ({ name, type }) => (
-    <div className="flex flex-col text-white">
-        <label htmlFor="item-name" className="my-3 text-lg">
-            {name}
-        </label>
-        <input
-            type={type || 'text'}
-            id="item-name"
-            placeholder="Example: Monalisa"
-            className="p-3 border-black border-2 rounded-md text-black"
-        />
-    </div>
-)
+const UserProfile = () => {
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [isFilePicked, setIsFilePicked] = useState(false)
+    const [crop, setCrop] = useState({ aspect: 16 / 9 })
+    const [imageSrc, setImageSrc] = useState('/static/images/imageHolder.svg')
 
-const userProfile = () => {
+    const handleChangeFile = (e) => {
+        const file = e.target.files[0]
+        setSelectedFile(file)
+        setImageSrc(URL.createObjectURL(file))
+        setIsFilePicked(true)
+    }
+
+    const handleDeleteImage = () => {
+        setSelectedFile(null)
+        setImageSrc('/static/images/imageHolder.svg')
+        setIsFilePicked(false)
+    }
+
     return (
         <div className="text-white">
             <div className="w-full h-72 relative">
@@ -31,42 +38,99 @@ const userProfile = () => {
             <Wrapper>
                 <div className="flex my-10 w-full">
                     <div className="w-72 flex flex-col px-10">
-                        <div className="bg-red-900 w-52 h-52 mx-auto rounded-full my-2"></div>
-                        <button className="bg-blue-900 py-2 my-2">
-                            Upload From Computer
-                        </button>
-                        <button className="bg-gray-900 py-2 my-2">
+                        <div className="relative w-52 h-52 mx-auto rounded-full my-2">
+                            <Image
+                                src={imageSrc}
+                                alt="Insert Image"
+                                layout="fill"
+                                objectFit="cover"
+                            />
+                        </div>
+                        <label
+                            className="rays py-3 my-2 rounded-md font-semibold text-center"
+                            htmlFor="profileImage"
+                        >
+                            Browse Your Image
+                        </label>
+                        <input
+                            id="profileImage"
+                            name="profileImage"
+                            accept="image/*"
+                            type="file"
+                            hidden
+                            onChange={handleChangeFile}
+                        />
+
+                        <button
+                            onClick={handleDeleteImage}
+                            className="bg-text-dark py-3 my-2 rounded-md font-semibold"
+                        >
                             Delete Image
                         </button>
+
+                        {isFilePicked && (
+                            <div>
+                                <ReactCrop
+                                    crop={crop}
+                                    onChange={(crop) => {
+                                        console.log(crop)
+                                        setCrop({ crop })
+                                    }}
+                                    src={imageSrc}
+                                />
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex-1  grid grid-cols-4 px-5 ">
                         <div className="col-span-4 my-5">
-                            <h1 className="bg-gray-700 text-white py-3 text-xl pl-5 w-full">
-                                Account Information
+                            <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
+                                Details
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
-                                <FormInput name={'First Name'} />
-                                <FormInput name={'Last Name'} />
+                                <FormInput
+                                    name={'First Name'}
+                                    placeholder="Example: John"
+                                />
+                                <FormInput
+                                    name={'Last Name'}
+                                    placeholder="Example: Doe"
+                                />
                                 <FormInput
                                     name={'Email Address'}
                                     type="email"
+                                    placeholder={'Example: johndoe@gmail.com'}
                                 />
-                                <FormInput name={'Bio'} />
+                                <FormInput
+                                    name={'Bio'}
+                                    placeholder={'Example: I am a student.'}
+                                />
                             </div>
                         </div>
                         <div className="col-span-4 my-5">
-                            <h1 className="bg-gray-700 text-white py-3 text-xl pl-5 w-full">
-                                Social Information
+                            <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
+                                Details
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
-                                <FormInput name={'Your Website'} />
-                                <FormInput name={'Facebook'} />
-                                <FormInput name={'Twitter'} />
-                                <FormInput name={'Instagram'} />
+                                <FormInput
+                                    name={'Your Website'}
+                                    placeholder="Your website url"
+                                />
+                                <FormInput
+                                    name={'Facebook'}
+                                    placeholder="Your facebook url"
+                                />
+                                <FormInput
+                                    name={'Twitter'}
+                                    placeholder="Your Twitter url"
+                                />
+                                <FormInput
+                                    name={'Instagram'}
+                                    placeholder="Your Instagram url"
+                                />
                             </div>
                         </div>
-                        <button className="col-span-1 col-start-4 rounded-lg w-max px-7 bg-blue-900 h-10  my-5 justify-self-end">
+                        <button className="col-span-1 col-start-4 rounded-lg w-max px-7 rays h-10  my-5 justify-self-end font-semibold">
                             Update your profile
                         </button>
                     </div>
@@ -76,4 +140,4 @@ const userProfile = () => {
     )
 }
 
-export default userProfile
+export default UserProfile
