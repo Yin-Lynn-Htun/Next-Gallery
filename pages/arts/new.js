@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Wrapper from '../../components/Wrapper'
 import PrimaryButton from '../../components/PrimaryButton'
 import SecondaryButton from '../../components/SecondaryButton'
@@ -9,6 +9,12 @@ const CreatArt = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
+    const [artImage, setArtImage] = useState(null)
+    const [isFilePicked, setIsFilePicked] = useState(false)
+    const [artImageSrc, setArtImageSrc] = useState(
+        '/static/images/ImageHolder.svg'
+    )
+    const fileInputRef = useRef(null)
 
     const handleNameChange = (e) => {
         setName(e.target.value)
@@ -22,21 +28,56 @@ const CreatArt = () => {
         setDescription(e.target.value)
     }
 
+    const handleChangeFileInput = (e) => {
+        const file = e.target.files[0]
+        console.log(file)
+        setArtImage(file)
+        setIsFilePicked(true)
+        setArtImageSrc(URL.createObjectURL(file))
+    }
+
     return (
         <Wrapper>
             <div>
-                <div className=" text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
+                <div className="text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
                     Upload Your Art
                 </div>
                 <div className="flex h-[1000px] ">
                     <div className="h-full flex-1 p-10">
                         <div className="flex flex-col">
                             <div className="text-white border-dashed border-2 border-white h-60 w-full bg-black grid place-items-center">
-                                <h1 className="text-2xl">
-                                    Drop your art image here
-                                </h1>
-                                <h3 className="text-large font-bold">OR</h3>
-                                <SecondaryButton>Browse File</SecondaryButton>
+                                {!isFilePicked ? (
+                                    <>
+                                        <h1 className="text-2xl">
+                                            Drop your art image here
+                                        </h1>
+                                        <h3 className="text-large font-bold">
+                                            OR
+                                        </h3>
+                                        <input
+                                            type="file"
+                                            name="art"
+                                            id="art"
+                                            hidden
+                                            ref={fileInputRef}
+                                            onChange={handleChangeFileInput}
+                                        />
+                                        <SecondaryButton
+                                            onClick={() => {
+                                                console.log(
+                                                    fileInputRef.current
+                                                )
+                                                fileInputRef.current.click()
+                                            }}
+                                        >
+                                            Browse File
+                                        </SecondaryButton>
+                                    </>
+                                ) : (
+                                    <h1 className="text-green-300 text-2xl">
+                                        {artImage.name}
+                                    </h1>
+                                )}
                             </div>
 
                             <div className=" flex flex-col w-full my-8">
@@ -95,17 +136,21 @@ const CreatArt = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[320px] text-white h-full pt-5 ">
-                        <h1 className="my-5 font-bold text-2xl">Art Preview</h1>
-                        <ArtItem
-                            preview
-                            artistProfile={true}
-                            name={name || 'Enter your art Name'}
-                            price={price}
-                            src="/static/images/ImageHolder.svg"
-                            loveCount={0}
-                            viewCount={0}
-                        />
+                    <div className="w-[320px] text-white h-max  pt-5 sticky top-0">
+                        <div>
+                            <h1 className="my-5 font-bold text-2xl">
+                                Art Preview
+                            </h1>
+                            <ArtItem
+                                preview
+                                artistProfile={true}
+                                name={name || 'Enter your art Name'}
+                                price={price}
+                                src={artImageSrc}
+                                loveCount={0}
+                                viewCount={0}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
