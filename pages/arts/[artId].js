@@ -1,4 +1,3 @@
-import Wrapper from '../../components/Wrapper'
 import Image from 'next/image'
 import ArtOwner from '../../components/ArtItem/ArtOwner'
 import { GiSelfLove } from 'react-icons/gi'
@@ -6,14 +5,7 @@ import { AiFillEye } from 'react-icons/ai'
 import CtaButton from '../../components/CtaButton'
 import { dummy_arts } from '../../dummy_data'
 import Link from 'next/link'
-
-const Tag = ({ name }) => {
-    return (
-        <span className="bg-emerald-700 w-max py-1 px-2 rounded-full m-2 whitespace-nowrap">
-            {name}
-        </span>
-    )
-}
+import Tag from '../../components/Tag'
 
 const Artist = ({ id, avatar, owner, loveCount, viewCount }) => (
     <Link href={`/artists/${id}`}>

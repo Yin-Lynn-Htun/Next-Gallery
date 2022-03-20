@@ -4,6 +4,7 @@ import PrimaryButton from '../../components/PrimaryButton'
 import SecondaryButton from '../../components/SecondaryButton'
 import ArtItem from '../../components/ArtItem/ArtItem'
 import FormInput from '../../components/FormInput'
+import CategoryModal from '../../components/Modals/CategoryModal'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -38,6 +39,7 @@ const CreatArt = () => {
 
     return (
         <Wrapper>
+            <CategoryModal />
             <div>
                 <div className="text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
                     Upload Your Art

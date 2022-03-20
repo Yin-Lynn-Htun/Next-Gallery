@@ -19,12 +19,18 @@
 @layer base {
     html {
         font-family: 'Urbanist', sans-serif;
-        background-color: #030812;
+        background-color: '#030812';
     }
 }
 
 @layer components {
     .button-utils {
         @apply w-[120px] font-bold text-base px-1 py-3 text-white rounded-xl shadow-md;
+    }
+}
+
+@layer utilities {
+    .center_fixed_component {
+        @apply top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2;
     }
 }
