@@ -3,22 +3,7 @@ import Wrapper from '../../components/Wrapper'
 import PrimaryButton from '../../components/PrimaryButton'
 import SecondaryButton from '../../components/SecondaryButton'
 import ArtItem from '../../components/ArtItem/ArtItem'
-
-const FormInput = ({ name, type, value, handleChange }) => (
-    <div className="flex flex-col text-white">
-        <label htmlFor="item-name" className="my-3 text-lg">
-            {name}
-        </label>
-        <input
-            type={type || 'text'}
-            id="item-name"
-            placeholder="Example: Monalisa"
-            className="p-3 border-black border-2 rounded-md text-black"
-            value={value}
-            onChange={handleChange}
-        />
-    </div>
-)
+import FormInput from '../../components/FormInput'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -63,6 +48,7 @@ const CreatArt = () => {
                                         <FormInput
                                             name="Art Name"
                                             value={name}
+                                            placeholder={'Example: Monalisa'}
                                             handleChange={handleNameChange}
                                         />
                                         <FormInput
