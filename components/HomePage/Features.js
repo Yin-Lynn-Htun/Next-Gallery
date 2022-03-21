@@ -14,7 +14,7 @@ const Features = () => {
                         width={60}
                         height={60}
                     />
-                    <h2 className="text-2xl font-bold">
+                    <h2 className="text-3xl font-bold">
                         Discover the Finest Arts
                     </h2>
                     <p>
@@ -30,7 +30,7 @@ const Features = () => {
                         width={60}
                         height={60}
                     />
-                    <h2 className="text-2xl font-bold">Upload your arts</h2>
+                    <h2 className="text-3xl font-bold">Upload your arts</h2>
                     <p>
                         Upload your work (image, photgraphy or drawing), add a
                         title and description, and get featured on the
@@ -44,7 +44,7 @@ const Features = () => {
                         width={60}
                         height={60}
                     />
-                    <h2 className="text-2xl font-bold">Sale your creations</h2>
+                    <h2 className="text-3xl font-bold">Sale your creations</h2>
                     <p>
                         Add price for your creative art and the art lovers from
                         our website will buy it. Earn money together with us.
