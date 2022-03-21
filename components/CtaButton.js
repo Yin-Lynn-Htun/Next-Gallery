@@ -18,7 +18,7 @@ const CtaButton = ({ name }) => {
                 }}
                 className="absolute blur-md w-32 h-12 rounded-lg bg-cta-gradient bg-[length:400%]"
             ></motion.div>
-            <button className=" flex justify-center items-center h-11 rounded-lg bg-gray-700 w-[125px] backdrop-blur-3xl">
+            <button className="flex justify-center items-center h-11 rounded-lg bg-gray-700 w-[125px] backdrop-blur-3xl font-bold">
                 {name}
             </button>
         </div>

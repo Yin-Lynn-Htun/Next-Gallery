@@ -3,6 +3,7 @@ import SecondaryButton from '../SecondaryButton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
+import CtaButton from '../CtaButton'
 
 const contextVariants = {
     hidden: {
@@ -67,15 +68,13 @@ const HeroSection = () => {
                         <motion.div variants={childVariants}>
                             <Link href={'/arts'}>
                                 <a>
-                                    <PrimaryButton large={1} _classname="mr-10">
-                                        Explore
-                                    </PrimaryButton>
+                                    <CtaButton name={'Explore'} large={1} />
                                 </a>
                             </Link>
                         </motion.div>
-                        <motion.div variants={childVariants}>
-                            <SecondaryButton large={1}>Create</SecondaryButton>
-                        </motion.div>
+                        {/* <motion.div variants={childVariants}>
+                            <SecondaryButton>Create</SecondaryButton>
+                        </motion.div> */}
                     </div>
                 </motion.div>
                 <motion.div
