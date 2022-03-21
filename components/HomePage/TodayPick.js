@@ -9,16 +9,14 @@ const TodayPick = () => {
                 Today&apos;s pick
             </h1>
 
-            <div className="w-[900px] mx-auto mt-20">
-                <Link href="/arts/1">
-                    <a>
-                        <h1 className="text-5xl font-bold rays gradient_text w-max">
-                            Cutie Cat
-                        </h1>
-                    </a>
-                </Link>
+            <div className="w-[900px] mx-auto mt-20 flex items-baseline">
+                <h1 className="text-5xl font-bold rays gradient_text w-max">
+                    <Link href="/arts/1">
+                        <a> Cutie Cat </a>
+                    </Link>
+                </h1>
 
-                <p className="my-7 text-xl">
+                <p className="text-xl ml-4">
                     by:{' '}
                     <Link href="/artists/1">
                         <a className="text-yellow-300">Crazy Artist</a>
