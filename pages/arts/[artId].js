@@ -44,7 +44,7 @@ const ArtItem = ({
     return (
         <div className="flex-1 flex">
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
-                <div className="w-full h-full border-4 outline-white relative rounded-xl overflow-hidden">
+                <div className="w-full h-full relative rounded-xl overflow-hidden">
                     <Image
                         src={imageSrc}
                         alt="Title of the art"

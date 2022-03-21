@@ -4,10 +4,14 @@ import ArtOwner from './ArtOwner'
 import Image from 'next/image'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
+import { motion } from 'framer-motion'
 
 const ArtItem = (props) => {
     return (
-        <div className="w-80 h-min p-5 bg-white/10 rounded-2xl hover:bg-black/50 hover:outline-1 hover:outline-dashed hover:outline-white">
+        <motion.div
+            whileHover={{ y: -5, scale: 1.02 }}
+            className="w-80 h-min p-5  bg-white/10 rounded-2xl"
+        >
             <div className="flex justify-center">
                 <Image
                     className="rounded-xl overflow-hidden"
@@ -19,15 +23,25 @@ const ArtItem = (props) => {
                 />
             </div>
 
+            <h1 className="text-2xl my-5 font-bold w-max text-white">
+                {props.name}
+            </h1>
+
+
             {!props.artistProfile ? (
+
                 <ArtOwner
+                    id={1}
                     name={props.name}
                     owner={props.owner}
                     src={props.avatar}
                 />
+
+
             ) : (
                 <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
             )}
+
 
             {props.preview ? (
                 <div>
@@ -49,7 +63,7 @@ const ArtItem = (props) => {
             <div className="mt-auto mb-0 h-full">
                 <ArtButtons />
             </div>
-        </div>
+        </motion.div>
     )
 }
 
