@@ -23,25 +23,16 @@ const ArtItem = (props) => {
                 />
             </div>
 
-            <h1 className="text-2xl my-5 font-bold w-max text-white">
-                {props.name}
-            </h1>
-
-
             {!props.artistProfile ? (
-
                 <ArtOwner
                     id={1}
                     name={props.name}
                     owner={props.owner}
                     src={props.avatar}
                 />
-
-
             ) : (
                 <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
             )}
-
 
             {props.preview ? (
                 <div>
