@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 import Wrapper from '../../components/Wrapper'
 import FormInput from '../../components/FormInput'
-import ReactCrop from 'react-image-crop'
+import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
 const UserProfile = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [isFilePicked, setIsFilePicked] = useState(false)
     const [crop, setCrop] = useState({ aspect: 1 / 1 })
-    const [imageSrc, setImageSrc] = useState('/static/images/imageHolder.svg')
+    const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
@@ -20,7 +20,7 @@ const UserProfile = () => {
 
     const handleDeleteImage = () => {
         setSelectedFile(null)
-        setImageSrc('/static/images/imageHolder.svg')
+        setImageSrc('/static/images/Profile.svg')
         setIsFilePicked(false)
     }
 
@@ -113,9 +113,23 @@ const UserProfile = () => {
                                     placeholder={'Example: johndoe@gmail.com'}
                                 />
                                 <FormInput
-                                    name={'Bio'}
-                                    placeholder={'Example: I am a student.'}
+                                    name={'Location'}
+                                    placeholder={'Example: USA, Florida'}
                                 />
+
+                                <div className="flex flex-col">
+                                    <label className="my-3 text-lg text-white">
+                                        Your bio
+                                    </label>
+                                    <textarea
+                                        className="p-5 rounded-md text-black"
+                                        name="bio"
+                                        id="bio"
+                                        cols="30"
+                                        rows="10"
+                                        placeholder="Write anything about you."
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="col-span-4 my-5">
