@@ -9,8 +9,8 @@ export default function Home() {
         <Wrapper>
             <HeroSection />
             <Features />
-            <TodayPick />
             <TrendingArtist />
+            <TodayPick />
         </Wrapper>
     )
 }
