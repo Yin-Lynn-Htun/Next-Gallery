@@ -1,4 +1,4 @@
-const FormInput = ({ name, type, value, handleChange, placeholder }) => (
+const FormInput = ({ name, type, value, handleChange, focus, placeholder }) => (
     <div className="flex flex-col text-white">
         <label htmlFor="item-name" className="my-3 text-lg">
             {name}
@@ -10,6 +10,7 @@ const FormInput = ({ name, type, value, handleChange, placeholder }) => (
             className="p-3 border-black border-2 rounded-md text-black"
             value={value}
             onChange={handleChange}
+            autoFocus={focus}
         />
     </div>
 )

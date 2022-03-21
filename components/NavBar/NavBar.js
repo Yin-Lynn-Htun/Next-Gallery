@@ -34,7 +34,7 @@ const NavBar = () => {
                         <Link href={'/arts'} passHref>
                             <a className="mx-3">Explore</a>
                         </Link>
-                        <Link href={'/artists/2'} passHref>
+                        <Link href={'/artists'} passHref>
                             <a className="mx-3">Artists</a>
                         </Link>
                         <Link href={'/'} passHref>
