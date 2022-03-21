@@ -8,7 +8,7 @@ import 'react-image-crop/dist/ReactCrop.css'
 const UserProfile = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [isFilePicked, setIsFilePicked] = useState(false)
-    const [crop, setCrop] = useState({ aspect: 16 / 9 })
+    const [crop, setCrop] = useState({ aspect: 1 / 1 })
     const [imageSrc, setImageSrc] = useState('/static/images/imageHolder.svg')
 
     const handleChangeFile = (e) => {
@@ -22,6 +22,17 @@ const UserProfile = () => {
         setSelectedFile(null)
         setImageSrc('/static/images/imageHolder.svg')
         setIsFilePicked(false)
+    }
+
+    const handleCropChange = (newCrop) => {
+        setCrop(newCrop)
+    }
+    const handleCropImageLoaded = (image) => {
+        console.log('image loaded', image)
+    }
+
+    const handleOnCropComplete = (crop, pixelCrop) => {
+        console.log('complete', crop, pixelCrop)
     }
 
     return (
@@ -72,11 +83,11 @@ const UserProfile = () => {
                             <div>
                                 <ReactCrop
                                     crop={crop}
-                                    onChange={(crop) => {
-                                        console.log(crop)
-                                        setCrop({ crop })
-                                    }}
+                                    onChange={handleCropChange}
                                     src={imageSrc}
+                                    onImageLoaded={handleCropImageLoaded}
+                                    onComplete={handleOnCropComplete}
+                                    circularCrop={true}
                                 />
                             </div>
                         )}
