@@ -34,14 +34,17 @@ const NavBar = () => {
                         <Link href={'/arts'} passHref>
                             <a className="mx-3">Explore</a>
                         </Link>
-                        <Link href={'/artists/2'} passHref>
+                        <Link href={'/artists'} passHref>
                             <a className="mx-3">Artists</a>
                         </Link>
                         <Link href={'/'} passHref>
                             <a className="mx-3 mr-5">Contact Us</a>
                         </Link>
-                        <PrimaryButton onClick={() => router.push('/signup')}>
+                        {/* <PrimaryButton onClick={() => router.push('/signup')}>
                             SIGN UP
+                        </PrimaryButton> */}
+                        <PrimaryButton onClick={() => router.push('/arts/new')}>
+                            Create Art
                         </PrimaryButton>
                     </div>
                 </div>

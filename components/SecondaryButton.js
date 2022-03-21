@@ -10,6 +10,7 @@ const SecondaryButton = ({ children, ...props }) => {
             className={`bg-text-dark button-utils ${
                 props.large ? 'py-5 px-7 text-xl w-[170px]' : ''
             }`}
+            {...props}
         >
             {children}
         </motion.button>
