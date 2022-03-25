@@ -2,16 +2,20 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import Wrapper from '../../components/Wrapper'
 import FormInput from '../../components/FormInput'
-import { getSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [isFilePicked, setIsFilePicked] = useState(false)
     const [crop, setCrop] = useState({ aspect: 1 / 1 })
     const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
+    const { data: session } = useSession()
 
+    console.log('session', session)
+
+    const { email } = session.user
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         setSelectedFile(file)
@@ -80,7 +84,7 @@ const UserProfile = () => {
                             Delete Image
                         </button>
 
-                        {isFilePicked && (
+                        {/* {isFilePicked && (
                             <div>
                                 <ReactCrop
                                     crop={crop}
@@ -91,7 +95,7 @@ const UserProfile = () => {
                                     circularCrop={true}
                                 />
                             </div>
-                        )}
+                        )} */}
                     </div>
 
                     <div className="flex-1  grid grid-cols-4 px-5 ">
@@ -112,13 +116,14 @@ const UserProfile = () => {
                                     name={'Email Address'}
                                     type="email"
                                     placeholder={'Example: johndoe@gmail.com'}
+                                    value={email}
                                 />
                                 <FormInput
                                     name={'Location'}
                                     placeholder={'Example: USA, Florida'}
                                 />
 
-                                <div className="flex flex-col">
+                                <div className="flex flex-col col-span-2">
                                     <label className="my-3 text-lg text-white">
                                         Your bio
                                     </label>
@@ -179,9 +184,5 @@ export async function getServerSideProps(context) {
         }
     }
 
-    return {
-        props: {
-            session: await getSession(context),
-        },
-    }
+    return { props: { session } }
 }
