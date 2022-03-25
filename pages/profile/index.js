@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Wrapper from '../../components/Wrapper'
 import FormInput from '../../components/FormInput'
+import { getSession } from 'next-auth/react'
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
@@ -166,3 +167,21 @@ const UserProfile = () => {
 }
 
 export default UserProfile
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login',
+            },
+        }
+    }
+
+    return {
+        props: {
+            session: await getSession(context),
+        },
+    }
+}
