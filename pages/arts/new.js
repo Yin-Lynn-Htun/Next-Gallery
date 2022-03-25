@@ -55,6 +55,45 @@ const CreatArt = () => {
         setShowCategoryModal(false)
     }
 
+    const uploadImage = async () => {
+        const cloudName = 'dtakk3gbq'
+        const formData = new FormData()
+        formData.append('file', artImage)
+        formData.append('upload_preset', 'next-gallery')
+
+        const respond = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+            {
+                method: 'POST',
+                body: formData,
+            }
+        )
+
+        const data = await respond.json()
+        return data
+    }
+
+    const handleUploadArt = async () => {
+        const imageData = await uploadImage()
+        console.log(imageData)
+        const data = await fetch('/api/uploadArtImage', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                imageUrl: imageData.secure_url,
+                imagePublicId: imageData.public_id,
+                name,
+                price,
+                description,
+                categories,
+            }),
+        }).then((res) => res.json())
+
+        console.log(data)
+    }
+
     return (
         <Wrapper>
             {showCategoryModal && (
@@ -88,7 +127,7 @@ const CreatArt = () => {
                                             ref={fileInputRef}
                                             onChange={handleChangeFileInput}
                                         />
-                                        <SecondaryButton
+                                        <PrimaryButton
                                             onClick={() => {
                                                 console.log(
                                                     fileInputRef.current
@@ -97,12 +136,25 @@ const CreatArt = () => {
                                             }}
                                         >
                                             Browse File
-                                        </SecondaryButton>
+                                        </PrimaryButton>
                                     </>
                                 ) : (
-                                    <h1 className="text-green-300 text-2xl">
-                                        {artImage.name}
-                                    </h1>
+                                    <div className="flex flex-col gap-10 items-center">
+                                        <h1 className="text-green-300 text-2xl">
+                                            {artImage.name}
+                                        </h1>
+                                        <SecondaryButton
+                                            onClick={() => {
+                                                setIsFilePicked(false)
+                                                setArtImage(null)
+                                                setArtImageSrc(
+                                                    '/static/images/ImageHolder.svg'
+                                                )
+                                            }}
+                                        >
+                                            Delete Image
+                                        </SecondaryButton>
+                                    </div>
                                 )}
                             </div>
 
@@ -170,7 +222,10 @@ const CreatArt = () => {
                                     </div>
                                 </div>
 
-                                <PrimaryButton _classname="w-max px-5 self-center ">
+                                <PrimaryButton
+                                    _classname="w-max px-5 self-center"
+                                    onClick={handleUploadArt}
+                                >
                                     Upload Your Art
                                 </PrimaryButton>
                             </div>
