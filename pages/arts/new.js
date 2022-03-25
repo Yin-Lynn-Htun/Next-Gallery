@@ -46,13 +46,25 @@ const CreatArt = () => {
         setShowCategoryModal(true)
     }
 
-    const handleSaveCategory = (name) => {
-        if (name === '') return
+    const handleSaveCategory = (e, name) => {
+        e.preventDefault()
+
+        if (name === '') return true
         setCategories((prevC) => [...prevC, name])
     }
 
     const handleCancelCategory = () => {
         setShowCategoryModal(false)
+    }
+
+    const clearFormData = () => {
+        setName('')
+        setPrice(0)
+        setDescription('')
+        setIsFilePicked(false)
+        setArtImage(null)
+        setArtImageSrc('/static/images/ImageHolder.svg')
+        setCategories([])
     }
 
     const uploadImage = async () => {
@@ -92,6 +104,10 @@ const CreatArt = () => {
         }).then((res) => res.json())
 
         console.log(data)
+        if (data.ok) {
+            // right now clear states, later maybe redirect to explore page or something
+            clearFormData()
+        }
     }
 
     return (
