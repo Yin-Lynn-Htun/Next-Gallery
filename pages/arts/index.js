@@ -6,11 +6,23 @@ import { AiOutlineDollarCircle } from 'react-icons/ai'
 import PriceRange from '../../components/Explore/PriceRange'
 import CategoryFilter from '../../components/Explore/Category'
 import SearchBar from '../../components/Explore/SearchBar'
+import { connectToDb } from '../../utils/db'
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
+    const arts = dummy_arts
+
+    const client = await connectToDb()
+    const data = await client
+        .db('next_gallery')
+        .collection('arts')
+        .find({})
+        .toArray()
+
+    const newArts = JSON.parse(JSON.stringify(data))
+
     return {
         props: {
-            arts: dummy_arts,
+            arts: arts,
         },
     }
 }
