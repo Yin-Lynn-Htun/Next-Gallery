@@ -41,7 +41,7 @@ const onSubmit = async (values) => {
     })
     const data = await respond.json()
     if (data.status === 'succeed') {
-        window.location.href = '/profile'
+        window.location.href = '/login'
     }
 }
 
