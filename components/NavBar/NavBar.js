@@ -3,9 +3,12 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import PrimaryButton from '../PrimaryButton'
 import Wrapper from '../Wrapper'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import SecondaryButton from '../SecondaryButton'
 
 const NavBar = () => {
     const router = useRouter()
+    const { data: session } = useSession()
 
     return (
         <div>
@@ -37,15 +40,28 @@ const NavBar = () => {
                         <Link href={'/artists'} passHref>
                             <a>Artists</a>
                         </Link>
-                        <Link href={'/'} passHref>
-                            <a>Contact Us</a>
-                        </Link>
-                        <PrimaryButton onClick={() => router.push('/signup')}>
-                            SIGN UP
-                        </PrimaryButton>
-                        <PrimaryButton onClick={() => router.push('/arts/new')}>
-                            Create Art
-                        </PrimaryButton>
+                        {!session && (
+                            <PrimaryButton
+                                onClick={() => router.push('/signup')}
+                            >
+                                SIGN UP
+                            </PrimaryButton>
+                        )}
+                        {session && (
+                            <>
+                                <Link href={'/profile'} passHref>
+                                    <a>Profile</a>
+                                </Link>
+                                <PrimaryButton
+                                    onClick={() => router.push('/arts/new')}
+                                >
+                                    Create Art
+                                </PrimaryButton>
+                                <SecondaryButton onClick={signOut}>
+                                    Logout
+                                </SecondaryButton>
+                            </>
+                        )}
                     </div>
                 </div>
             </Wrapper>
