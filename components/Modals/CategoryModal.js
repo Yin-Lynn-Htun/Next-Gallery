@@ -16,7 +16,7 @@ const CategoryModal = ({
     return (
         <Portal>
             <div className="w-screen h-screen bg-[#030812ef]  fixed top-0 left-0 z-50 overflow-hidden">
-                <div className=" bg-gradient-to-r from-[#EF3B36] to-white text-white fixed w-[1000px] h-[300px] center_fixed_component bg-blue-900 shadow-2xl rounded-lg px-20 py-7">
+                <div className=" bg-gradient-to-r from-[#EF3B36] to-white text-white fixed w-[700px] h-[300px] center_fixed_component bg-blue-900 shadow-2xl rounded-lg px-20 py-7">
                     <h1 className="text-3xl">Categories</h1>
 
                     <div>

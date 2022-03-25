@@ -10,7 +10,7 @@ const NavBar = () => {
     return (
         <div>
             <Wrapper>
-                <div className="text-white h-20  flex justify-between items-center z-10">
+                <div className="text-white h-20  flex jusitemstify-between -center z-10">
                     <div className="flex items-center ">
                         <Link href="/">
                             <a>
@@ -27,22 +27,22 @@ const NavBar = () => {
                             Next Gallery
                         </h1>
                     </div>
-                    <div className="font-semibold text-xl">
+                    <div className="font-semibold text-xl flex gap-7 items-center ml-auto">
                         <Link href={'/'} passHref>
-                            <a className="mx-3"> Home</a>
+                            <a> Home</a>
                         </Link>
                         <Link href={'/arts'} passHref>
-                            <a className="mx-3">Explore</a>
+                            <a>Explore</a>
                         </Link>
                         <Link href={'/artists'} passHref>
-                            <a className="mx-3">Artists</a>
+                            <a>Artists</a>
                         </Link>
                         <Link href={'/'} passHref>
-                            <a className="mx-3 mr-5">Contact Us</a>
+                            <a>Contact Us</a>
                         </Link>
-                        {/* <PrimaryButton onClick={() => router.push('/signup')}>
+                        <PrimaryButton onClick={() => router.push('/signup')}>
                             SIGN UP
-                        </PrimaryButton> */}
+                        </PrimaryButton>
                         <PrimaryButton onClick={() => router.push('/arts/new')}>
                             Create Art
                         </PrimaryButton>

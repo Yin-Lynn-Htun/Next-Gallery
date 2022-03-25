@@ -61,7 +61,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="list-disc flex flex-col gap-2 justify-self-center text-lg ">
+                <div className="list-none flex flex-col gap-2 justify-self-center text-lg text-yellow-300 ">
                     <li>
                         <Link href="/">
                             <a> Home</a>
