@@ -1,13 +1,38 @@
 import NextAuth from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
+import CredentialsProvider from 'next-auth/providers/credentials'
+import { connectToDb } from '../../../utils/db'
+import { isPasswordValid } from '../../../utils/auth'
 
 export default NextAuth({
-    // Configure one or more authentication providers
     providers: [
-        GithubProvider({
-            clientId: process.env.GITHUB_ID,
-            clientSecret: process.env.GITHUB_SECRET,
+        CredentialsProvider({
+            async authorize(credentials, req) {
+                // Add logic here to look up the user from the credentials supplied
+                const client = connectToDb()
+                const users_collection = client
+                    .db('next_gallery')
+                    .collection('users')
+
+                const user = users_collection.findOne({
+                    email: credentials.email,
+                })
+
+                if (!user) {
+                    client.close()
+                    throw new Error('User not found')
+                }
+
+                const entered_password = credentials.password
+                const isValid = isPasswordValid(entered_password, user.password)
+
+                if (!isValid) {
+                    client.close()
+                    throw new Error('Password is incorrect')
+                }
+
+                client.close()
+                return user
+            },
         }),
-        // ...add more providers here
     ],
 })
