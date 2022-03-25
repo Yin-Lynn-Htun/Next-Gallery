@@ -30,8 +30,19 @@ const validationSchema = yup.object().shape({
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
 
-const onSubmit = (values) => {
-    alert(JSON.stringify(values))
+const onSubmit = async (values) => {
+    console.log(values)
+    const respond = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+    })
+    const data = await respond.json()
+    if (data.status === 'succeed') {
+        window.location.href = '/profile'
+    }
 }
 
 const RegisterForm = () => {
