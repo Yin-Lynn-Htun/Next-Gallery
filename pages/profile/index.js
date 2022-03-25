@@ -1,16 +1,21 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Wrapper from '../../components/Wrapper'
 import FormInput from '../../components/FormInput'
+import { useSession, getSession } from 'next-auth/react'
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [isFilePicked, setIsFilePicked] = useState(false)
     const [crop, setCrop] = useState({ aspect: 1 / 1 })
     const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
+    const { data: session } = useSession()
 
+    console.log('session', session)
+
+    const { email } = session.user
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         setSelectedFile(file)
@@ -79,7 +84,7 @@ const UserProfile = () => {
                             Delete Image
                         </button>
 
-                        {isFilePicked && (
+                        {/* {isFilePicked && (
                             <div>
                                 <ReactCrop
                                     crop={crop}
@@ -90,13 +95,13 @@ const UserProfile = () => {
                                     circularCrop={true}
                                 />
                             </div>
-                        )}
+                        )} */}
                     </div>
 
                     <div className="flex-1  grid grid-cols-4 px-5 ">
                         <div className="col-span-4 my-5">
                             <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
-                                Details
+                                General Information
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
                                 <FormInput
@@ -111,13 +116,14 @@ const UserProfile = () => {
                                     name={'Email Address'}
                                     type="email"
                                     placeholder={'Example: johndoe@gmail.com'}
+                                    value={email}
                                 />
                                 <FormInput
                                     name={'Location'}
                                     placeholder={'Example: USA, Florida'}
                                 />
 
-                                <div className="flex flex-col">
+                                <div className="flex flex-col col-span-2">
                                     <label className="my-3 text-lg text-white">
                                         Your bio
                                     </label>
@@ -134,7 +140,7 @@ const UserProfile = () => {
                         </div>
                         <div className="col-span-4 my-5">
                             <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
-                                Details
+                                Social Accounts
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
                                 <FormInput
@@ -166,3 +172,17 @@ const UserProfile = () => {
 }
 
 export default UserProfile
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/',
+            },
+        }
+    }
+
+    return { props: { session } }
+}

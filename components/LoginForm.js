@@ -3,6 +3,7 @@ import PrimaryButton from './PrimaryButton'
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { signIn } from 'next-auth/react'
 
 const LoginForm = () => {
     const validationSchema = yup.object().shape({
@@ -13,14 +14,25 @@ const LoginForm = () => {
         password: yup.string().required('Password is required'),
     })
 
+    const onSubmit = async (values) => {
+        const response = await signIn('credentials', {
+            redirect: false,
+            ...values,
+        })
+
+        console.log(response)
+
+        if (!response.error) {
+            window.location.href = '/profile'
+        }
+    }
+
     const formik = useFormik({
         initialValues: {
             email: '',
             password: '',
         },
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
-        },
+        onSubmit,
         validationSchema,
     })
 
