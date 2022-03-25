@@ -96,7 +96,7 @@ const UserProfile = () => {
                     <div className="flex-1  grid grid-cols-4 px-5 ">
                         <div className="col-span-4 my-5">
                             <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
-                                Details
+                                General Information
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
                                 <FormInput
@@ -134,7 +134,7 @@ const UserProfile = () => {
                         </div>
                         <div className="col-span-4 my-5">
                             <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
-                                Details
+                                Social Accounts
                             </h1>
                             <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
                                 <FormInput
