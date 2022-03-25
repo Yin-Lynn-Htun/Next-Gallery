@@ -6,6 +6,7 @@ import ArtItem from '../../components/ArtItem/ArtItem'
 import FormInput from '../../components/FormInput'
 import CategoryModal from '../../components/Modals/CategoryModal'
 import Tag from '../../components/Tag'
+import { getSession } from 'next-auth/react'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -198,3 +199,21 @@ const CreatArt = () => {
 }
 
 export default CreatArt
+
+export async function getServerSideProps(context) {
+    const session = await getSession(context)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/',
+            },
+        }
+    }
+
+    return {
+        props: {
+            session: await getSession(context),
+        },
+    }
+}
