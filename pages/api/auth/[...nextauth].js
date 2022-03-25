@@ -8,12 +8,14 @@ export default NextAuth({
         CredentialsProvider({
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                const client = connectToDb()
+                const client = await connectToDb()
                 const users_collection = client
                     .db('next_gallery')
                     .collection('users')
 
-                const user = users_collection.findOne({
+                console.log(credentials)
+
+                const user = await users_collection.findOne({
                     email: credentials.email,
                 })
 
@@ -23,8 +25,12 @@ export default NextAuth({
                 }
 
                 const entered_password = credentials.password
-                const isValid = isPasswordValid(entered_password, user.password)
-
+                console.log({ entered_password, hashed: user.password })
+                const isValid = await isPasswordValid(
+                    entered_password,
+                    user.password
+                )
+                console.log({ isValid })
                 if (!isValid) {
                     client.close()
                     throw new Error('Password is incorrect')

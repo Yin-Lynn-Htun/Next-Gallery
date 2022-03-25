@@ -5,14 +5,14 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 
 const initialValues = {
-    full_name: '',
+    username: '',
     email: '',
     password: '',
     confirm_password: '',
 }
 
 const validationSchema = yup.object().shape({
-    full_name: yup.string().required('Full name is required'),
+    username: yup.string().required('Username is required'),
     email: yup
         .string()
         .required('Email is required')
@@ -55,13 +55,13 @@ const RegisterForm = () => {
     return (
         <form className="w-[500px]" onSubmit={formik.handleSubmit}>
             <Input
-                label={'Full Name'}
-                name="full_name"
-                id="full_name"
+                label={'Username'}
+                name="username"
+                id="username"
                 type="text"
-                touched={formik.touched.full_name}
-                errorMessage={formik.errors.full_name}
-                {...formik.getFieldProps('full_name')}
+                touched={formik.touched.username}
+                errorMessage={formik.errors.username}
+                {...formik.getFieldProps('username')}
             />
 
             <Input

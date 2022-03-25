@@ -7,7 +7,7 @@ const handler = async (req, res) => {
     }
 
     const { body } = req
-    const { full_name, email, password, confirm_password } = body
+    const { username, email, password, confirm_password } = body
 
     if (password !== confirm_password) {
         return res.status(401).send({ message: 'Passwords must match' })
@@ -19,9 +19,9 @@ const handler = async (req, res) => {
     const users_collection = client.db('next_gallery').collection('users')
 
     const respond = await users_collection.insertOne({
-        full_name,
+        username,
         email,
-        hashedPassword,
+        password: hashedPassword,
     })
 
     return res.status(200).send({
