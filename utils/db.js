@@ -3,14 +3,14 @@ const mongoose = require('mongoose')
 const connection = {}
 
 export const connectToDb = async () => {
-    if (connection.connected) return
+    if (connection.isConnected) return
 
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
+        const db = await mongoose.connect(process.env.MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
-        connection.connected = true
+        connection.isConnected = db.connections[0].readyState
     } catch (err) {
         throw new Error('Connection to database failed')
     }
