@@ -34,8 +34,19 @@ export default NextAuth({
                     throw new Error('Password is incorrect')
                 }
 
-                return user
+                return {
+                    id: user._id,
+                    email: user.email,
+                }
             },
         }),
     ],
+
+    callbacks: {
+        async session({ session, token, user }) {
+            session.accessToken = token.accessToken
+            session.userId = token.sub
+            return session
+        },
+    },
 })
