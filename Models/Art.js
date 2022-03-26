@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Art = mongoose.model('Art', {
+const ArtScheme = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Title is required'],
@@ -30,12 +30,12 @@ const Art = mongoose.model('Art', {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Artist',
     },
-    tags: [
+    categories: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Tag',
+            ref: 'Category',
         },
     ],
 })
 
-module.exports = mongoose.models.Art || mongoose.model('Art', Art)
+module.exports = mongoose.models.Art || mongoose.model('Art', ArtScheme)
