@@ -6,7 +6,7 @@ import ArtItem from '../../components/ArtItem/ArtItem'
 import FormInput from '../../components/FormInput'
 import CategoryModal from '../../components/Modals/CategoryModal'
 import Tag from '../../components/Tag'
-import { getSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -21,6 +21,9 @@ const CreatArt = () => {
     const [showCategoryModal, setShowCategoryModal] = useState(false)
     const [categories, setCategories] = useState([])
     const fileInputRef = useRef(null)
+
+    const { data: session } = useSession()
+    const { userId } = session
 
     const handleNameChange = (e) => {
         setName(e.target.value)
@@ -99,13 +102,14 @@ const CreatArt = () => {
                 price,
                 description,
                 categories,
+                artist: userId,
             }),
         }).then((res) => res.json())
 
         console.log(data)
         if (data.ok) {
             // right now clear states, later maybe redirect to explore page or something
-            // clearFormData()
+            clearFormData()
         }
     }
 
