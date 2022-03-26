@@ -113,10 +113,9 @@ const UserProfile = (props) => {
                                     placeholder="Example: Doe"
                                 />
                                 <FormInput
-                                    name={'Email Address'}
-                                    type="email"
-                                    placeholder={'Example: johndoe@gmail.com'}
-                                    value={email}
+                                    name={'Phone Number'}
+                                    type="phone"
+                                    placeholder={'Example: +95 9876543210'}
                                 />
                                 <FormInput
                                     name={'Location'}

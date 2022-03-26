@@ -1,5 +1,6 @@
 import { connectToDb } from '../../../utils/db'
 import { hashPassword } from '../../../utils/auth'
+import Artist from '../../../Models/Artist'
 
 const handler = async (req, res) => {
     if (req.method !== 'POST') {
@@ -15,10 +16,9 @@ const handler = async (req, res) => {
 
     const hashedPassword = hashPassword(password)
 
-    const client = await connectToDb()
-    const users_collection = client.db('next_gallery').collection('users')
+    await connectToDb()
 
-    const respond = await users_collection.insertOne({
+    const respond = await Artist.create({
         username,
         email,
         password: hashedPassword,

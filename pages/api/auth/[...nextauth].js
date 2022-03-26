@@ -2,20 +2,18 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { connectToDb } from '../../../utils/db'
 import { isPasswordValid } from '../../../utils/auth'
+import Artist from '../../../Models/Artist'
 
 export default NextAuth({
     providers: [
         CredentialsProvider({
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                const client = await connectToDb()
-                const users_collection = client
-                    .db('next_gallery')
-                    .collection('users')
+                await connectToDb()
 
                 console.log(credentials)
 
-                const user = await users_collection.findOne({
+                const user = await Artist.findOne({
                     email: credentials.email,
                 })
 
@@ -36,7 +34,6 @@ export default NextAuth({
                     throw new Error('Password is incorrect')
                 }
 
-                client.close()
                 return user
             },
         }),

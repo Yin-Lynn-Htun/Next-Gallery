@@ -36,13 +36,16 @@ const ArtistScheme = new mongoose.Schema({
     phoneNumber: {
         type: String,
     },
+    location: {
+        type: String,
+    },
     bio: {
         type: String,
     },
     imgUrl: {
         type: String,
     },
-    social: {
+    socials: {
         website: {
             type: String,
         },
@@ -55,9 +58,6 @@ const ArtistScheme = new mongoose.Schema({
         twitter: {
             type: String,
         },
-    },
-    location: {
-        type: String,
     },
 })
 
