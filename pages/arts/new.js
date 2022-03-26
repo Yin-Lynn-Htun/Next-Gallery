@@ -88,15 +88,14 @@ const CreatArt = () => {
     const handleUploadArt = async () => {
         const imageData = await uploadImage()
         console.log(imageData)
-        const data = await fetch('/api/uploadArtImage', {
+        const data = await fetch('/api/arts', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                imageUrl: imageData.secure_url,
-                imagePublicId: imageData.public_id,
-                name,
+                imgUrl: imageData.secure_url,
+                title: name,
                 price,
                 description,
                 categories,
@@ -106,7 +105,7 @@ const CreatArt = () => {
         console.log(data)
         if (data.ok) {
             // right now clear states, later maybe redirect to explore page or something
-            clearFormData()
+            // clearFormData()
         }
     }
 
