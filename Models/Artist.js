@@ -33,6 +33,9 @@ const ArtistScheme = new mongoose.Schema({
     lastName: {
         type: String,
     },
+    phoneNumber: {
+        type: String,
+    },
     bio: {
         type: String,
     },
