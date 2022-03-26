@@ -1,13 +1,17 @@
-const { MongoClient, ServerApiVersion } = require('mongodb')
+const mongoose = require('mongoose')
+
+const connection = {}
 
 export const connectToDb = async () => {
-    const uri =
-        'mongodb+srv://admin1:TestIng123@cluster0.l009c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-    const client = new MongoClient(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        serverApi: ServerApiVersion.v1,
-    })
-    await client.connect()
-    return client
+    if (connection.connected) return
+
+    try {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        })
+        connection.connected = true
+    } catch (err) {
+        throw new Error('Connection to database failed')
+    }
 }
