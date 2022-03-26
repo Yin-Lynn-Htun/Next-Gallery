@@ -15,7 +15,6 @@ const UserProfile = (props) => {
 
     console.log('session', session)
 
-    const { email } = session.user
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         setSelectedFile(file)
