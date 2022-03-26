@@ -3,28 +3,43 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 
 const Testing = () => {
-    const [crop, setCrop] = useState({ aspect: 1 / 1 })
-    const handleChange = (newCrop) => {
-        setCrop(newCrop)
-    }
-    const handleImageLoaded = (image) => {
-        console.log(image)
-    }
+    const handleClickProfile = async () => {
+        const res = await fetch('/api/profile/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                firstName: 'Liam',
+                lastName: 'Lynn',
+                phoneNumber: '+1012121212',
+                location: 'Florida, USA',
+                bio: 'I am a software developer',
+                socials: {
+                    website: 'https://www.liamlynn.com/',
+                    twitter: 'https://twitter.com/liamlynn',
+                },
+            }),
+        }).then((res) => res.json())
 
-    const handleOnCropComplete = (crop, pixelCrop) => {
-        console.log(crop, pixelCrop)
+        console.log(res)
     }
 
     return (
-        <div style={{ width: '500px', height: '500px' }}>
-            <ReactCrop
-                src="/static/images/BG.png"
-                crop={crop}
-                onChange={handleChange}
-                onImageLoaded={handleImageLoaded}
-                onComplete={handleOnCropComplete}
-                circularCrop={true}
-            />
+        <div>
+            <button
+                className="bg-white text-black"
+                onClick={handleClickProfile}
+            >
+                Click to create profile
+            </button>
+
+            <button
+                className="bg-white text-black"
+                onClick={handleClickProfile}
+            >
+                Click to fetch art by liam
+            </button>
         </div>
     )
 }
