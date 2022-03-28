@@ -24,27 +24,7 @@ const Testing = () => {
         console.log(res)
     }
 
-<<<<<<< HEAD
     return <ImageCrop />
-=======
-    return (
-        <div>
-            <button
-                className="bg-white text-black"
-                onClick={handleClickProfile}
-            >
-                Click to create profile
-            </button>
-
-            <button
-                className="bg-white text-black"
-                onClick={handleClickProfile}
-            >
-                Click to fetch art by liam
-            </button>
-        </div>
-    )
->>>>>>> main
 }
 
 export default Testing
