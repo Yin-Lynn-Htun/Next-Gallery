@@ -8,8 +8,8 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc }) => {
     return (
         <Portal>
             <div className="w-screen h-screen bg-[#030812ef]  fixed top-0 left-0 z-50 overflow-hidden grid place-items-center">
-                <div className="w-[500px] flex flex-col gap-10">
-                    <div className="w-[500px] h-[500px]  ">
+                <div className="w-[1000px] flex flex-col gap-10">
+                    <div className="grid place-items-center">
                         <ImageCrop imgSrc={imgSrc} />
                     </div>
                     <div className="flex justify-center gap-10">
