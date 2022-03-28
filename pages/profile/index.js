@@ -69,7 +69,7 @@ const UserProfile = (props) => {
                         <div className="w-72 flex flex-col px-10">
                             <div className="relative w-52 h-52 mx-auto rounded-full my-2 overflow-hidden outline-2 outline-white">
                                 <Image
-                                    src={imageSrc}
+                                    src="/static/images/Profile.svg"
                                     alt="Insert Image"
                                     layout="fill"
                                     objectFit="cover"
