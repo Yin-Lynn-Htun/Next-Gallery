@@ -1,4 +1,5 @@
 import { connectToDb } from '../../../utils/db'
+import Art from '../../../Models/Art'
 
 const handler = async (req, res) => {
     if (req.method !== 'POST') {
@@ -10,12 +11,9 @@ const handler = async (req, res) => {
     console.log(categories)
     console.log(categories[0])
 
-    const client = await connectToDb()
-    const art_collection = client.db('next_gallery').collection('arts')
-    const response = await art_collection.insertOne({
-        ...req.body,
-    })
-    console.log(response)
+    await connectToDb()
+    const response = await Art.create(req.body)
+
     return res
         .status(200)
         .send({ ok: true, message: 'Art added', data: response })

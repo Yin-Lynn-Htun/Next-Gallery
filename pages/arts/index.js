@@ -7,19 +7,16 @@ import PriceRange from '../../components/Explore/PriceRange'
 import CategoryFilter from '../../components/Explore/Category'
 import SearchBar from '../../components/Explore/SearchBar'
 import { connectToDb } from '../../utils/db'
+import Art from '../../Models/Art'
 
 export async function getServerSideProps() {
     const arts = dummy_arts
 
-    const client = await connectToDb()
-    const data = await client
-        .db('next_gallery')
-        .collection('arts')
-        .find({})
-        .toArray()
+    await connectToDb()
+    const data = await Art.find()
 
     const newArts = JSON.parse(JSON.stringify(data))
-
+    console.log(newArts)
     return {
         props: {
             arts: arts,
