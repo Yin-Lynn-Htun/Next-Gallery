@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import ReactCrop from 'react-image-crop'
-import 'react-image-crop/dist/ReactCrop.css'
+import ImageCrop from '../../components/ImageCrop/ImageCrop'
 
 const Testing = () => {
     const [crop, setCrop] = useState({ aspect: 1 / 1 })
@@ -15,18 +14,7 @@ const Testing = () => {
         console.log(crop, pixelCrop)
     }
 
-    return (
-        <div style={{ width: '500px', height: '500px' }}>
-            <ReactCrop
-                src="/static/images/BG.png"
-                crop={crop}
-                onChange={handleChange}
-                onImageLoaded={handleImageLoaded}
-                onComplete={handleOnCropComplete}
-                circularCrop={true}
-            />
-        </div>
-    )
+    return <ImageCrop />
 }
 
 export default Testing
