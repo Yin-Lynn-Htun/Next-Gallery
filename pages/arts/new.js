@@ -6,7 +6,7 @@ import ArtItem from '../../components/ArtItem/ArtItem'
 import FormInput from '../../components/FormInput'
 import CategoryModal from '../../components/Modals/CategoryModal'
 import Tag from '../../components/Tag'
-import { getSession } from 'next-auth/react'
+import { useSession, getSession } from 'next-auth/react'
 
 const CreatArt = () => {
     const [name, setName] = useState('')
@@ -21,6 +21,9 @@ const CreatArt = () => {
     const [showCategoryModal, setShowCategoryModal] = useState(false)
     const [categories, setCategories] = useState([])
     const fileInputRef = useRef(null)
+
+    const { data: session } = useSession()
+    const { userId } = session
 
     const handleNameChange = (e) => {
         setName(e.target.value)
@@ -46,13 +49,68 @@ const CreatArt = () => {
         setShowCategoryModal(true)
     }
 
-    const handleSaveCategory = (name) => {
-        if (name === '') return
+    const handleSaveCategory = (e, name) => {
+        e.preventDefault()
+
+        if (name === '') return true
         setCategories((prevC) => [...prevC, name])
     }
 
     const handleCancelCategory = () => {
         setShowCategoryModal(false)
+    }
+
+    const clearFormData = () => {
+        setName('')
+        setPrice(0)
+        setDescription('')
+        setIsFilePicked(false)
+        setArtImage(null)
+        setArtImageSrc('/static/images/ImageHolder.svg')
+        setCategories([])
+    }
+
+    const uploadImage = async () => {
+        const cloudName = 'dtakk3gbq'
+        const formData = new FormData()
+        formData.append('file', artImage)
+        formData.append('upload_preset', 'next-gallery')
+
+        const respond = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+            {
+                method: 'POST',
+                body: formData,
+            }
+        )
+
+        const data = await respond.json()
+        return data
+    }
+
+    const handleUploadArt = async () => {
+        const imageData = await uploadImage()
+        console.log(imageData)
+        const data = await fetch('/api/arts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                imgUrl: imageData.secure_url,
+                title: name,
+                price,
+                description,
+                categories,
+                artist: userId,
+            }),
+        }).then((res) => res.json())
+
+        console.log(data)
+        if (data.ok) {
+            // right now clear states, later maybe redirect to explore page or something
+            clearFormData()
+        }
     }
 
     return (
@@ -88,7 +146,7 @@ const CreatArt = () => {
                                             ref={fileInputRef}
                                             onChange={handleChangeFileInput}
                                         />
-                                        <SecondaryButton
+                                        <PrimaryButton
                                             onClick={() => {
                                                 console.log(
                                                     fileInputRef.current
@@ -97,12 +155,25 @@ const CreatArt = () => {
                                             }}
                                         >
                                             Browse File
-                                        </SecondaryButton>
+                                        </PrimaryButton>
                                     </>
                                 ) : (
-                                    <h1 className="text-green-300 text-2xl">
-                                        {artImage.name}
-                                    </h1>
+                                    <div className="flex flex-col gap-10 items-center">
+                                        <h1 className="text-green-300 text-2xl">
+                                            {artImage.name}
+                                        </h1>
+                                        <SecondaryButton
+                                            onClick={() => {
+                                                setIsFilePicked(false)
+                                                setArtImage(null)
+                                                setArtImageSrc(
+                                                    '/static/images/ImageHolder.svg'
+                                                )
+                                            }}
+                                        >
+                                            Delete Image
+                                        </SecondaryButton>
+                                    </div>
                                 )}
                             </div>
 
@@ -170,7 +241,10 @@ const CreatArt = () => {
                                     </div>
                                 </div>
 
-                                <PrimaryButton _classname="w-max px-5 self-center ">
+                                <PrimaryButton
+                                    _classname="w-max px-5 self-center"
+                                    onClick={handleUploadArt}
+                                >
                                     Upload Your Art
                                 </PrimaryButton>
                             </div>

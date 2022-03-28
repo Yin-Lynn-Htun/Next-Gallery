@@ -15,7 +15,6 @@ const UserProfile = (props) => {
 
     console.log('session', session)
 
-    const { email } = session.user
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         setSelectedFile(file)
@@ -113,10 +112,9 @@ const UserProfile = (props) => {
                                     placeholder="Example: Doe"
                                 />
                                 <FormInput
-                                    name={'Email Address'}
-                                    type="email"
-                                    placeholder={'Example: johndoe@gmail.com'}
-                                    value={email}
+                                    name={'Phone Number'}
+                                    type="phone"
+                                    placeholder={'Example: +95 9876543210'}
                                 />
                                 <FormInput
                                     name={'Location'}
