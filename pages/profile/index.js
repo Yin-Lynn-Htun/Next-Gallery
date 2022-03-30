@@ -11,23 +11,23 @@ const UserProfile = (props) => {
     const [selectedImageFile, setSelectedImageFile] = useState(null)
     const [showModal, setShowModal] = useState(false)
     const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
+    const [isFilePicked, setIsFilePicked] = useState(false)
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         if (!file) return
         setSelectedImageFile(URL.createObjectURL(file))
-
         setShowModal(true)
     }
 
     const handleDeleteImage = () => {
-        setSelectedFile(null)
         setImageSrc('/static/images/Profile.svg')
         setIsFilePicked(false)
     }
 
     const setImageUrl = (url) => {
         setImageSrc(url)
+        setIsFilePicked(true)
         setShowModal(false)
     }
 
@@ -65,27 +65,34 @@ const UserProfile = (props) => {
                                     objectFit="cover"
                                 />
                             </div>
-                            <label
-                                className="rays py-3 my-2 rounded-md font-semibold text-center"
-                                htmlFor="profileImage"
-                            >
-                                Browse Your Image
-                            </label>
-                            <input
-                                id="profileImage"
-                                name="profileImage"
-                                accept="image/*"
-                                type="file"
-                                hidden
-                                onChange={handleChangeFile}
-                            />
+                            {!isFilePicked && (
+                                <>
+                                    <label
+                                        className="rays py-3 my-2 rounded-md font-semibold text-center"
+                                        htmlFor="profileImage"
+                                    >
+                                        Browse Your Image
+                                    </label>
 
-                            <button
-                                onClick={handleDeleteImage}
-                                className="bg-text-dark py-3 my-2 rounded-md font-semibold"
-                            >
-                                Delete Image
-                            </button>
+                                    <input
+                                        id="profileImage"
+                                        name="profileImage"
+                                        accept="image/*"
+                                        type="file"
+                                        hidden
+                                        onChange={handleChangeFile}
+                                    />
+                                </>
+                            )}
+
+                            {isFilePicked && (
+                                <button
+                                    onClick={handleDeleteImage}
+                                    className="bg-text-dark py-3 my-2 rounded-md font-semibold"
+                                >
+                                    Delete Image
+                                </button>
+                            )}
 
                             {/* {isFilePicked && (
                             <div>
