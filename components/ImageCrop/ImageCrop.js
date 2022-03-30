@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRef, useState } from 'react'
+import { forwardRef, useRef, useState } from 'react'
 import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import Image from 'next/image'
 import { useDebounceEffect } from './useDebounceEffect'
 import { canvasPreview } from './CanvasPreview'
 
-const ImageCrop = ({ imgSrc }) => {
-    const previewCanvasRef = useRef(null)
+const ImageCrop = ({ imgSrc }, ref) => {
+    const previewCanvasRef = ref
     const [completedCrop, setCompletedCrop] = useState()
     const imgRef = useRef(null)
 
@@ -39,6 +39,27 @@ const ImageCrop = ({ imgSrc }) => {
         [completedCrop]
     )
 
+    const uploadImage = async () => {
+        const dataURL = previewCanvasRef.current.toDataURL()
+
+        const cloudName = 'dtakk3gbq'
+        const formData = new FormData()
+        formData.append('file', dataURL)
+        formData.append('upload_preset', 'next-gallery')
+
+        const respond = await fetch(
+            `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
+            {
+                method: 'POST',
+                body: formData,
+            }
+        )
+
+        const data = await respond.json()
+        console.log(data)
+        return data
+    }
+
     return (
         <div className="flex gap-20">
             <div className="w-[500px] h-max">
@@ -62,20 +83,24 @@ const ImageCrop = ({ imgSrc }) => {
                     />
                 </ReactCrop>
             </div>
-            <div className="w-[250px] h-[250px]">
-                {Boolean(completedCrop) && (
-                    <canvas
-                        ref={previewCanvasRef}
-                        style={{
-                            outline: '1px solid white',
-                            borderRadius: '50%',
-                            objectFit: 'contain',
-                            width: 250,
-                            height: 250,
-                        }}
-                    />
-                )}
-            </div>
+            {/* <div className="w-[250px] h-[250px]"> */}
+            {Boolean(completedCrop) && (
+                <canvas
+                    ref={previewCanvasRef}
+                    style={{
+                        outline: '1px solid white',
+                        borderRadius: '50%',
+                        objectFit: 'contain',
+                        width: 250,
+                        height: 250,
+                    }}
+                />
+            )}
+            {/* </div> */}
+
+            <button className="bg-white" onClick={uploadImage}>
+                Upload Image
+            </button>
         </div>
     )
 }
