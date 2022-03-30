@@ -8,20 +8,15 @@ import 'react-image-crop/dist/ReactCrop.css'
 import ProfileImageCropModal from '../../components/Modals/ProfileImageCropModal'
 
 const UserProfile = (props) => {
-    const [selectedFile, setSelectedFile] = useState(null)
-    const [isFilePicked, setIsFilePicked] = useState(false)
+    const [selectedImageFile, setSelectedImageFile] = useState(null)
     const [showModal, setShowModal] = useState(false)
-    const [crop, setCrop] = useState({ aspect: 1 / 1 })
     const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
-    const { data: session } = useSession()
-
-    console.log('session', session)
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
-        setSelectedFile(file)
-        setImageSrc(URL.createObjectURL(file))
-        setIsFilePicked(true)
+        if (!file) return
+        setSelectedImageFile(URL.createObjectURL(file))
+
         setShowModal(true)
     }
 
@@ -31,15 +26,9 @@ const UserProfile = (props) => {
         setIsFilePicked(false)
     }
 
-    const handleCropChange = (newCrop) => {
-        setCrop(newCrop)
-    }
-    const handleCropImageLoaded = (image) => {
-        console.log('image loaded', image)
-    }
-
-    const handleOnCropComplete = (crop, pixelCrop) => {
-        console.log('complete', crop, pixelCrop)
+    const setImageUrl = (url) => {
+        setImageSrc(url)
+        setShowModal(false)
     }
 
     const handleCancelModal = () => {
@@ -50,8 +39,9 @@ const UserProfile = (props) => {
         <>
             {showModal && (
                 <ProfileImageCropModal
-                    imgSrc={imageSrc}
+                    imgSrc={selectedImageFile}
                     onClickCancel={handleCancelModal}
+                    setimageurl={setImageUrl}
                 />
             )}
             <div className="text-white">
@@ -69,7 +59,7 @@ const UserProfile = (props) => {
                         <div className="w-72 flex flex-col px-10">
                             <div className="relative w-52 h-52 mx-auto rounded-full my-2 overflow-hidden outline-2 outline-white">
                                 <Image
-                                    src="/static/images/Profile.svg"
+                                    src={imageSrc}
                                     alt="Insert Image"
                                     layout="fill"
                                     objectFit="cover"
