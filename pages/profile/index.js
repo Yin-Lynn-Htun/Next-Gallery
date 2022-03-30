@@ -13,6 +13,17 @@ const UserProfile = (props) => {
     const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
     const [isFilePicked, setIsFilePicked] = useState(false)
 
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [location, setLocation] = useState('')
+    const [bio, setBio] = useState('')
+
+    const [twitter, setTwitter] = useState('')
+    const [website, setWebsite] = useState('')
+    const [instagram, setInstagram] = useState('')
+    const [facebook, setFacebook] = useState('')
+
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         if (!file) return
@@ -33,6 +44,33 @@ const UserProfile = (props) => {
 
     const handleCancelModal = () => {
         setShowModal(false)
+    }
+
+    const uploadProfile = async () => {
+        console.log('first')
+        const formBody = {
+            firstName,
+            lastName,
+            phoneNumber,
+            location,
+            bio,
+            imgUrl: imageSrc,
+            socials: {
+                twitter,
+                website,
+                instagram,
+                facebook,
+            },
+        }
+        const res = await fetch('api/profile/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formBody),
+        })
+        const data = await res.json()
+        console.log(data)
     }
 
     return (
@@ -117,19 +155,35 @@ const UserProfile = (props) => {
                                     <FormInput
                                         name={'First Name'}
                                         placeholder="Example: John"
+                                        value={firstName}
+                                        handleChange={(e) => {
+                                            setFirstName(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Last Name'}
                                         placeholder="Example: Doe"
+                                        value={lastName}
+                                        handleChange={(e) => {
+                                            setLastName(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Phone Number'}
                                         type="phone"
                                         placeholder={'Example: +95 9876543210'}
+                                        value={phoneNumber}
+                                        handleChange={(e) => {
+                                            setPhoneNumber(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Location'}
                                         placeholder={'Example: USA, Florida'}
+                                        value={location}
+                                        handleChange={(e) => {
+                                            setLocation(e.target.value)
+                                        }}
                                     />
 
                                     <div className="flex flex-col col-span-2">
@@ -143,6 +197,10 @@ const UserProfile = (props) => {
                                             cols="30"
                                             rows="10"
                                             placeholder="Write anything about you."
+                                            value={bio}
+                                            onChange={(e) => {
+                                                setBio(e.target.value)
+                                            }}
                                         />
                                     </div>
                                 </div>
@@ -155,22 +213,41 @@ const UserProfile = (props) => {
                                     <FormInput
                                         name={'Your Website'}
                                         placeholder="Your website url"
+                                        value={website}
+                                        handleChange={(e) => {
+                                            setWebsite(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Facebook'}
                                         placeholder="Your facebook url"
+                                        value={facebook}
+                                        handleChange={(e) => {
+                                            setFacebook(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Twitter'}
                                         placeholder="Your Twitter url"
+                                        value={twitter}
+                                        handleChange={(e) => {
+                                            setTwitter(e.target.value)
+                                        }}
                                     />
                                     <FormInput
                                         name={'Instagram'}
                                         placeholder="Your Instagram url"
+                                        value={instagram}
+                                        handleChange={(e) => {
+                                            setInstagram(e.target.value)
+                                        }}
                                     />
                                 </div>
                             </div>
-                            <button className="col-span-1 col-start-4 rounded-lg w-max px-7 rays h-10  my-5 justify-self-end font-semibold">
+                            <button
+                                onClick={uploadProfile}
+                                className="col-span-1 col-start-4 rounded-lg w-max px-7 rays h-10  my-5 justify-self-end font-semibold"
+                            >
                                 Update your profile
                             </button>
                         </div>
