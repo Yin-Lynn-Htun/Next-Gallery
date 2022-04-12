@@ -10,16 +10,19 @@ import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
 
 export async function getServerSideProps() {
-    const arts = dummy_arts
+    // const arts = dummy_arts
 
     await connectToDb()
-    const data = await Art.find()
+    const data = await Art.find().populate(
+        'artist',
+        'username firstName lastName imgUrl'
+    )
 
     const newArts = JSON.parse(JSON.stringify(data))
     console.log(newArts)
     return {
         props: {
-            arts: arts,
+            arts: newArts,
         },
     }
 }
