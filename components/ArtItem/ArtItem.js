@@ -15,7 +15,10 @@ const ArtItem = (props) => {
             <div className="flex justify-center">
                 <Image
                     className="rounded-xl overflow-hidden"
-                    src={props.src}
+                    src={
+                        props.imgUrl ||
+                        'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
+                    }
                     alt="Art"
                     width={270}
                     height={270}
@@ -24,12 +27,7 @@ const ArtItem = (props) => {
             </div>
 
             {!props.artistProfile ? (
-                <ArtOwner
-                    id={1}
-                    name={props.name}
-                    owner={props.owner}
-                    src={props.avatar}
-                />
+                <ArtOwner {...props.artist} artName={props.title} />
             ) : (
                 <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
             )}
@@ -42,11 +40,11 @@ const ArtItem = (props) => {
                 <div className="flex justify-between my-5 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{props.loveCount}</span>
+                        <span className="text-white">{props.love}</span>
                     </div>
                     <div>
                         <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{props.viewCount}</span>
+                        <span className="text-white">{props.watch}</span>
                     </div>
                 </div>
             )}
