@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import ReactCrop from 'react-image-crop'
-import 'react-image-crop/dist/ReactCrop.css'
+import ImageCrop from '../../components/ImageCrop/ImageCrop'
 
 const Testing = () => {
     const handleClickProfile = async () => {
@@ -25,23 +24,7 @@ const Testing = () => {
         console.log(res)
     }
 
-    return (
-        <div>
-            <button
-                className="bg-white text-black"
-                onClick={handleClickProfile}
-            >
-                Click to create profile
-            </button>
-
-            <button
-                className="bg-white text-black"
-                onClick={handleClickProfile}
-            >
-                Click to fetch art by liam
-            </button>
-        </div>
-    )
+    return <ImageCrop />
 }
 
 export default Testing
