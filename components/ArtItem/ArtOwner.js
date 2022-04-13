@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const ArtOwner = ({ _id, username, artName, imgUrl }) => {
     return (
-        <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
+        <div className="my-5 grid grid-cols-[90px_minmax(100px,_1fr)] grid-rows-2 text-white ">
             <div className="row-span-2 w-100">
                 <Image
                     src={
@@ -18,7 +18,9 @@ const ArtOwner = ({ _id, username, artName, imgUrl }) => {
                     objectFit="cover"
                 />
             </div>
-            <h1 className="text-2xl font-bold w-max">{artName}</h1>
+            <h1 className="text-2xl font-bold w-full text-ellipsis overflow-hidden whitespace-nowrap">
+                {artName}
+            </h1>
             <h5 className=" w-max">
                 <span className="text-text-blue">Owned by </span>
                 <span className="hover:text-red-500 ">
