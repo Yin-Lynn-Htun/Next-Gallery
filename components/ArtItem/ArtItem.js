@@ -9,7 +9,11 @@ import { motion } from 'framer-motion'
 const ArtItem = (props) => {
     return (
         <motion.div
-            whileHover={{ y: -5, scale: 1.02 }}
+            whileHover={{
+                y: -5,
+                scale: 1.02,
+                outline: '0.5px solid #b8b8b8',
+            }}
             className="w-80 h-min p-5  bg-white/10 rounded-2xl"
         >
             <div className="flex justify-center">
@@ -20,8 +24,8 @@ const ArtItem = (props) => {
                         'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
                     }
                     alt="Art"
-                    width={270}
-                    height={270}
+                    width={500}
+                    height={500}
                     objectFit="cover"
                 />
             </div>
