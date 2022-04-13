@@ -1,19 +1,19 @@
 import Image from 'next/image'
-import ArtOwner from '../../components/ArtItem/ArtOwner'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
 import CtaButton from '../../components/CtaButton'
 import { dummy_arts } from '../../dummy_data'
 import Link from 'next/link'
 import Tag from '../../components/Tag'
+import { connectToDb } from '../../utils/db'
 
-const Artist = ({ id, avatar, owner, loveCount, viewCount }) => (
-    <Link href={`/artists/${id}`}>
+const ArtistComponent = ({ _id, artist, love, watch }) => (
+    <Link href={`/artists/${_id}`}>
         <a>
             <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
                 <div className="row-span-2 w-100">
                     <Image
-                        src={avatar}
+                        src={artist.imgUrl}
                         alt="owner avatar"
                         className="rounded-full"
                         width={70}
@@ -21,16 +21,16 @@ const Artist = ({ id, avatar, owner, loveCount, viewCount }) => (
                         objectFit="cover"
                     />
                 </div>
-                <h1 className="text-xl font-bold w-max">{owner}</h1>
+                <h1 className="text-xl font-bold w-max">{artist.username}</h1>
 
                 <div className="flex gap-20 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-3" />
-                        <span className="text-white">{loveCount}</span>
+                        <span className="text-white">{love}</span>
                     </div>
                     <div>
                         <AiFillEye className="text-blue-300 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{viewCount}</span>
+                        <span className="text-white">{watch}</span>
                     </div>
                 </div>
             </div>
@@ -39,14 +39,24 @@ const Artist = ({ id, avatar, owner, loveCount, viewCount }) => (
 )
 
 const ArtItem = ({
-    art: { id, src: imageSrc, name, owner, loveCount, viewCount, avatar },
+    art: {
+        _id,
+        title,
+        description,
+        price,
+        love,
+        watch,
+        imgUrl,
+        artist,
+        categories,
+    },
 }) => {
     return (
         <div className="flex-1 flex">
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
                 <div className="w-full h-full relative rounded-xl overflow-hidden">
                     <Image
-                        src={imageSrc}
+                        src={imgUrl}
                         alt="Title of the art"
                         layout="fill"
                         objectFit="contain"
@@ -56,15 +66,15 @@ const ArtItem = ({
             <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll overflow-x-hidden screen_with_nav  relative ">
                 <div className="flex justify-between  pt-10 py-5 sticky  z-10 top-0 bg-background-main">
                     <div className="flex flex-col ">
-                        <h1 className="text-3xl font-bold">{name}</h1>
+                        <h1 className="text-3xl font-bold">{title}</h1>
                         <h3 className="font-bold text-xl text-text-pink">
-                            Price: 300$
+                            Price: {price}$
                         </h3>
                     </div>
                     <CtaButton name="Buy Now" />
                 </div>
 
-                <Artist {...{ id, owner, loveCount, viewCount, avatar }} />
+                <ArtistComponent {...{ _id, artist, love, watch }} />
 
                 <div className="flex flex-wrap">
                     <Tag name="Color Painting" />
@@ -76,7 +86,7 @@ const ArtItem = ({
 
                 <div>
                     <h1 className="text-2xl mt-10 mb-3">About Art</h1>
-                    <p className="text-base">
+                    {/* <p className="text-base">
                         The Runners. The most elite agency among the Tasty
                         Bones. The Speedy Bones undergo rigorous training and
                         wear enchanted speed suits that enable them to bend time
@@ -116,7 +126,8 @@ const ArtItem = ({
                         and make food deliveries at incredible speed. With their
                         help, the souls receive their food deliveries before
                         turning into Hungry Ghosts
-                    </p>
+                    </p> */}
+                    {description}
                 </div>
             </div>
         </div>
@@ -125,26 +136,43 @@ const ArtItem = ({
 
 export default ArtItem
 
-export async function getStaticPaths() {
-    const paths = dummy_arts.map((art) => ({
-        params: {
-            artId: art.id.toString(),
-        },
-    }))
+// export async function getStaticPaths() {
+//     const paths = dummy_arts.map((art) => ({
+//         params: {
+//             artId: art.id.toString(),
+//         },
+//     }))
 
-    return {
-        paths,
-        fallback: false, // false or 'blocking'
-    }
-}
+//     return {
+//         paths,
+//         fallback: false, // false or 'blocking'
+//     }
+// }
 
-export async function getStaticProps({ params }) {
-    const artId = params.artId
-    const art = dummy_arts.find((art) => art.id === +artId)
+// export async function getStaticProps({ params }) {
+//     const artId = params.artId
+//     const art = dummy_arts.find((art) => art.id === +artId)
+
+//     return {
+//         props: {
+//             art,
+//         },
+//     }
+// }
+
+import Art from '../../Models/Art'
+import Artist from '../../Models/Artist'
+
+export async function getServerSideProps(context) {
+    await connectToDb()
+    const { artId } = context.query
+    const data = await Art.findById(artId).populate('artist', 'username imgUrl')
+    const art = JSON.parse(JSON.stringify(data))
 
     return {
         props: {
-            art,
-        },
+            // _id , title , description , price , love , watch, imgUrl, artist { _id , username , imgUrl }, categories
+            art: art,
+        }, // will be passed to the page component as props
     }
 }
