@@ -3,27 +3,30 @@ import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
 import Link from 'next/link'
 
-const AristsItem = ({ id, name, src, loveCount, location }) => {
+const AristsItem = ({ _id, username, imgUrl, love, location }) => {
     return (
-        <Link href={`/artists/${id}`}>
-            <a>
+        <Link href={`/artists/${_id}`}>
+            <a className="flex">
                 <div className="p-10 rounded-xl gap-5 border-blue-400/0 border-2 my-10 items-center flex flex-col text-white cursor-pointer w-[300px] justify-center bg-text-darker ">
                     <div className="row-span-2 w-[150px] h-[150px] justify-self-center self-center relative outline-text-pink outline-2 outline-none rounded-full">
                         <Image
-                            src={src}
+                            src={
+                                imgUrl ||
+                                'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
+                            }
                             alt="artist avatar"
                             className="rounded-full"
                             layout="fill"
                             objectFit="cover"
                         />
                     </div>
-                    <h1 className="text-2xl font-bold w-max ">{name}</h1>
+                    <h1 className="text-2xl font-bold w-max ">{username}</h1>
                     <h1 className="text-xl font-bold w-max text-green-200">
                         21 Artworks
                     </h1>
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{loveCount}</span>
+                        <span className="text-white">{love || 0}</span>
                     </div>
                     <h1 className="text-lg font-bold text-center w-full text-yellow-200 overflow-hidden whitespace-nowrap text-ellipsis ">
                         {location}
