@@ -101,7 +101,7 @@ const CreatArt = () => {
                 title: name,
                 price,
                 description,
-                categories,
+                // categories,
                 artist: userId,
             }),
         }).then((res) => res.json())
@@ -140,6 +140,7 @@ const CreatArt = () => {
                                         </h3>
                                         <input
                                             type="file"
+                                            accept="image/*"
                                             name="art"
                                             id="art"
                                             hidden
@@ -260,7 +261,7 @@ const CreatArt = () => {
                                 artistProfile={true}
                                 name={name || 'Enter your art Name'}
                                 price={price}
-                                src={artImageSrc}
+                                imgUrl={artImageSrc}
                                 loveCount={0}
                                 viewCount={0}
                             />
