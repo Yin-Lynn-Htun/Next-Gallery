@@ -38,4 +38,4 @@ const ArtScheme = new mongoose.Schema({
     ],
 })
 
-module.exports = mongoose.models.Art || mongoose.model('Art', ArtScheme)
+module.exports = mongoose.models?.Art || mongoose.model('Art', ArtScheme)

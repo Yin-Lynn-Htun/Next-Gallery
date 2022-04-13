@@ -62,4 +62,4 @@ const ArtistScheme = new mongoose.Schema({
 })
 
 module.exports =
-    mongoose.models.Artist || mongoose.model('Artist', ArtistScheme)
+    mongoose.models?.Artist || mongoose.model('Artist', ArtistScheme)
