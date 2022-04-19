@@ -10,10 +10,7 @@ const AristsItem = ({ _id, username, imgUrl, love, location }) => {
                 <div className="p-10 rounded-xl gap-5 border-blue-400/0 border-2 my-10 items-center flex flex-col text-white cursor-pointer w-[300px] justify-center bg-text-darker ">
                     <div className="row-span-2 w-[150px] h-[150px] justify-self-center self-center relative outline-text-pink outline-2 outline-none rounded-full">
                         <Image
-                            src={
-                                imgUrl ||
-                                'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
-                            }
+                            src={imgUrl || '/static/images/defaultUser.svg'}
                             alt="artist avatar"
                             className="rounded-full"
                             layout="fill"
