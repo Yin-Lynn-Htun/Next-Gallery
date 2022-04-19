@@ -96,12 +96,12 @@ const ArtistProfile = ({ artist, profile }) => {
 
                     <section className="flex w-full my-10 justify-center gap-10 text-xl">
                         <MotionLink onClick={handleClickHome}>
-                            <span className={isHome && `text-text-pink`}>
+                            <span className={isHome ? `text-text-pink` : ''}>
                                 Home
                             </span>
                         </MotionLink>
                         <MotionLink onClick={handleClickAbout}>
-                            <span className={!isHome && `text-text-pink`}>
+                            <span className={!isHome ? `text-text-pink` : ''}>
                                 About Me
                             </span>
                         </MotionLink>
