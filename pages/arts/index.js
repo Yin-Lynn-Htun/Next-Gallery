@@ -13,10 +13,9 @@ export async function getServerSideProps() {
     // const arts = dummy_arts
 
     await connectToDb()
-    const data = await Art.find().populate(
-        'artist',
-        'username firstName lastName imgUrl'
-    )
+    const data = await Art.find()
+        .sort({ _id: 'desc' })
+        .populate('artist', 'username firstName lastName imgUrl')
 
     const newArts = JSON.parse(JSON.stringify(data))
     console.log(newArts)
