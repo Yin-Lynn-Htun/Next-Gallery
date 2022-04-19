@@ -29,33 +29,29 @@ const ArtItem = (props) => {
                     objectFit="cover"
                 />
             </div>
-
             {!props.artistProfile ? (
                 <ArtOwner {...props.artist} artName={props.title} />
             ) : (
-                <h1 className="text-2xl my-3 font-bold w-max">{props.name}</h1>
+                <h1 className="text-2xl my-3 font-bold w-max">{props.title}</h1>
             )}
-
-            {props.preview ? (
-                <div>
-                    <p className="text-xl mb-3">Price: $ {props.price}</p>
-                </div>
-            ) : (
-                <div className="flex justify-between my-5 w-full">
-                    <div>
-                        <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{props.love}</span>
-                    </div>
-                    <div>
-                        <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{props.watch}</span>
-                    </div>
-                </div>
-            )}
-
-            <div className="mt-auto mb-0 h-full">
-                <ArtButtons />
+            <div>
+                <p className="text-2xl mb-3 text-white font-bold">
+                    <span className="text-[#a8b6f8]">${props.price}</span>
+                </p>
             </div>
+            <div className="flex justify-between mt-5 w-full">
+                <div>
+                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
+                    <span className="text-white">{props.love}</span>
+                </div>
+                <div>
+                    <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
+                    <span className="text-white">{props.watch}</span>
+                </div>
+            </div>
+            {/* <div className="mt-auto mb-0 h-full">
+                <ArtButtons />
+            </div> */}
         </motion.div>
     )
 }
