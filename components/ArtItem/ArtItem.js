@@ -36,6 +36,7 @@ const ArtItem = (props) => {
             )}
             <div>
                 <p className="text-2xl mb-3 text-white font-bold">
+                    Sell Price :{' '}
                     <span className="text-[#a8b6f8]">${props.price}</span>
                 </p>
             </div>
