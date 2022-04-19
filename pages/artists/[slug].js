@@ -29,23 +29,15 @@ const MotionLink = ({ href, children }) => {
     )
 }
 
+import Artist from '../../Models/Artist'
+import ArtsByArtist from '../../components/ArtsByArtist'
 // This function gets called at build time
-export async function getStaticPaths() {
+export async function getServerSideProps({ params }) {
     // Get the paths we want to pre-render based on posts
-    const paths = dummy_artists.map((artist) => ({
-        params: { slug: `${artist.id}` },
-    }))
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
-    return { paths, fallback: false }
-}
-
-// This function gets called at build time
-export async function getStaticProps({ params }) {
-    // Call an external API endpoint to get posts
     const id = params.slug
-    const artist = dummy_artists.find((artist) => artist.id === +id)
+    const data = await Artist.findById(id)
+    const artist = JSON.parse(JSON.stringify(data))
 
     return {
         props: {
@@ -54,7 +46,7 @@ export async function getStaticProps({ params }) {
     }
 }
 
-const Artist = ({ artist }) => {
+const ArtistItem = ({ artist }) => {
     return (
         <div className="text-white">
             {/* cover photo */}
@@ -73,7 +65,10 @@ const Artist = ({ artist }) => {
                         <div className="flex flex-col justify-center items-center">
                             <div className="rounded-full w-60 h-60 relative overflow-hidden -mt-32 mb-5">
                                 <Image
-                                    src={artist.src}
+                                    src={
+                                        artist.imgUrl ||
+                                        '/static/images/defaultUser.svg'
+                                    }
                                     alt="avatar"
                                     objectFit="cover"
                                     // width={300}
@@ -81,9 +76,11 @@ const Artist = ({ artist }) => {
                                     layout="fill"
                                 />
                             </div>
-                            <h1 className="text-xl">{artist.name}</h1>
+                            <h1 className="text-xl">
+                                {artist.firstName} {artist.lastName}
+                            </h1>
                             <h3 className="text-text-blue">
-                                {artist.username}
+                                @{artist.username}
                             </h3>
                         </div>
 
@@ -107,15 +104,11 @@ const Artist = ({ artist }) => {
                         <MotionLink href="/">About Me </MotionLink>
                     </section>
 
-                    <ArtItems artistProfile arts={dummy_arts} />
-                    <br />
-                    <ArtItems artistProfile arts={dummy_arts} />
-                    <br />
-                    <ArtItems artistProfile arts={dummy_arts} />
+                    <ArtsByArtist artistId={artist._id} />
                 </Wrapper>
             </div>
         </div>
     )
 }
 
-export default Artist
+export default ArtistItem
