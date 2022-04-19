@@ -8,18 +8,20 @@ import Tag from '../../components/Tag'
 import { connectToDb } from '../../utils/db'
 
 const ArtistComponent = ({ _id, artist, love, watch }) => (
-    <Link href={`/artists/${_id}`}>
+    <Link href={`/artists/${artist._id}`}>
         <a>
             <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
-                <div className="row-span-2 w-100">
-                    <Image
-                        src={artist.imgUrl}
-                        alt="owner avatar"
-                        className="rounded-full"
-                        width={70}
-                        height={70}
-                        objectFit="cover"
-                    />
+                <div className="row-span-2 w-100 ml-2">
+                    <div className="w-[70px] h-[70px] outline-none outline-text-pink rounded-full">
+                        <Image
+                            src={artist.imgUrl}
+                            alt="owner avatar"
+                            className="rounded-full"
+                            width={70}
+                            height={70}
+                            objectFit="cover"
+                        />
+                    </div>
                 </div>
                 <h1 className="text-xl font-bold w-max">{artist.username}</h1>
 
