@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 const MotionLink = ({ children, onClick }) => {
     return (
         <motion.p
-            className="text-xl"
+            className="text-2xl"
             whileHover={{
                 color: '#fdae8f',
                 scale: 1.2,
@@ -41,7 +41,7 @@ const ArtistProfile = ({ artist, profile }) => {
     }
 
     return (
-        <div className="text-white mb-10">
+        <div className=" text-white mb-10">
             {/* cover photo */}
             <div className="w-full h-72 relative ">
                 <Image
@@ -52,7 +52,7 @@ const ArtistProfile = ({ artist, profile }) => {
                 />
             </div>
 
-            <div className="h-max ">
+            <div className="h-max px-10 ">
                 <Wrapper>
                     <section className="flex justify-between">
                         <div className="flex flex-col justify-center items-center">
@@ -69,10 +69,10 @@ const ArtistProfile = ({ artist, profile }) => {
                                     layout="fill"
                                 />
                             </div>
-                            <h1 className="text-xl">
+                            <h1 className="text-3xl">
                                 {artist.firstName} {artist.lastName}
                             </h1>
-                            <h3 className="text-text-blue">
+                            <h3 className="text-text-blue text-xl">
                                 @{artist.username}
                             </h3>
                         </div>
