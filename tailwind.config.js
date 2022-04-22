@@ -21,7 +21,9 @@ module.exports = {
                 'button-blue': '#24478c',
 
                 'form-gray': '#252525',
-
+            },
+            boxShadow: {
+                button: '0px 0px 20px 3px #0000008c;',
             },
 
             fontFamily: {
