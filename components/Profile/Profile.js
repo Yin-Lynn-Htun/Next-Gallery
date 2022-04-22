@@ -29,7 +29,7 @@ const MotionLink = ({ children, onClick }) => {
 }
 
 const ArtistProfile = ({ artist, profile }) => {
-    const [isHome, setIsHome] = useState(true)
+    const [isHome, setIsHome] = useState(false)
     const router = useRouter()
 
     const handleClickHome = () => {
@@ -41,7 +41,7 @@ const ArtistProfile = ({ artist, profile }) => {
     }
 
     return (
-        <div className="text-white">
+        <div className="text-white mb-10">
             {/* cover photo */}
             <div className="w-full h-72 relative ">
                 <Image
@@ -85,11 +85,6 @@ const ArtistProfile = ({ artist, profile }) => {
                                     <AiFillEdit className="inline mr-2 text-white" />
                                     <span>Edit Profile</span>
                                 </PrimaryButton>
-
-                                <SecondaryButton>
-                                    <AiFillSetting className="inline mr-2 text-white" />
-                                    <span>Settings</span>
-                                </SecondaryButton>
                             </div>
                         )}
                     </section>
