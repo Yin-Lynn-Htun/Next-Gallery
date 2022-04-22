@@ -45,6 +45,10 @@ const ArtistScheme = new mongoose.Schema({
     imgUrl: {
         type: String,
     },
+    popularity: {
+        type: Number,
+        default: 0,
+    },
     socials: {
         website: {
             type: String,
