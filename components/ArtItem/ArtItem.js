@@ -7,11 +7,19 @@ import { AiFillEye } from 'react-icons/ai'
 
 const ArtItem = (props) => {
     const [love, setLove] = useState(props.love)
+    const [clicked, setClicked] = useState(false)
 
-    const handleClickLove = () => {
-        setLove(love + 1)
-        // create a new api to update love count
-        // call api later
+    const handleClickLove = async () => {
+        if (clicked) return
+        const data = await fetch('/api/arts/love', {
+            method: 'POST',
+            body: JSON.stringify({ artId: props._id }),
+        }).then((data) => data.json())
+
+        if (data.ok) {
+            setLove(love + 1)
+            setClicked(true)
+        }
     }
 
     return (
@@ -39,17 +47,19 @@ const ArtItem = (props) => {
                 <p className="text-2xl mb-3 text-white font-bold">
                     <span className="text-[#a8b6f8]">$ {props.price}</span>
                 </p>
-                <button
-                    onClick={handleClickLove}
-                    className="hover:shadow-button rounded-md px-3 py-2"
-                >
-                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-2" />
-                    <span className="text-white">{love}</span>
-                </button>
                 <div>
                     <AiFillEye className="text-blue-500 w-10 h-10 inline mr-2" />
                     <span className="text-white">{props.watch}</span>
                 </div>
+                <button
+                    onClick={handleClickLove}
+                    className={` rounded-md px-3 py-2 ${
+                        !clicked && 'hover:bg-black shadow-button'
+                    } `}
+                >
+                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-2" />
+                    <span className="text-white">{love}</span>
+                </button>
             </div>
             {/* <div className="mt-auto mb-0 h-full">
                 <ArtButtons />
