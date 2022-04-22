@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
 import CtaButton from '../../components/CtaButton'
-import { dummy_arts } from '../../dummy_data'
+import Art from '../../Models/Art'
 import Link from 'next/link'
 import Tag from '../../components/Tag'
 import { connectToDb } from '../../utils/db'
@@ -138,37 +138,12 @@ const ArtItem = ({
 
 export default ArtItem
 
-// export async function getStaticPaths() {
-//     const paths = dummy_arts.map((art) => ({
-//         params: {
-//             artId: art.id.toString(),
-//         },
-//     }))
-
-//     return {
-//         paths,
-//         fallback: false, // false or 'blocking'
-//     }
-// }
-
-// export async function getStaticProps({ params }) {
-//     const artId = params.artId
-//     const art = dummy_arts.find((art) => art.id === +artId)
-
-//     return {
-//         props: {
-//             art,
-//         },
-//     }
-// }
-
-import Art from '../../Models/Art'
-import Artist from '../../Models/Artist'
-
 export async function getServerSideProps(context) {
     await connectToDb()
     const { artId } = context.query
     const data = await Art.findById(artId).populate('artist', 'username imgUrl')
+    data.watch = data.watch + 1
+    await data.save()
     const art = JSON.parse(JSON.stringify(data))
 
     return {
