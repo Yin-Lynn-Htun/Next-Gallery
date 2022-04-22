@@ -15,6 +15,7 @@ module.exports = {
                 'text-darker': '#202123',
                 'text-blue': '#8393AF',
                 'border-blue': '#10599f',
+                'text-green': '#00FFD1',
                 'background-main': '#030812',
                 'text-pink': '#FD3E71',
 
