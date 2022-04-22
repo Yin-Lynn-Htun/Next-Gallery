@@ -110,7 +110,7 @@ const ArtistProfile = ({ artist, profile }) => {
                     {isHome ? (
                         <ArtsByArtist artistId={artist._id} />
                     ) : (
-                        <AboutMe />
+                        <AboutMe artist={artist} />
                     )}
                 </Wrapper>
             </div>
