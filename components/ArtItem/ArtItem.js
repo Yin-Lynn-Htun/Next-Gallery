@@ -1,21 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ArtButtons from './ArtButtons'
 import ArtOwner from './ArtOwner'
 import Image from 'next/image'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
-import { motion } from 'framer-motion'
 
 const ArtItem = (props) => {
+    const [love, setLove] = useState(props.love)
+
+    const handleClickLove = () => {
+        setLove(love + 1)
+        // create a new api to update love count
+        // call api later
+    }
+
     return (
-        <motion.div
-            whileHover={{
-                y: -5,
-                scale: 1.02,
-                outline: '0.5px solid #b8b8b8',
-            }}
-            className="w-80 h-min p-5  bg-white/10 rounded-2xl"
-        >
+        <div className="w-80 h-min p-5  bg-white/10 rounded-2xl">
             <div className="flex justify-center">
                 <Image
                     className="rounded-xl overflow-hidden"
@@ -34,26 +34,27 @@ const ArtItem = (props) => {
             ) : (
                 <h1 className="text-2xl my-3 font-bold w-max">{props.title}</h1>
             )}
-            <div>
+            <div></div>
+            <div className="flex justify-between mt-5 w-full items-center">
                 <p className="text-2xl mb-3 text-white font-bold">
-                    Sell Price :{' '}
-                    <span className="text-[#a8b6f8]">${props.price}</span>
+                    <span className="text-[#a8b6f8]">$ {props.price}</span>
                 </p>
-            </div>
-            <div className="flex justify-between mt-5 w-full">
+                <button
+                    onClick={handleClickLove}
+                    className="hover:shadow-button rounded-md px-3 py-2"
+                >
+                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-2" />
+                    <span className="text-white">{love}</span>
+                </button>
                 <div>
-                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                    <span className="text-white">{props.love}</span>
-                </div>
-                <div>
-                    <AiFillEye className="text-blue-500 w-10 h-10 inline mr-5" />
+                    <AiFillEye className="text-blue-500 w-10 h-10 inline mr-2" />
                     <span className="text-white">{props.watch}</span>
                 </div>
             </div>
             {/* <div className="mt-auto mb-0 h-full">
                 <ArtButtons />
             </div> */}
-        </motion.div>
+        </div>
     )
 }
 
