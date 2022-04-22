@@ -4,20 +4,23 @@ import Wrapper from '../../components/Wrapper'
 import FormInput from '../../components/FormInput'
 import { useSession, getSession } from 'next-auth/react'
 import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
+import Artist from '../../Models/Artist'
 import 'react-image-crop/dist/ReactCrop.css'
 import ProfileImageCropModal from '../../components/Modals/ProfileImageCropModal'
 
-const UserProfile = (props) => {
+const UserProfile = ({ artist }) => {
     const [selectedImageFile, setSelectedImageFile] = useState(null)
     const [showModal, setShowModal] = useState(false)
-    const [imageSrc, setImageSrc] = useState('/static/images/Profile.svg')
+    const [imageSrc, setImageSrc] = useState(
+        artist.imgUrl || '/static/images/Profile.svg'
+    )
     const [isFilePicked, setIsFilePicked] = useState(false)
 
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [location, setLocation] = useState('')
-    const [bio, setBio] = useState('')
+    const [firstName, setFirstName] = useState(artist.firstName)
+    const [lastName, setLastName] = useState(artist.lastName)
+    const [phoneNumber, setPhoneNumber] = useState(artist.phoneNumber)
+    const [location, setLocation] = useState(artist.location)
+    const [bio, setBio] = useState(artist.bio)
 
     const [twitter, setTwitter] = useState('')
     const [website, setWebsite] = useState('')
@@ -258,8 +261,8 @@ const UserProfile = (props) => {
 
 export default UserProfile
 
-export async function getServerSideProps(context) {
-    const session = await getSession(context)
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req })
 
     if (!session) {
         return {
@@ -269,5 +272,13 @@ export async function getServerSideProps(context) {
         }
     }
 
-    return { props: { session } }
+    const id = session.userId
+    const data = await Artist.findById(id)
+    const artist = JSON.parse(JSON.stringify(data))
+
+    return {
+        props: {
+            artist,
+        },
+    }
 }
