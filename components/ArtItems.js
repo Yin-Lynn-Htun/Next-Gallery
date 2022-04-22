@@ -5,11 +5,7 @@ const ArtItems = ({ artistProfile, arts }) => {
     return (
         <div className="flex flex-wrap gap-10 justify-between">
             {arts.map((art) => (
-                <Link key={art._id} href={`/arts/${art._id}`}>
-                    <a>
-                        <ArtItem {...art} artistProfile={artistProfile} />
-                    </a>
-                </Link>
+                <ArtItem key={art._id} {...art} artistProfile={artistProfile} />
             ))}
         </div>
     )
