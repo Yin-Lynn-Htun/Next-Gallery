@@ -7,6 +7,9 @@ export async function getServerSideProps({ params }) {
 
     const id = params.slug
     const data = await Artist.findById(id)
+    data.popularity = data.popularity + 1
+    await data.save()
+
     const artist = JSON.parse(JSON.stringify(data))
 
     return {
