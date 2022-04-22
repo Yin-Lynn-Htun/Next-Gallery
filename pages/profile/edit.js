@@ -47,7 +47,6 @@ const UserProfile = (props) => {
     }
 
     const uploadProfile = async () => {
-        console.log('first')
         const formBody = {
             firstName,
             lastName,
@@ -70,7 +69,6 @@ const UserProfile = (props) => {
             body: JSON.stringify(formBody),
         })
         const data = await res.json()
-        console.log(data)
     }
 
     return (

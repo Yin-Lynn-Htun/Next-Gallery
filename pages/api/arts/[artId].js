@@ -1,7 +1,6 @@
 import Art from '../../../Models/Art'
 
 const handler = async (req, res) => {
-    console.log(req)
     if (req.method === 'GET') {
         const art = await Art.findById(req.query.artId).populate(
             'artist',

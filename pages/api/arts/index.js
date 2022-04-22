@@ -15,7 +15,6 @@ const handler = async (req, res) => {
                 ...req.body,
                 artist: session.userId,
             })
-            console.log(art)
 
             return res
                 .status(200)

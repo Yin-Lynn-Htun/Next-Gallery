@@ -18,7 +18,6 @@ export async function getServerSideProps() {
         .populate('artist', 'username firstName lastName imgUrl')
 
     const newArts = JSON.parse(JSON.stringify(data))
-    console.log(newArts)
     return {
         props: {
             arts: newArts,

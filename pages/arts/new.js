@@ -39,7 +39,6 @@ const CreatArt = () => {
 
     const handleChangeFileInput = (e) => {
         const file = e.target.files[0]
-        console.log(file)
         setArtImage(file)
         setIsFilePicked(true)
         setArtImageSrc(URL.createObjectURL(file))
@@ -90,7 +89,6 @@ const CreatArt = () => {
 
     const handleUploadArt = async () => {
         const imageData = await uploadImage()
-        console.log(imageData)
         const data = await fetch('/api/arts', {
             method: 'POST',
             headers: {
@@ -106,7 +104,6 @@ const CreatArt = () => {
             }),
         }).then((res) => res.json())
 
-        console.log(data)
         if (data.ok) {
             // right now clear states, later maybe redirect to explore page or something
             clearFormData()
