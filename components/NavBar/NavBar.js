@@ -42,9 +42,9 @@ const NavBar = () => {
                         </Link>
                         {!session && (
                             <PrimaryButton
-                                onClick={() => router.push('/signup')}
+                                onClick={() => router.push('/login')}
                             >
-                                SIGN UP
+                                LOGIN
                             </PrimaryButton>
                         )}
                         {session && (
