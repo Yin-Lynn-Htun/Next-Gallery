@@ -41,8 +41,10 @@ const ArtItem = (props) => {
                     _id={props._id}
                     price={props.price}
                     watch={props.watch}
-                    artistProfile={props.artistProfile}
                     love={props.love}
+                    artistId={
+                        props.artistProfile ? props.artist : props.artist._id
+                    }
                 />
             </div>
             {/* <div className="mt-auto mb-0 h-full">

@@ -6,7 +6,6 @@ const handler = async (req, res) => {
     connectToDb()
 
     const arts = await Arts.find({ artist: artistId })
-
     return res.status(200).send({ ok: true, data: arts })
 }
 
