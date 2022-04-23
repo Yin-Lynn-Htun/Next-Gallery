@@ -1,67 +1,48 @@
 import React, { useState } from 'react'
-import ArtButtons from './ArtButtons'
 import ArtOwner from './ArtOwner'
 import Image from 'next/image'
-import { GiSelfLove } from 'react-icons/gi'
-import { AiFillEye } from 'react-icons/ai'
+import ArtDescription from './ArtDescription'
+import Link from 'next/link'
 
 const ArtItem = (props) => {
-    const [love, setLove] = useState(props.love)
-    const [clicked, setClicked] = useState(false)
-
-    const handleClickLove = async () => {
-        if (clicked || props.artistProfile) return
-        const data = await fetch('/api/arts/love', {
-            method: 'POST',
-            body: JSON.stringify({ artId: props._id }),
-        }).then((data) => data.json())
-
-        if (data.ok) {
-            setLove(love + 1)
-            setClicked(true)
-        }
-    }
-
+    console.log(props)
     return (
-        <div className="w-80 h-min p-5  bg-white/10 rounded-2xl">
+        <div className="w-72 h-min p-5  bg-white/10 rounded-2xl">
             <div className="flex justify-center">
-                <Image
-                    className="rounded-xl overflow-hidden"
-                    src={
-                        props.imgUrl ||
-                        'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
-                    }
-                    alt="Art"
-                    width={500}
-                    height={500}
-                    objectFit="cover"
-                />
+                <Link href={`/arts/${props._id}`}>
+                    <a>
+                        <Image
+                            className="rounded-xl overflow-hidden"
+                            src={
+                                props.imgUrl ||
+                                'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
+                            }
+                            alt="Art"
+                            width={500}
+                            height={500}
+                            objectFit="cover"
+                        />
+                    </a>
+                </Link>
             </div>
-            {!props.artistProfile ? (
+            <Link href={`/arts/${props._id}`}>
+                <a>
+                    <h1 className="hover:text-text-pink mt-5 text-white text-2xl font-bold w-full text-ellipsis overflow-hidden whitespace-nowrap">
+                        {props.title}
+                    </h1>
+                </a>
+            </Link>
+
+            {!props.artistProfile && (
                 <ArtOwner {...props.artist} artName={props.title} />
-            ) : (
-                <h1 className="text-2xl my-3 font-bold w-max">{props.title}</h1>
             )}
-            <div></div>
-            <div className="flex justify-between  w-full items-center">
-                <p className="text-2xl mb-3 text-white font-bold">
-                    <span className="text-[#a8b6f8]">$ {props.price}</span>
-                </p>
-                <div>
-                    <AiFillEye className="text-blue-500 w-10 h-10 inline mr-2" />
-                    <span className="text-white">{props.watch}</span>
-                </div>
-                <button
-                    onClick={handleClickLove}
-                    className={` rounded-md px-3 py-2 ${
-                        !clicked ||
-                        (props.artistProfile && 'hover:bg-black shadow-button')
-                    } `}
-                >
-                    <GiSelfLove className="text-red-500 w-10 h-10 inline mr-2" />
-                    <span className="text-white">{love}</span>
-                </button>
-            </div>
+            <ArtDescription
+                _id={props._id}
+                price={props.price}
+                watch={props.watch}
+                artistProfile={props.artistProfile}
+                love={props.love}
+            />
             {/* <div className="mt-auto mb-0 h-full">
                 <ArtButtons />
             </div> */}
