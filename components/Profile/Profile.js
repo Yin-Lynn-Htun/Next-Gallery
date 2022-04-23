@@ -69,7 +69,7 @@ const ArtistProfile = ({ artist, profile }) => {
                                     layout="fill"
                                 />
                             </div>
-                            <h1 className="text-3xl">
+                            <h1 className="text-2xl">
                                 {artist.firstName} {artist.lastName}
                             </h1>
                             <h3 className="text-text-blue text-xl">

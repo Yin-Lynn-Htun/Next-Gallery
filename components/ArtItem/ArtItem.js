@@ -25,24 +25,26 @@ const ArtItem = (props) => {
                     </a>
                 </Link>
             </div>
-            <Link href={`/arts/${props._id}`}>
-                <a>
-                    <h1 className="hover:text-text-pink mt-5 text-white text-2xl font-bold w-full text-ellipsis overflow-hidden whitespace-nowrap">
-                        {props.title}
-                    </h1>
-                </a>
-            </Link>
+            <div className="flex flex-col gap-4">
+                <Link href={`/arts/${props._id}`}>
+                    <a>
+                        <h1 className="hover:text-text-pink mt-5 text-white text-2xl font-bold w-full text-ellipsis overflow-hidden whitespace-nowrap">
+                            {props.title}
+                        </h1>
+                    </a>
+                </Link>
 
-            {!props.artistProfile && (
-                <ArtOwner {...props.artist} artName={props.title} />
-            )}
-            <ArtDescription
-                _id={props._id}
-                price={props.price}
-                watch={props.watch}
-                artistProfile={props.artistProfile}
-                love={props.love}
-            />
+                {!props.artistProfile && (
+                    <ArtOwner {...props.artist} artName={props.title} />
+                )}
+                <ArtDescription
+                    _id={props._id}
+                    price={props.price}
+                    watch={props.watch}
+                    artistProfile={props.artistProfile}
+                    love={props.love}
+                />
+            </div>
             {/* <div className="mt-auto mb-0 h-full">
                 <ArtButtons />
             </div> */}

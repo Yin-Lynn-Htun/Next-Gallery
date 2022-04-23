@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const ArtOwner = ({ _id, username, imgUrl }) => {
     return (
-        <div className="flex my-5 gap-5 items-center text-white">
+        <div className="flex gap-5 items-center text-white">
             <Link href={`/artists/${_id}`}>
                 <a>
                     <div className="w-[40px] h-[40px] outline-text-pink outline-2 outline-none rounded-full">
