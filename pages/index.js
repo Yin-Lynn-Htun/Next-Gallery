@@ -21,7 +21,7 @@ export default function Home({ artists }) {
 
 export async function getStaticProps(context) {
     await connectToDb()
-    const data = await Artist.find({}).sort({ watch: -1 }).limit(5)
+    const data = await Artist.find({}).sort({ watch: -1 }).limit(4)
     const artists = JSON.parse(JSON.stringify(data))
     return {
         props: {
