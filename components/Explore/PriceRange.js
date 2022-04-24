@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
 import { useRouter } from 'next/router'
+import { FilterContext } from '../../context/FilterContext'
 
 const PriceRange = () => {
-    const [showPriceRangeForm, setShowPriceRangeForm] = useState(false)
+    const { model, handleChangeModel } = useContext(FilterContext)
     const [fromPrice, setFromPrice] = useState('')
     const [toPrice, setToPrice] = useState('')
     const [error, setError] = useState(null)
@@ -30,7 +31,7 @@ const PriceRange = () => {
         }
 
         cleanStates()
-        setShowPriceRangeForm(false)
+        handleChangeModel(null)
         router.push(`?from=${fromPrice}&to=${toPrice}`)
     }
 
@@ -39,13 +40,13 @@ const PriceRange = () => {
     }
 
     const closePriceRangeForm = () => {
-        setShowPriceRangeForm(false)
+        handleChangeModel(null)
         document.removeEventListener('click', closePriceRangeForm)
     }
 
     const handleClickPriceButton = (e) => {
-        if (!showPriceRangeForm) {
-            setShowPriceRangeForm(true)
+        if (model !== 'price') {
+            handleChangeModel('price')
             e.stopPropagation()
             document.addEventListener('click', closePriceRangeForm)
         } else {
@@ -63,7 +64,7 @@ const PriceRange = () => {
                 <span> Price range</span>
             </button>
 
-            {showPriceRangeForm && (
+            {model === 'price' && (
                 <div className="absolute py-3 px-5 top-full mt-5 ml-5 z-20 bg-white text-black rounded-lg  ">
                     {error && <p className="text-red-400">{error}</p>}
                     <p className="text-center py-2 font-bold">

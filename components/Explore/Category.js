@@ -1,33 +1,41 @@
 import { useRouter } from 'next/router'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BiCategoryAlt } from 'react-icons/bi'
+import { FilterContext } from '../../context/FilterContext'
 
 const dummy_categories = [
     'All',
     'Cartoon',
-    '3D Animation',
-    'Motion',
-    'Virtual',
-    'Drawing',
+    'Character',
+    'Environment',
+    'Pattern Design',
+    'Portraits Design',
+    'Illustration',
+    'Graphic Design',
+    'Modern Art',
+    'Pencil',
 ]
 
 const CategoryFilter = () => {
-    const [showCategory, setShowCategory] = useState(false)
     const router = useRouter()
     const { category } = router.query
+
+    const { model, handleChangeModel } = useContext(FilterContext)
+
+    console.log(model, 'value')
 
     useEffect(() => {
         console.log(category, 'asdf')
     }, [category])
 
     const closeCategory = () => {
-        setShowCategory(false)
+        handleChangeModel(null)
         document.removeEventListener('click', closeCategory)
     }
 
     const handleClickCategoryButton = (e) => {
-        if (!showCategory) {
-            setShowCategory(true)
+        if (model !== 'category') {
+            handleChangeModel('category')
             e.stopPropagation()
             document.addEventListener('click', closeCategory)
         } else {
@@ -47,7 +55,7 @@ const CategoryFilter = () => {
                 Category
             </button>
 
-            {showCategory && (
+            {model === 'category' && (
                 <div className="py-5 absolute mt-2 w-64 rounded-lg top-full bg-white text-border-blue px-2">
                     {dummy_categories.map((category, idx) => {
                         return (

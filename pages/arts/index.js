@@ -8,6 +8,7 @@ import CategoryFilter from '../../components/Explore/Category'
 import SearchBar from '../../components/Explore/SearchBar'
 import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
+import FilterContextProvider from '../../context/FilterContext'
 
 export async function getServerSideProps() {
     // const arts = dummy_arts
@@ -33,9 +34,11 @@ export default function Arts({ arts }) {
             </h1>
 
             <div className="text-white w-full my-5 bg-red-900/0 h-12 flex justify-between items-center">
-                <div className="flex items-stretch  ">
-                    <CategoryFilter />
-                    <PriceRange />
+                <div className="flex items-stretch">
+                    <FilterContextProvider>
+                        <CategoryFilter />
+                        <PriceRange />
+                    </FilterContextProvider>
                 </div>
 
                 <SearchBar />

@@ -5,7 +5,6 @@ import ArtDescription from './ArtDescription'
 import Link from 'next/link'
 
 const ArtItem = (props) => {
-    console.log(props)
     return (
         <div className="w-72 h-min p-5  bg-white/10 rounded-2xl">
             <div className="flex justify-center">
