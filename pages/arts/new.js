@@ -229,7 +229,7 @@ const CreatArt = () => {
                                                         )
                                                     )}
                                                 <button
-                                                    className="border-2 self border-white px-4 py-1"
+                                                    className="border-2 self border-white px-4 py-1 mx-2"
                                                     onClick={handleAddCategory}
                                                 >
                                                     +
@@ -254,13 +254,12 @@ const CreatArt = () => {
                                 Art Preview
                             </h1>
                             <ArtItem
-                                preview
                                 artistProfile={true}
-                                name={name || 'Enter your art Name'}
+                                title={name || 'Enter your art Name'}
                                 price={price}
                                 imgUrl={artImageSrc}
-                                loveCount={0}
-                                viewCount={0}
+                                love={0}
+                                watch={0}
                             />
                         </div>
                     </div>
