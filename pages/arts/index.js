@@ -30,6 +30,7 @@ export async function getServerSideProps() {
 
 export default function Arts({ arts }) {
     const [artList, setArtList] = useState(arts)
+
     const router = useRouter()
     console.log(router.query)
 
@@ -43,6 +44,14 @@ export default function Arts({ arts }) {
         setArtList(newArtList)
     }
 
+    const handlePrice = (low, high) => {
+        const newArtist = arts.filter((art) => {
+            console.log(art.price, +low, high)
+            return art.price >= +low && art.price <= +high
+        })
+        setArtList(newArtist)
+    }
+
     return (
         <Wrapper>
             <h1 className="text-white text-center text-5xl mt-10">
@@ -53,7 +62,7 @@ export default function Arts({ arts }) {
                 <div className="flex items-stretch">
                     <FilterContextProvider>
                         <CategoryFilter />
-                        <PriceRange />
+                        <PriceRange handlePrice={handlePrice} />
                     </FilterContextProvider>
                 </div>
 

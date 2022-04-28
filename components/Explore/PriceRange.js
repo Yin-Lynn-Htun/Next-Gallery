@@ -3,7 +3,7 @@ import { AiOutlineDollarCircle } from 'react-icons/ai'
 import { useRouter } from 'next/router'
 import { FilterContext } from '../../context/FilterContext'
 
-const PriceRange = () => {
+const PriceRange = ({ handlePrice }) => {
     const { model, handleChangeModel } = useContext(FilterContext)
     const [fromPrice, setFromPrice] = useState('')
     const [toPrice, setToPrice] = useState('')
@@ -32,7 +32,7 @@ const PriceRange = () => {
 
         cleanStates()
         handleChangeModel(null)
-        router.push(`?from=${fromPrice}&to=${toPrice}`)
+        handlePrice(fromPrice, toPrice)
     }
 
     const handleClickClearButton = () => {
