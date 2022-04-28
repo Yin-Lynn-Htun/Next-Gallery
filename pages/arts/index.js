@@ -9,6 +9,8 @@ import SearchBar from '../../components/Explore/SearchBar'
 import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
 import FilterContextProvider from '../../context/FilterContext'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps() {
     // const arts = dummy_arts
@@ -27,6 +29,20 @@ export async function getServerSideProps() {
 }
 
 export default function Arts({ arts }) {
+    const [artList, setArtList] = useState(arts)
+    const router = useRouter()
+    console.log(router.query)
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const newArtList = arts.filter((art) => {
+            return art.title
+                .toLowerCase()
+                .includes(e.target.value.toLowerCase())
+        })
+        setArtList(newArtList)
+    }
+
     return (
         <Wrapper>
             <h1 className="text-white text-center text-5xl mt-10">
@@ -41,11 +57,16 @@ export default function Arts({ arts }) {
                     </FilterContextProvider>
                 </div>
 
-                <SearchBar />
+                <SearchBar handleSearch={handleSearch} />
             </div>
 
             <div className="mt-20">
-                <ArtItems arts={arts} />
+                {artList.length && <ArtItems arts={artList} />}
+                {!artList.length && arts.length && (
+                    <p className="text-white font-bold text-2xl">
+                        There is no arts for this search.
+                    </p>
+                )}
             </div>
         </Wrapper>
     )
