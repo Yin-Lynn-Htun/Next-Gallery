@@ -5,6 +5,7 @@ import { dummy_artists } from '../../dummy_data'
 import Link from 'next/link'
 import { connectToDb } from '../../utils/db'
 import Artist from '../../Models/Artist'
+import { useRouter } from 'next/router'
 
 const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -21,6 +22,33 @@ export async function getServerSideProps() {
 }
 
 const Artists = ({ artists }) => {
+    const router = useRouter()
+    let letter = ''
+
+    const { query } = router
+    if (query.letter) {
+        letter = query.letter
+    }
+
+    console.log(letter, 'letter')
+    console.log(
+        artists.filter(
+            (artist) =>
+                artist.username.startsWith(letter) ||
+                artist.username.startsWith(letter.toLowerCase())
+        )
+    )
+
+    let artistList
+    if (letter) {
+        console.log(letter)
+        artistList = artists.filter((artist) =>
+            artist.username.toLowerCase().includes(letter.toLowerCase())
+        )
+    } else {
+        artistList = artists
+    }
+
     return (
         <Wrapper>
             <section className="text-white">
@@ -30,31 +58,39 @@ const Artists = ({ artists }) => {
 
                 <div className="mbnpm-5 mt-10">
                     <h3 className="text-2xl my-3">
-                        Search for artists starting with
+                        Search for artist containing the letter{' '}
                     </h3>
                     {alphabets.map((alphabet) => (
                         <Link
                             href={`/artists?letter=${alphabet}`}
                             key={alphabet}
                         >
-                            <a className="mx-4">{alphabet}</a>
+                            <a
+                                className={`px-4 py-2 ${
+                                    alphabet === letter && 'bg-gray-400'
+                                }`}
+                            >
+                                {alphabet}
+                            </a>
                         </Link>
                     ))}
                 </div>
 
                 <div className="flex flex-wrap justify-between gap-7 items-stretch">
-                    {artists.map((artist) => (
-                        <AristsItem key={artist._id} {...artist} />
-                    ))}
-                    {artists.map((artist) => (
-                        <AristsItem key={artist._id} {...artist} />
-                    ))}
-                    {artists.map((artist) => (
-                        <AristsItem key={artist._id} {...artist} />
-                    ))}
-                    {artists.map((artist) => (
-                        <AristsItem key={artist._id} {...artist} />
-                    ))}
+                    {artistList.length ? (
+                        artistList.map((artist) => (
+                            <AristsItem key={artist._id} {...artist} />
+                        ))
+                    ) : (
+                        <p className="text-text-pink text-2xl my-10">
+                            There is no artist with that name.{' '}
+                            <Link href="/artists" passHref>
+                                <span className="font-bold text-white cursor-pointer">
+                                    All Artists?
+                                </span>
+                            </Link>
+                        </p>
+                    )}
                 </div>
             </section>
         </Wrapper>
