@@ -1,3 +1,15 @@
+export const dummy_categories = [
+    'Cartoon',
+    'Character',
+    'Environment',
+    'Pattern Design',
+    'Portraits Design',
+    'Illustration',
+    'Graphic Design',
+    'Modern Art',
+    'Pencil',
+]
+
 export const dummy_arts = [
     {
         id: 1,

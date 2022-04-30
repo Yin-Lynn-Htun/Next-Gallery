@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Portal from '../Portal'
 import Tag from '../Tag'
-import PrimaryButton from '../PrimaryButton'
 import SecondaryButton from '../SecondaryButton'
+import { dummy_categories } from '../../dummy_data'
 
 const CategoryInput = ({ value, handleChange, focus, placeholder }) => {
     return (
@@ -19,60 +19,65 @@ const CategoryInput = ({ value, handleChange, focus, placeholder }) => {
     )
 }
 
-const CategoryModal = ({
-    categories,
-    handleCancelCategory,
-    handleSaveCategory,
-}) => {
-    const [name, setName] = useState('')
-    const handleNameChange = (e) => setName(e.target.value)
+const CategoryModal = ({ handleSaveCategory }) => {
+    const [categoryList, setCategoryList] = useState(dummy_categories)
+    const [chooseCategory, setChooseCategory] = useState([])
+
+    const handleAddCategoryItem = (name) => {
+        setChooseCategory([...chooseCategory, name])
+    }
+
+    const handleRemoveCategoryItem = (name) => {
+        setChooseCategory(chooseCategory.filter((item) => item !== name))
+    }
+
+    const handleNameChange = (e) => {
+        const newCategory = dummy_categories.filter((category) =>
+            category.toLocaleLowerCase().includes(e.target.value.toLowerCase())
+        )
+        setCategoryList(newCategory)
+    }
 
     return (
         <Portal>
             <div className="w-screen h-screen bg-[#030812ef]  fixed top-0 left-0 z-50 overflow-hidden">
                 <div className=" bg-gradient-to-r bg-[#dd2653] text-white fixed w-[600px]  center_fixed_component shadow-2xl rounded-lg px-14 py-7">
                     <h1 className="text-3xl font-semibold">Categories</h1>
-                    <form
-                        onSubmit={(e) => {
-                            const result = handleSaveCategory(e, name)
-                            if (!result) {
-                                setName('')
-                            }
-                        }}
-                    >
-                        <div>
-                            <CategoryInput
-                                // name={'Add Categories'}
-                                placeholder={'Example: Cartoon'}
-                                value={name}
-                                handleChange={handleNameChange}
-                                focus={true}
+
+                    <div>
+                        <CategoryInput
+                            placeholder={'Search categories'}
+                            handleChange={handleNameChange}
+                            focus={true}
+                        />
+                    </div>
+
+                    <div className="flex flex-wrap mb-5">
+                        {categoryList.map((category) => (
+                            <Tag
+                                key={category}
+                                name={category}
+                                edit={true}
+                                handleAddCategoryItem={handleAddCategoryItem}
+                                handleRemoveCategoryItem={
+                                    handleRemoveCategoryItem
+                                }
                             />
+                        ))}
+                    </div>
+
+                    <div className="flex ">
+                        <div className="ml-auto flex gap-3 ">
+                            <SecondaryButton
+                                type="button"
+                                onClick={() =>
+                                    handleSaveCategory(chooseCategory)
+                                }
+                            >
+                                Save
+                            </SecondaryButton>
                         </div>
-                        <div className="flex flex-wrap mb-5">
-                            {categories.length > 0 &&
-                                categories.map((category) => (
-                                    <Tag
-                                        key={category}
-                                        name={category}
-                                        edit={true}
-                                    />
-                                ))}
-                        </div>
-                        <div className="flex ">
-                            <div className="ml-auto flex gap-3 ">
-                                <SecondaryButton
-                                    type="button"
-                                    onClick={handleCancelCategory}
-                                >
-                                    Close
-                                </SecondaryButton>
-                                <PrimaryButton type="submit">
-                                    Save
-                                </PrimaryButton>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </Portal>

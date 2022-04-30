@@ -2,19 +2,7 @@ import { useRouter } from 'next/router'
 import React, { useState, useEffect, useContext } from 'react'
 import { BiCategoryAlt } from 'react-icons/bi'
 import { FilterContext } from '../../context/FilterContext'
-
-const dummy_categories = [
-    'All',
-    'Cartoon',
-    'Character',
-    'Environment',
-    'Pattern Design',
-    'Portraits Design',
-    'Illustration',
-    'Graphic Design',
-    'Modern Art',
-    'Pencil',
-]
+import { dummy_categories } from '../../dummy_data'
 
 const CategoryFilter = () => {
     const router = useRouter()

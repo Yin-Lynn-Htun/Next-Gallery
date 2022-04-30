@@ -48,14 +48,8 @@ const CreatArt = () => {
         setShowCategoryModal(true)
     }
 
-    const handleSaveCategory = (e, name) => {
-        e.preventDefault()
-
-        if (name === '') return true
-        setCategories((prevC) => [...prevC, name])
-    }
-
-    const handleCancelCategory = () => {
+    const handleSaveCategory = (categories) => {
+        setCategories(categories)
         setShowCategoryModal(false)
     }
 
@@ -99,7 +93,7 @@ const CreatArt = () => {
                 title: name,
                 price,
                 description,
-                // categories,
+                categories,
                 artist: userId,
             }),
         }).then((res) => res.json())
@@ -115,7 +109,6 @@ const CreatArt = () => {
             {showCategoryModal && (
                 <CategoryModal
                     handleSaveCategory={handleSaveCategory}
-                    handleCancelCategory={handleCancelCategory}
                     categories={categories}
                 />
             )}
