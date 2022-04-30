@@ -1,20 +1,10 @@
-import { useRouter } from 'next/router'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useContext } from 'react'
 import { BiCategoryAlt } from 'react-icons/bi'
 import { FilterContext } from '../../context/FilterContext'
 import { dummy_categories } from '../../dummy_data'
 
 const CategoryFilter = ({ handleCategory }) => {
-    const router = useRouter()
-    const { category } = router.query
-
     const { model, handleChangeModel } = useContext(FilterContext)
-
-    console.log(model, 'value')
-
-    useEffect(() => {
-        console.log(category, 'asdf')
-    }, [category])
 
     const closeCategory = () => {
         handleChangeModel(null)

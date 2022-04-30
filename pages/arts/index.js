@@ -43,7 +43,6 @@ const filterReducer = (state, action) => {
                 priceRange: action.payload,
             }
         case 'category':
-            console.log('change category')
             return {
                 ...state,
                 category: action.payload,
@@ -60,13 +59,8 @@ const filterReducer = (state, action) => {
 
 export default function Arts({ arts }) {
     const [filter, dispatchFilter] = useReducer(filterReducer, initalFilter)
-    console.log(filter, 'filter')
-
-    const router = useRouter()
-    console.log(router.query)
 
     const handleCategory = (category) => {
-        console.log(category, 'handleCategory')
         dispatchFilter({ type: 'category', payload: category })
     }
 

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AiOutlineDollarCircle } from 'react-icons/ai'
-import { useRouter } from 'next/router'
+import { isNumeric } from '../../utils/math'
 import { FilterContext } from '../../context/FilterContext'
 
 const PriceRange = ({ handlePrice }) => {
@@ -9,8 +9,6 @@ const PriceRange = ({ handlePrice }) => {
     const [toPrice, setToPrice] = useState('')
     const [error, setError] = useState(null)
 
-    const router = useRouter()
-
     const cleanStates = () => {
         setFromPrice('')
         setToPrice('')
@@ -18,8 +16,10 @@ const PriceRange = ({ handlePrice }) => {
     }
 
     const handleClickApplyButton = () => {
-        console.log(fromPrice, toPrice)
-
+        if (!isNumeric(fromPrice) || !isNumeric(toPrice)) {
+            setError('Price must be a number')
+            return
+        }
         if (toPrice === '' && fromPrice === '') {
             setError('Please fill one of the fields.')
             return
