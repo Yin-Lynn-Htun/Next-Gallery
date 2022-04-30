@@ -34,6 +34,11 @@ export default function Arts({ arts }) {
     const router = useRouter()
     console.log(router.query)
 
+    const handleCategory = (category) => {
+        const newArts = arts.filter((art) => art.categories.includes(category))
+        setArtList(newArts)
+    }
+
     const handleSearch = (e) => {
         e.preventDefault()
         const newArtList = arts.filter((art) => {
@@ -61,7 +66,7 @@ export default function Arts({ arts }) {
             <div className="text-white w-full my-5 bg-red-900/0 h-12 flex justify-between items-center">
                 <div className="flex items-stretch">
                     <FilterContextProvider>
-                        <CategoryFilter />
+                        <CategoryFilter handleCategory={handleCategory} />
                         <PriceRange handlePrice={handlePrice} />
                     </FilterContextProvider>
                 </div>

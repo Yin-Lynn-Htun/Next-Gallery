@@ -4,7 +4,7 @@ import { BiCategoryAlt } from 'react-icons/bi'
 import { FilterContext } from '../../context/FilterContext'
 import { dummy_categories } from '../../dummy_data'
 
-const CategoryFilter = () => {
+const CategoryFilter = ({ handleCategory }) => {
     const router = useRouter()
     const { category } = router.query
 
@@ -51,7 +51,7 @@ const CategoryFilter = () => {
                                 key={idx}
                                 className="font-bold py-2 px-3 border-gray-400 hover:bg-gray-200 rounded-md text-lg"
                                 onClick={() => {
-                                    router.push(`?category=${category}`)
+                                    handleCategory(category)
                                 }}
                             >
                                 {category}
