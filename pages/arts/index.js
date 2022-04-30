@@ -12,7 +12,6 @@ import FilterContextProvider from '../../context/FilterContext'
 import { useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
 import Tag from '../../components/TagForFilter'
-import { GiTruce } from 'react-icons/gi'
 
 export async function getServerSideProps() {
     // const arts = dummy_arts
@@ -81,11 +80,6 @@ export default function Arts({ arts }) {
 
     const handlePrice = (low, high) => {
         dispatchFilter({ type: 'priceRange', payload: [low, high] })
-        // const newArtist = arts.filter((art) => {
-        //     console.log(art.price, +low, high)
-        //     return art.price >= +low && art.price <= +high
-        // })
-        // setArtList(newArtist)
     }
 
     const filterArts = () => {
@@ -142,7 +136,7 @@ export default function Arts({ arts }) {
                 )}
             </div>
 
-            <div className="mt-20">
+            <div className="my-20">
                 {artList.length && <ArtItems arts={artList} />}
                 {!artList.length && arts.length && (
                     <p className="text-white font-bold text-2xl">
