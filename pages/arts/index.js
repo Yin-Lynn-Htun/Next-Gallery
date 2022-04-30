@@ -9,8 +9,10 @@ import SearchBar from '../../components/Explore/SearchBar'
 import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
 import FilterContextProvider from '../../context/FilterContext'
-import { useState } from 'react'
+import { useReducer, useState } from 'react'
 import { useRouter } from 'next/router'
+import Tag from '../../components/TagForFilter'
+import { GiTruce } from 'react-icons/gi'
 
 export async function getServerSideProps() {
     // const arts = dummy_arts
@@ -28,34 +30,81 @@ export async function getServerSideProps() {
     }
 }
 
+const initalFilter = {
+    priceRange: [],
+    category: '',
+    search: '',
+}
+
+const filterReducer = (state, action) => {
+    switch (action.type) {
+        case 'priceRange':
+            return {
+                ...state,
+                priceRange: action.payload,
+            }
+        case 'category':
+            console.log('change category')
+            return {
+                ...state,
+                category: action.payload,
+            }
+        case 'search':
+            return {
+                ...state,
+                search: action.payload,
+            }
+        default:
+            return state
+    }
+}
+
 export default function Arts({ arts }) {
-    const [artList, setArtList] = useState(arts)
+    const [filter, dispatchFilter] = useReducer(filterReducer, initalFilter)
+    console.log(filter, 'filter')
 
     const router = useRouter()
     console.log(router.query)
 
     const handleCategory = (category) => {
-        const newArts = arts.filter((art) => art.categories.includes(category))
-        setArtList(newArts)
+        console.log(category, 'handleCategory')
+        dispatchFilter({ type: 'category', payload: category })
     }
 
     const handleSearch = (e) => {
         e.preventDefault()
-        const newArtList = arts.filter((art) => {
-            return art.title
-                .toLowerCase()
-                .includes(e.target.value.toLowerCase())
+        dispatchFilter({
+            type: 'search',
+            payload: e.target.value.toLowerCase(),
         })
-        setArtList(newArtList)
     }
 
     const handlePrice = (low, high) => {
-        const newArtist = arts.filter((art) => {
-            console.log(art.price, +low, high)
-            return art.price >= +low && art.price <= +high
-        })
-        setArtList(newArtist)
+        dispatchFilter({ type: 'priceRange', payload: [low, high] })
+        // const newArtist = arts.filter((art) => {
+        //     console.log(art.price, +low, high)
+        //     return art.price >= +low && art.price <= +high
+        // })
+        // setArtList(newArtist)
     }
+
+    const filterArts = () => {
+        const newArtList = arts
+            .filter(
+                (art) =>
+                    !filter.category || art.categories.includes(filter.category)
+            )
+            .filter((art) => art.title.toLowerCase().includes(filter.search))
+            .filter(
+                (art) =>
+                    !filter.priceRange.length ||
+                    (+art.price >= +filter.priceRange[0] &&
+                        +art.price <= +filter.priceRange[1])
+            )
+        return newArtList
+    }
+
+    const artList = filterArts()
 
     return (
         <Wrapper>
@@ -72,6 +121,25 @@ export default function Arts({ arts }) {
                 </div>
 
                 <SearchBar handleSearch={handleSearch} />
+            </div>
+
+            <div className="flex gap-2">
+                {filter.category && (
+                    <Tag
+                        name={filter.category}
+                        onClick={() =>
+                            dispatchFilter({ type: 'category', payload: '' })
+                        }
+                    />
+                )}
+                {filter.priceRange.length && (
+                    <Tag
+                        name={`$ ${filter.priceRange[0]} - ${filter.priceRange[1]}`}
+                        onClick={() =>
+                            dispatchFilter({ type: 'priceRange', payload: [] })
+                        }
+                    />
+                )}
             </div>
 
             <div className="mt-20">
