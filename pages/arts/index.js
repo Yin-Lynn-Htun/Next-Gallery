@@ -136,7 +136,7 @@ export default function Arts({ arts }) {
                 )}
             </div>
 
-            <div className="my-20">
+            <div className="my-10">
                 {artList.length && <ArtItems arts={artList} />}
                 {!artList.length && arts.length && (
                     <p className="text-white font-bold text-2xl">
