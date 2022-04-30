@@ -30,18 +30,8 @@ const Artists = ({ artists }) => {
         letter = query.letter
     }
 
-    console.log(letter, 'letter')
-    console.log(
-        artists.filter(
-            (artist) =>
-                artist.username.startsWith(letter) ||
-                artist.username.startsWith(letter.toLowerCase())
-        )
-    )
-
     let artistList
     if (letter) {
-        console.log(letter)
         artistList = artists.filter((artist) =>
             artist.username.toLowerCase().includes(letter.toLowerCase())
         )
