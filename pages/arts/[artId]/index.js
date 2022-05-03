@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import { GiSelfLove } from 'react-icons/gi'
 import { AiFillEye } from 'react-icons/ai'
-import CtaButton from '../../components/CtaButton'
-import Art from '../../Models/Art'
+import CtaButton from '../../../components/CtaButton'
+import Art from '../../../Models/Art'
 import Link from 'next/link'
-import Tag from '../../components/Tag'
-import { connectToDb } from '../../utils/db'
+import Tag from '../../../components/Tag'
+import { connectToDb } from '../../../utils/db'
+import { useRouter } from 'next/router'
 
 const ArtistComponent = ({ _id, artist, love, watch }) => (
     <Link href={`/artists/${artist._id}`}>
@@ -53,6 +54,7 @@ const ArtItem = ({
         categories,
     },
 }) => {
+    const { asPath } = useRouter()
     return (
         <div className="flex-1 flex">
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
@@ -73,7 +75,11 @@ const ArtItem = ({
                             Price: {price}$
                         </h3>
                     </div>
-                    <CtaButton name="Buy Now" />
+                    <Link href={`${asPath}/checkout`} passHref>
+                        <a>
+                            <CtaButton name="Buy Now" />
+                        </a>
+                    </Link>
                 </div>
 
                 <ArtistComponent {...{ _id, artist, love, watch }} />
