@@ -63,6 +63,10 @@ const ArtistScheme = new mongoose.Schema({
             type: String,
         },
     },
+    isArtist: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 module.exports =

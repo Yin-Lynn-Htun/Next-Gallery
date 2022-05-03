@@ -25,9 +25,9 @@ const AristsItem = ({ _id, username, imgUrl, love, location }) => {
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
                         <span className="text-white">{love || 0}</span>
                     </div>
-                    <h1 className="text-lg font-bold text-center w-full text-yellow-200 overflow-hidden whitespace-nowrap text-ellipsis ">
+                    {/* <h1 className="text-lg font-bold text-center w-full text-yellow-200 overflow-hidden whitespace-nowrap text-ellipsis ">
                         {location}
-                    </h1>
+                    </h1> */}
 
                     {/* <div className="flex justify-between my-5 w-full">
                         <div>

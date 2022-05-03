@@ -1,7 +1,6 @@
 import React from 'react'
 import AristsItem from '../../components/AristsItem'
 import Wrapper from '../../components/Wrapper'
-import { dummy_artists } from '../../dummy_data'
 import Link from 'next/link'
 import { connectToDb } from '../../utils/db'
 import Artist from '../../Models/Artist'
@@ -11,7 +10,7 @@ const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
 export async function getServerSideProps() {
     await connectToDb()
-    const data = await Artist.find()
+    const data = await Artist.find({ isArtist: true })
     const artists = JSON.parse(JSON.stringify(data))
 
     return {
@@ -22,6 +21,7 @@ export async function getServerSideProps() {
 }
 
 const Artists = ({ artists }) => {
+    console.log(artists)
     const router = useRouter()
     let letter = ''
 

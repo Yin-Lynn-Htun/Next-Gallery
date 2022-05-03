@@ -27,6 +27,8 @@ const UserProfile = ({ artist }) => {
     const [instagram, setInstagram] = useState('')
     const [facebook, setFacebook] = useState('')
 
+    const [isArtist, setIsArtist] = useState('')
+
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         if (!file) return
@@ -63,6 +65,7 @@ const UserProfile = ({ artist }) => {
                 instagram,
                 facebook,
             },
+            isArtist: isArtist === 'yes',
         }
         const res = await fetch('/api/profile/', {
             method: 'POST',
@@ -132,19 +135,6 @@ const UserProfile = ({ artist }) => {
                                     Delete Image
                                 </button>
                             )}
-
-                            {/* {isFilePicked && (
-                            <div>
-                                <ReactCrop
-                                    crop={crop}
-                                    onChange={handleCropChange}
-                                    src={imageSrc}
-                                    onImageLoaded={handleCropImageLoaded}
-                                    onComplete={handleOnCropComplete}
-                                    circularCrop={true}
-                                />
-                            </div>
-                        )} */}
                         </div>
 
                         <div className="flex-1  grid grid-cols-4 px-5 ">
@@ -244,6 +234,33 @@ const UserProfile = ({ artist }) => {
                                         }}
                                     />
                                 </div>
+                            </div>
+
+                            <div className="text-2xl font-bold flex col-span-4 items-center">
+                                <span className="mr-10">
+                                    Are you an artist?
+                                </span>
+                                <input
+                                    type="radio"
+                                    id="yes"
+                                    name="isArtist"
+                                    checked={isArtist === 'yes'}
+                                    onChange={(e) => setIsArtist('yes')}
+                                />
+                                <label className="ml-2" htmlFor="yes">
+                                    Yes
+                                </label>
+                                <input
+                                    className="ml-5"
+                                    type="radio"
+                                    id="no"
+                                    name="isArtist"
+                                    checked={isArtist === 'no'}
+                                    onChange={(e) => setIsArtist('no')}
+                                />
+                                <label className="ml-2" htmlFor="no">
+                                    No
+                                </label>
                             </div>
                             <button
                                 onClick={uploadProfile}

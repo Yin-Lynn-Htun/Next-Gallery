@@ -5,7 +5,7 @@ const handler = async (req, res) => {
     const { artistId } = req.query
     connectToDb()
 
-    const arts = await Arts.find({ artist: artistId })
+    const arts = await Arts.find({ artist: artistId }).sort({ _id: 'desc' })
     return res.status(200).send({ ok: true, data: arts })
 }
 
