@@ -8,41 +8,9 @@ import Tag from '../../../components/Tag'
 import { connectToDb } from '../../../utils/db'
 import { countries } from '../../../dummy_data'
 import { useState } from 'react'
+import { useSession, getSession } from 'next-auth/react'
 
-const ArtistComponent = ({ _id, artist, love, watch }) => (
-    <Link href={`/artists/${artist._id}`}>
-        <a>
-            <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
-                <div className="row-span-2 w-100 ml-2">
-                    <div className="w-[70px] h-[70px] outline-none outline-text-pink rounded-full">
-                        <Image
-                            src={artist.imgUrl}
-                            alt="owner avatar"
-                            className="rounded-full"
-                            width={70}
-                            height={70}
-                            objectFit="cover"
-                        />
-                    </div>
-                </div>
-                <h1 className="text-xl font-bold w-max">{artist.username}</h1>
-
-                <div className="flex gap-20 w-full">
-                    <div>
-                        <GiSelfLove className="text-red-500 w-10 h-10 inline mr-3" />
-                        <span className="text-white">{love}</span>
-                    </div>
-                    <div>
-                        <AiFillEye className="text-blue-300 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{watch}</span>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </Link>
-)
-
-const ArtItem = ({ art: { imgUrl } }) => {
+const ArtItem = ({ art: { imgUrl, price } }) => {
     const [numbers, setNumbers] = useState('')
     const [monthAndYear, setMonthAndYear] = useState('')
     const [cvc, setCvc] = useState('')
@@ -194,7 +162,7 @@ const ArtItem = ({ art: { imgUrl } }) => {
                     </div>
 
                     <button className="w-full bg-text-pink py-3 rounded-lg text-xl">
-                        Pay
+                        Pay ${price}
                     </button>
                 </form>
             </div>
@@ -205,17 +173,26 @@ const ArtItem = ({ art: { imgUrl } }) => {
 export default ArtItem
 
 export async function getServerSideProps(context) {
+    const session = await getSession(context)
+
+    if (!session) {
+        return {
+            redirect: {
+                destination: '/login',
+            },
+        }
+    }
+
     await connectToDb()
     const { artId } = context.query
     const data = await Art.findById(artId).populate('artist', 'username imgUrl')
-    data.watch = data.watch + 1
-    await data.save()
     const art = JSON.parse(JSON.stringify(data))
 
     return {
         props: {
             // _id , title , description , price , love , watch, imgUrl, artist { _id , username , imgUrl }, categories
             art: art,
+            session: await getSession(context),
         }, // will be passed to the page component as props
     }
 }

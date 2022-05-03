@@ -2,7 +2,7 @@ import React from 'react'
 
 const Input = ({ label, id, errorMessage, touched, ...props }) => {
     return (
-        <div className="flex flex-col my-5">
+        <div className="flex flex-col my-3">
             <label htmlFor={id} className="text-xl font-semibold">
                 {label}
             </label>
