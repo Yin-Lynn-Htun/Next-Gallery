@@ -92,6 +92,13 @@ const ArtItem = ({ art: { imgUrl } }) => {
         setZip(e.target.value)
     }
 
+    const handleSubmitForm = (e) => {
+        e.preventDefault()
+        alert(
+            'Thanks for your order. Buying an art real payment is in progress...'
+        )
+    }
+
     return (
         <div className="flex-1 flex">
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
@@ -108,7 +115,7 @@ const ArtItem = ({ art: { imgUrl } }) => {
                 <h1 className="text-2xl font-bold w-max mx-auto">
                     Pay with Card
                 </h1>
-                <form className="">
+                <form onSubmit={handleSubmitForm}>
                     <div className="flex flex-col my-4">
                         <label className="my-1" htmlFor="email">
                             Email
@@ -119,6 +126,7 @@ const ArtItem = ({ art: { imgUrl } }) => {
                             name="email"
                             id="email"
                             placeholder="Email"
+                            required
                         />
                     </div>
                     <div className="flex flex-col my-4">
