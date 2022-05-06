@@ -4,7 +4,7 @@ import ReactCrop from 'react-image-crop'
 import 'react-image-crop/dist/ReactCrop.css'
 import Image from 'next/image'
 import { useDebounceEffect } from './useDebounceEffect'
-import { canvasPreview } from './CanvasPreview'
+import { canvasPreview } from './canvasPreview'
 
 const ImageCrop = ({ imgSrc }, ref) => {
     const previewCanvasRef = ref
