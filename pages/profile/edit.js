@@ -7,6 +7,7 @@ import ReactCrop, { centerCrop, makeAspectCrop } from 'react-image-crop'
 import Artist from '../../Models/Artist'
 import 'react-image-crop/dist/ReactCrop.css'
 import ProfileImageCropModal from '../../components/Modals/ProfileImageCropModal'
+import { useRouter } from 'next/router'
 
 const UserProfile = ({ artist }) => {
     const [selectedImageFile, setSelectedImageFile] = useState(null)
@@ -27,7 +28,9 @@ const UserProfile = ({ artist }) => {
     const [instagram, setInstagram] = useState('')
     const [facebook, setFacebook] = useState('')
 
-    const [isArtist, setIsArtist] = useState('')
+    const [isArtist, setIsArtist] = useState(artist.isArtist ? 'yes' : 'no')
+
+    const router = useRouter()
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
@@ -75,6 +78,9 @@ const UserProfile = ({ artist }) => {
             body: JSON.stringify(formBody),
         })
         const data = await res.json()
+        if (data.message === 'Create a profile') {
+            router.replace('/profile')
+        }
     }
 
     return (
@@ -236,32 +242,39 @@ const UserProfile = ({ artist }) => {
                                 </div>
                             </div>
 
-                            <div className="text-2xl font-bold flex col-span-4 items-center">
-                                <span className="mr-10">
-                                    Are you an artist?
-                                </span>
-                                <input
-                                    type="radio"
-                                    id="yes"
-                                    name="isArtist"
-                                    checked={isArtist === 'yes'}
-                                    onChange={(e) => setIsArtist('yes')}
-                                />
-                                <label className="ml-2" htmlFor="yes">
-                                    Yes
-                                </label>
-                                <input
-                                    className="ml-5"
-                                    type="radio"
-                                    id="no"
-                                    name="isArtist"
-                                    checked={isArtist === 'no'}
-                                    onChange={(e) => setIsArtist('no')}
-                                />
-                                <label className="ml-2" htmlFor="no">
-                                    No
-                                </label>
+                            <div className="  flex col-span-4  flex-col">
+                                <div className="flex text-2xl font-bold  items-center">
+                                    <span className="mr-10">
+                                        Are you an artist?
+                                    </span>
+                                    <input
+                                        type="radio"
+                                        id="yes"
+                                        name="isArtist"
+                                        checked={isArtist === 'yes'}
+                                        onChange={(e) => setIsArtist('yes')}
+                                    />
+                                    <label className="ml-2" htmlFor="yes">
+                                        Yes
+                                    </label>
+                                    <input
+                                        className="ml-5"
+                                        type="radio"
+                                        id="no"
+                                        name="isArtist"
+                                        checked={isArtist === 'no'}
+                                        onChange={(e) => setIsArtist('no')}
+                                    />
+                                    <label className="ml-2" htmlFor="no">
+                                        No
+                                    </label>
+                                </div>
+                                <small>
+                                    If you need to choose Yes to be able to
+                                    upload your arts.
+                                </small>
                             </div>
+
                             <button
                                 onClick={uploadProfile}
                                 className="col-span-1 col-start-4 rounded-lg w-max px-7 rays h-10  my-5 justify-self-end font-semibold"

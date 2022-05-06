@@ -1,7 +1,9 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import Artist from '../../Models/Artist'
 import { getSession } from 'next-auth/react'
 import ArtistProfile from '../../components/Profile/Profile'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 // This function gets called at build time
 export async function getServerSideProps({ req }) {
@@ -28,7 +30,14 @@ export async function getServerSideProps({ req }) {
 }
 
 const ArtistItem = ({ artist }) => {
-    return <ArtistProfile artist={artist} profile />
+    return (
+        <>
+            <Head>
+                <title>{artist.username} | Profile</title>
+            </Head>
+            <ArtistProfile artist={artist} profile />
+        </>
+    )
 }
 
 export default ArtistItem
