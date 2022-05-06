@@ -57,11 +57,13 @@ const HeroSection = () => {
                     <div>
                         <h1 className="font-bold text-6xl ">
                             Discover, collect, and sell extraordinary
-                            <span className="text-[#FD1C68]">ARTs</span>
+                        </h1>
+                        <h1 className="font-bold text-5xl text-[#FD1C68]">
+                            Arts / Photographs
                         </h1>
                         <h3 className="text-base mt-10 font-light">
-                            NFT is the world&apos;s first and largest NFT
-                            marketplace
+                            Next Gallery is the next-generation gallery or
+                            marketplace for artists and collectors.
                         </h3>
                     </div>
                     <div className="mt-10 flex">

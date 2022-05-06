@@ -29,7 +29,7 @@ const Footer = () => {
                         design, and photography in various price ranges from
                         around the world. Enjoy the art.
                     </p>
-                    <div className="flex gap-5 my-3">
+                    {/* <div className="flex gap-5 my-3">
                         <Link href="/">
                             <a>
                                 <div className="w-10 h-10 bg-form-gray rounded-full grid place-items-center">
@@ -58,7 +58,7 @@ const Footer = () => {
                                 </div>
                             </a>
                         </Link>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="list-none flex flex-col gap-2 justify-self-center text-lg text-yellow-300 ">
@@ -78,16 +78,6 @@ const Footer = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="/">
-                            <a> About Us</a>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/">
-                            <a> Contact Us</a>
-                        </Link>
-                    </li>
-                    <li>
                         <Link href="/signup">
                             <a> Sign Up</a>
                         </Link>
@@ -99,44 +89,44 @@ const Footer = () => {
                     </li>
                 </div>
 
-                <div className="flex flex-col gap-10">
+                <div className="flex flex-col gap-5">
                     <div className="grid grid-rows-2 grid-cols-[repeat(2,max-content)] gap-x-5">
-                        <div className="bg-form-gray row-span-2 w-14 h-14 rounded-full grid place-items-center">
+                        <div className="bg-form-gray row-span-2 w-10 h-10 rounded-full grid place-items-center">
                             <Image
                                 src="/static/images/footer/Phone.svg"
-                                width={30}
-                                height={30}
+                                width={20}
+                                height={20}
                                 alt="Phone"
                             />
                         </div>
                         <p className="text-sm">Phone Number</p>
-                        <h4 className="text-xl">+959429047557</h4>
+                        <h4 className="text-lg">+959429047557</h4>
                     </div>
 
                     <div className="grid grid-rows-2 grid-cols-[repeat(2,max-content)] gap-x-5">
-                        <div className="bg-form-gray row-span-2 w-14 h-14 rounded-full grid place-items-center">
+                        <div className="bg-form-gray row-span-2 w-10 h-10 rounded-full grid place-items-center">
                             <Image
                                 src="/static/images/footer/EnvelopeSimple.svg"
-                                width={30}
-                                height={30}
+                                width={20}
+                                height={20}
                                 alt="Email"
                             />
                         </div>
                         <p className="text-sm">Email</p>
-                        <h4 className="text-xl">yinlynnhtun@gmail.com</h4>
+                        <h4 className="text-lg">yinlynnhtun@gmail.com</h4>
                     </div>
 
                     <div className="grid grid-rows-2 grid-cols-[repeat(2,max-content)] gap-x-5">
-                        <div className="bg-form-gray row-span-2 w-14 h-14 rounded-full grid place-items-center">
+                        <div className="bg-form-gray row-span-2 w-10 h-10 rounded-full grid place-items-center">
                             <Image
                                 src="/static/images/footer/MapPin.svg"
-                                width={30}
-                                height={30}
+                                width={20}
+                                height={20}
                                 alt="address"
                             />
                         </div>
                         <p className="text-sm">Address</p>
-                        <h4 className="text-xl">Yangon, Myanmar</h4>
+                        <h4 className="text-lg">Yangon, Myanmar</h4>
                     </div>
                 </div>
             </div>
