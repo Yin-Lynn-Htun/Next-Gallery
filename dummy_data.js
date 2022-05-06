@@ -203,13 +203,16 @@ export const countries = [
 export const dummy_categories = [
     'Cartoon',
     'Character',
-    'Environment',
+    'Environmental Art',
+    'Painting',
+    'Photograph',
+    'Drawing',
     'Pattern Design',
     'Portraits Design',
     'Illustration',
     'Graphic Design',
     'Modern Art',
-    'Pencil',
+    'Pencil Art',
 ]
 
 export const dummy_arts = [

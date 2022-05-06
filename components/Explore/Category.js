@@ -34,7 +34,7 @@ const CategoryFilter = ({ handleCategory }) => {
             </button>
 
             {model === 'category' && (
-                <div className="py-5 absolute mt-2 w-64 rounded-lg top-full bg-white text-border-blue px-2">
+                <div className="py-5 absolute mt-2 w-64 h-64 overflow-y-scroll rounded-lg top-full bg-white text-border-blue px-2">
                     {dummy_categories.map((category, idx) => {
                         return (
                             <p
