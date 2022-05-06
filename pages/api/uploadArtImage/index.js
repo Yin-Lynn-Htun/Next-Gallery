@@ -8,9 +8,6 @@ const handler = async (req, res) => {
 
     const { categories } = req.body
 
-    console.log(categories)
-    console.log(categories[0])
-
     await connectToDb()
     const response = await Art.create(req.body)
 

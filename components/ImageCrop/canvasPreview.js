@@ -10,7 +10,6 @@ export async function canvasPreview(
     rotate = 0
 ) {
     const ctx = canvas.getContext('2d')
-    console.log('working')
 
     if (!ctx) {
         throw new Error('No 2d context')

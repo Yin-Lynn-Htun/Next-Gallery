@@ -57,7 +57,6 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
         )
 
         const data = await respond.json()
-        console.log(data)
         setimageurl(data.url)
     }
 

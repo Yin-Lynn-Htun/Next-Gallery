@@ -289,8 +289,6 @@ export async function getServerSideProps(context) {
     await connectToDb()
     const user = await Artist.findById(session.userId)
 
-    console.log(session, 'session')
-
     return {
         props: {
             session: await getSession(context),

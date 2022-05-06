@@ -21,7 +21,6 @@ export async function getServerSideProps() {
 }
 
 const Artists = ({ artists }) => {
-    console.log(artists)
     const router = useRouter()
     let letter = ''
 

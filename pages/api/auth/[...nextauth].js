@@ -11,8 +11,6 @@ export default NextAuth({
                 // Add logic here to look up the user from the credentials supplied
                 await connectToDb()
 
-                console.log(credentials)
-
                 const user = await Artist.findOne({
                     email: credentials.email,
                 })
@@ -28,7 +26,7 @@ export default NextAuth({
                     entered_password,
                     user.password
                 )
-                console.log({ isValid })
+
                 if (!isValid) {
                     client.close()
                     throw new Error('Password is incorrect')

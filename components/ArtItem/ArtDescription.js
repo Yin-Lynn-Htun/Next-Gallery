@@ -10,7 +10,6 @@ const ArtDescription = ({ artistId, price, watch, _id, love: loveProps }) => {
     const userId = data?.userId
 
     useEffect(() => {
-        console.log(userId, artistId)
         if (userId === artistId) {
             setClicked(true)
         }
