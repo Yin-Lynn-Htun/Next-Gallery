@@ -242,7 +242,7 @@ const UserProfile = ({ artist }) => {
                                 </div>
                             </div>
 
-                            <div className="  flex col-span-4  flex-col">
+                            <div className="  flex col-span-4  flex-col my-10">
                                 <div className="flex text-2xl font-bold  items-center">
                                     <span className="mr-10">
                                         Are you an artist?
@@ -270,8 +270,8 @@ const UserProfile = ({ artist }) => {
                                     </label>
                                 </div>
                                 <small>
-                                    If you need to choose Yes to be able to
-                                    upload your arts.
+                                    You need to choose &apos;Yes&apos; to be
+                                    able to upload your arts.
                                 </small>
                             </div>
 

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import ArtsByArtist from '../ArtsByArtist'
 import PrimaryButton from '../PrimaryButton'
 import { AiFillEdit, AiFillSetting } from 'react-icons/ai'
-import SecondaryButton from '../SecondaryButton'
 import { useState } from 'react'
 import AboutMe from './AboutMe'
 import { useRouter } from 'next/router'
@@ -29,8 +28,8 @@ const MotionLink = ({ children, onClick }) => {
 }
 
 const ArtistProfile = ({ artist, profile }) => {
-    const [isHome, setIsHome] = useState(false)
     const router = useRouter()
+    const [isHome, setIsHome] = useState(router.query.home === 'true')
 
     const handleClickHome = () => {
         setIsHome(true)

@@ -7,8 +7,11 @@ import FormInput from '../../components/FormInput'
 import CategoryModal from '../../components/Modals/CategoryModal'
 import Tag from '../../components/Tag'
 import { useSession, getSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import FillProfileModal from '../../components/Modals/FillProfileModal'
+import { connectToDb } from '../../utils/db'
 
-const CreatArt = () => {
+const CreatArt = ({ user }) => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState(0)
     const [description, setDescription] = useState('')
@@ -24,6 +27,7 @@ const CreatArt = () => {
 
     const { data: session } = useSession()
     const { userId } = session
+    const router = useRouter()
 
     const handleNameChange = (e) => {
         setName(e.target.value)
@@ -101,7 +105,12 @@ const CreatArt = () => {
         if (data.ok) {
             // right now clear states, later maybe redirect to explore page or something
             clearFormData()
+            router.replace('/profile?home=true')
         }
+    }
+
+    if (!user.isArtist) {
+        return <FillProfileModal />
     }
 
     return (
@@ -264,6 +273,8 @@ const CreatArt = () => {
 
 export default CreatArt
 
+import Artist from '../../Models/Artist'
+
 export async function getServerSideProps(context) {
     const session = await getSession(context)
 
@@ -275,9 +286,15 @@ export async function getServerSideProps(context) {
         }
     }
 
+    await connectToDb()
+    const user = await Artist.findById(session.userId)
+
+    console.log(session, 'session')
+
     return {
         props: {
             session: await getSession(context),
+            user: JSON.parse(JSON.stringify(user)),
         },
     }
 }
