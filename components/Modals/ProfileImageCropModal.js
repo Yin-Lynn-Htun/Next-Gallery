@@ -5,7 +5,7 @@ import Portal from '../Portal'
 import PrimaryButton from '../PrimaryButton'
 import SecondaryButton from '../SecondaryButton'
 import { useDebounceEffect } from '../ImageCrop/useDebounceEffect'
-import { canvasPreview } from '../ImageCrop/CanvasPreview'
+import { canvasPreview } from '../ImageCrop/canvasPreview'
 
 const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
     const previewCanvasRef = createRef()
