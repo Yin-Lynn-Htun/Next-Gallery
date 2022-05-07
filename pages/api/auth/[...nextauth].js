@@ -39,7 +39,7 @@ export default NextAuth({
     ],
 
     callbacks: {
-        async session({ session, token, user }) {
+        async session({ session, token }) {
             session.accessToken = token.accessToken
             session.userId = token.sub
             return session

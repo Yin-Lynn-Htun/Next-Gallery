@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { signIn } from 'next-auth/react'
 
-const LoginForm = () => {
+const LoginForm = ({ handleAddAlert }) => {
     const validationSchema = yup.object().shape({
         email: yup
             .string()
@@ -21,11 +21,12 @@ const LoginForm = () => {
         })
 
         if (response.error) {
-            alert(response.error)
+            // alert(response.error)
+            handleAddAlert(response.error, 'danger')
         }
 
         if (!response.error) {
-            window.location.href = '/profile'
+            window.location.href = '/profile/edit'
         }
     }
 

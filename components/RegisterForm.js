@@ -31,23 +31,28 @@ const validationSchema = yup.object().shape({
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
 
-const onSubmit = async (values) => {
-    console.log('first')
-    const respond = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-    })
-    const data = await respond.json()
-    console.log(data)
-    if (data.status === 'succeed') {
-        window.location.href = '/login'
-    }
-}
+const RegisterForm = ({ handleAddAlert }) => {
+    const onSubmit = async (values) => {
+        console.log('first')
+        const respond = await fetch('/api/auth/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values),
+        })
+        const data = await respond.json()
+        console.log(data)
 
-const RegisterForm = () => {
+        if (data.status === 'failed') {
+            handleAddAlert(data.message, 'danger')
+        }
+
+        if (data.status === 'succeeded') {
+            window.location.href = '/login'
+        }
+    }
+
     const formik = useFormik({
         initialValues,
         validationSchema,
