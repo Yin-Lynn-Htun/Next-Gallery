@@ -24,6 +24,7 @@ const CreatArt = ({ user }) => {
     const [showCategoryModal, setShowCategoryModal] = useState(false)
     const [categories, setCategories] = useState([])
     const fileInputRef = useRef(null)
+    const [loading, setLoading] = useState(false)
 
     const { data: session } = useSession()
     const { userId } = session
@@ -86,6 +87,7 @@ const CreatArt = ({ user }) => {
     }
 
     const handleUploadArt = async () => {
+        setLoading(true)
         const imageData = await uploadImage()
         const data = await fetch('/api/arts', {
             method: 'POST',
@@ -101,9 +103,9 @@ const CreatArt = ({ user }) => {
                 artist: userId,
             }),
         }).then((res) => res.json())
+        setLoading(false)
 
         if (data.ok) {
-            // right now clear states, later maybe redirect to explore page or something
             clearFormData()
             router.replace('/profile?home=true')
         }
@@ -244,8 +246,9 @@ const CreatArt = ({ user }) => {
                                 <PrimaryButton
                                     _classname="w-max px-5 self-center"
                                     onClick={handleUploadArt}
+                                    disable={loading}
                                 >
-                                    Upload Your Art
+                                    {loading ? 'Uploading' : 'Upload Your Art'}
                                 </PrimaryButton>
                             </div>
                         </div>
