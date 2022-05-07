@@ -8,7 +8,7 @@
 }
 
 .disabledButton {
-    background-image: linear-gradient(gray, gray);
+    background-image: linear-gradient(rgb(37, 37, 37), rgb(29, 29, 29));
 }
 
 .gradient_text {

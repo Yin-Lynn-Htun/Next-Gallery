@@ -23,12 +23,13 @@ const UserProfile = ({ artist }) => {
     const [location, setLocation] = useState(artist.location)
     const [bio, setBio] = useState(artist.bio)
 
-    const [twitter, setTwitter] = useState('')
-    const [website, setWebsite] = useState('')
-    const [instagram, setInstagram] = useState('')
-    const [facebook, setFacebook] = useState('')
+    const [twitter, setTwitter] = useState(artist.socials.twitter)
+    const [website, setWebsite] = useState(artist.socials.website)
+    const [instagram, setInstagram] = useState(artist.socials.instagram)
+    const [facebook, setFacebook] = useState(artist.socials.facebook)
 
     const [isArtist, setIsArtist] = useState(artist.isArtist ? 'yes' : 'no')
+    const [loading, setLoading] = useState(false)
 
     const router = useRouter()
 
@@ -55,6 +56,7 @@ const UserProfile = ({ artist }) => {
     }
 
     const uploadProfile = async () => {
+        setLoading(true)
         const formBody = {
             firstName,
             lastName,
@@ -78,6 +80,7 @@ const UserProfile = ({ artist }) => {
             body: JSON.stringify(formBody),
         })
         const data = await res.json()
+        setLoading(false)
         if (data.message === 'Create a profile') {
             router.replace('/profile')
         }
@@ -277,9 +280,11 @@ const UserProfile = ({ artist }) => {
 
                             <button
                                 onClick={uploadProfile}
-                                className="col-span-1 col-start-4 rounded-lg w-max px-7 rays h-10  my-5 justify-self-end font-semibold"
+                                className={`col-span-1 col-start-4 rounded-lg w-max px-7  h-10  my-5 justify-self-end font-semibold ${
+                                    loading ? 'disabledButton' : 'rays'
+                                }`}
                             >
-                                Update your profile
+                                {loading ? 'Uploading' : 'Update your profile'}
                             </button>
                         </div>
                     </div>
