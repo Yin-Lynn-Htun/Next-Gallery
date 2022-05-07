@@ -85,56 +85,13 @@ const ArtItem = ({
                 <ArtistComponent {...{ _id, artist, love, watch }} />
 
                 <div className="flex flex-wrap">
-                    <Tag name="Color Painting" />
-                    <Tag name="Character" />
-                    <Tag name="Nature" />
-                    <Tag name="Fancy" />
-                    <Tag name="Color Painting" />
+                    {categories.map((category, idx) => (
+                        <Tag key={idx} name={category} />
+                    ))}
                 </div>
 
                 <div>
                     <h1 className="text-2xl mt-10 mb-3">About Art</h1>
-                    {/* <p className="text-base">
-                        The Runners. The most elite agency among the Tasty
-                        Bones. The Speedy Bones undergo rigorous training and
-                        wear enchanted speed suits that enable them to bend time
-                        and make food deliveries at incredible speed. With their
-                        help, the souls receive their food deliveries before
-                        turning into Hungry Ghosts
-                    </p>
-
-                    <p className="text-base">
-                        The Runners. The most elite agency among the Tasty
-                        Bones. The Speedy Bones undergo rigorous training and
-                        wear enchanted speed suits that enable them to bend time
-                        and make food deliveries at incredible speed. With their
-                        help, the souls receive their food deliveries before
-                        turning into Hungry Ghosts
-                    </p>
-                    <p className="text-base">
-                        The Runners. The most elite agency among the Tasty
-                        Bones. The Speedy Bones undergo rigorous training and
-                        wear enchanted speed suits that enable them to bend time
-                        and make food deliveries at incredible speed. With their
-                        help, the souls receive their food deliveries before
-                        turning into Hungry Ghosts
-                    </p>
-                    <p className="text-base">
-                        The Runners. The most elite agency among the Tasty
-                        Bones. The Speedy Bones undergo rigorous training and
-                        wear enchanted speed suits that enable them to bend time
-                        and make food deliveries at incredible speed. With their
-                        help, the souls receive their food deliveries before
-                        turning into Hungry Ghosts
-                    </p>
-                    <p className="text-base">
-                        The Runners. The most elite agency among the Tasty
-                        Bones. The Speedy Bones undergo rigorous training and
-                        wear enchanted speed suits that enable them to bend time
-                        and make food deliveries at incredible speed. With their
-                        help, the souls receive their food deliveries before
-                        turning into Hungry Ghosts
-                    </p> */}
                     {description}
                 </div>
             </div>
