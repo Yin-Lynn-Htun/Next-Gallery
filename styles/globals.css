@@ -7,6 +7,10 @@
     background-image: linear-gradient(207.67deg, #ff7c48 3.43%, #fd1c68 104.7%);
 }
 
+.disabledButton {
+    background-image: linear-gradient(gray, gray);
+}
+
 .gradient_text {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;

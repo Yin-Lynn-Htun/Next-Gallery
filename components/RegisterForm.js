@@ -3,6 +3,8 @@ import PrimaryButton from './PrimaryButton'
 import Link from 'next/link'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+import { useState } from 'react'
+import { GiFastNoodles } from 'react-icons/gi'
 
 const initialValues = {
     username: '',
@@ -32,8 +34,10 @@ const validationSchema = yup.object().shape({
 })
 
 const RegisterForm = ({ handleAddAlert }) => {
+    const [loading, setLoading] = useState(false)
+
     const onSubmit = async (values) => {
-        console.log('first')
+        setLoading(true)
         const respond = await fetch('/api/auth/signup', {
             method: 'POST',
             headers: {
@@ -42,7 +46,8 @@ const RegisterForm = ({ handleAddAlert }) => {
             body: JSON.stringify(values),
         })
         const data = await respond.json()
-        console.log(data)
+
+        setLoading(false)
 
         if (data.status === 'failed') {
             handleAddAlert(data.message, 'danger')
@@ -105,7 +110,9 @@ const RegisterForm = ({ handleAddAlert }) => {
                 {...formik.getFieldProps('confirm_password')}
             />
 
-            <PrimaryButton>Sign Up</PrimaryButton>
+            <PrimaryButton disable={loading}>
+                {loading ? 'Loading' : 'Sign Up'}
+            </PrimaryButton>
 
             <p className="text-lg mt-10 border-t-2 border-gray-300 pt-2">
                 Already have an account?

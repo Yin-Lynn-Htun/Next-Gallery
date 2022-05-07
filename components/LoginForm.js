@@ -4,8 +4,11 @@ import Link from 'next/link'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import { signIn } from 'next-auth/react'
+import { useState } from 'react'
 
 const LoginForm = ({ handleAddAlert }) => {
+    const [loading, setLoading] = useState(false)
+
     const validationSchema = yup.object().shape({
         email: yup
             .string()
@@ -15,6 +18,7 @@ const LoginForm = ({ handleAddAlert }) => {
     })
 
     const onSubmit = async (values) => {
+        setLoading(true)
         const response = await signIn('credentials', {
             redirect: false,
             ...values,
@@ -28,6 +32,7 @@ const LoginForm = ({ handleAddAlert }) => {
         if (!response.error) {
             window.location.href = '/profile/edit'
         }
+        setLoading(false)
     }
 
     const formik = useFormik({
@@ -67,7 +72,9 @@ const LoginForm = ({ handleAddAlert }) => {
                 placeholder="Enter your password"
             />
 
-            <PrimaryButton>Login</PrimaryButton>
+            <PrimaryButton disable={loading}>
+                {loading ? 'Loading' : 'Login'}
+            </PrimaryButton>
 
             <p className="text-lg mt-10 border-t-2 border-gray-300 pt-2">
                 Create a new account?

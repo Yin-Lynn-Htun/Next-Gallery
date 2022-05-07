@@ -10,6 +10,7 @@ import { canvasPreview } from '../ImageCrop/canvasPreview'
 const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
     const previewCanvasRef = createRef()
     const [completedCrop, setCompletedCrop] = useState()
+    const [imageUploadLoading, setImageUploadLoading] = useState(false)
     const imgRef = useRef(null)
 
     const [crop, setCrop] = useState({
@@ -48,6 +49,8 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
         formData.append('file', dataURL)
         formData.append('upload_preset', 'next-gallery')
 
+        setImageUploadLoading(true)
+
         const respond = await fetch(
             `https://api.cloudinary.com/v1_1/${cloudName}/upload`,
             {
@@ -58,6 +61,7 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
 
         const data = await respond.json()
         setimageurl(data.url)
+        setImageUploadLoading(false)
     }
 
     return (
@@ -66,7 +70,7 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
                 <div className="w-[1000px] flex flex-col gap-10">
                     <div className="grid place-items-center">
                         <div className="flex gap-20">
-                            <div className="w-[500px] h-max">
+                            <div className="w-[500px]">
                                 <ReactCrop
                                     crop={crop}
                                     onChange={(c) => setCrop(c)}
@@ -78,11 +82,10 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
                                         ref={imgRef}
                                         src={imgSrc}
                                         alt="Profile Picture"
-                                        width={500}
-                                        height={500}
                                         style={{
                                             objectFit: 'cover',
                                             border: '1px solid white',
+                                            maxHeight: '500px',
                                         }}
                                     />
                                 </ReactCrop>
@@ -104,8 +107,11 @@ const ProfileImageCropModal = ({ onClickCancel, imgSrc, setimageurl }) => {
                         </div>
                     </div>
                     <div className="flex justify-center gap-10">
-                        <PrimaryButton onClick={uploadImage}>
-                            Upload Image
+                        <PrimaryButton
+                            disable={imageUploadLoading}
+                            onClick={uploadImage}
+                        >
+                            {imageUploadLoading ? 'Loading' : 'Upload Image'}
                         </PrimaryButton>
                         <SecondaryButton onClick={onClickCancel}>
                             Cancel
