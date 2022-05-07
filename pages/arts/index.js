@@ -1,22 +1,19 @@
 import ArtItems from '../../components/ArtItems'
-import { dummy_arts } from '../../dummy_data'
 import Wrapper from '../../components/Wrapper'
-import { BiSearchAlt } from 'react-icons/bi'
-import { AiOutlineDollarCircle } from 'react-icons/ai'
 import PriceRange from '../../components/Explore/PriceRange'
 import CategoryFilter from '../../components/Explore/Category'
 import SearchBar from '../../components/Explore/SearchBar'
 import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
+import Artist from '../../Models/Artist'
 import FilterContextProvider from '../../context/FilterContext'
 import { useReducer, useState } from 'react'
-import { useRouter } from 'next/router'
 import Tag from '../../components/TagForFilter'
 
 export async function getServerSideProps() {
     // const arts = dummy_arts
-
     await connectToDb()
+    await Artist.find()
     const data = await Art.find()
         .sort({ _id: 'desc' })
         .populate('artist', 'username firstName lastName imgUrl')
