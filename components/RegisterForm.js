@@ -27,11 +27,12 @@ const validationSchema = yup.object().shape({
         ),
     confirm_password: yup
         .string()
+        .required('Confirm password is required')
         .oneOf([yup.ref('password'), null], 'Passwords must match'),
 })
 
 const onSubmit = async (values) => {
-    console.log(values)
+    console.log('first')
     const respond = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -40,6 +41,7 @@ const onSubmit = async (values) => {
         body: JSON.stringify(values),
     })
     const data = await respond.json()
+    console.log(data)
     if (data.status === 'succeed') {
         window.location.href = '/login'
     }
@@ -59,6 +61,7 @@ const RegisterForm = () => {
                 name="username"
                 id="username"
                 type="text"
+                placeholder="Enter your username"
                 touched={formik.touched.username}
                 errorMessage={formik.errors.username}
                 {...formik.getFieldProps('username')}
@@ -69,6 +72,7 @@ const RegisterForm = () => {
                 name="email"
                 id="email"
                 type="email"
+                placeholder="Enter your email"
                 touched={formik.touched.email}
                 errorMessage={formik.errors.email}
                 {...formik.getFieldProps('email')}
@@ -79,6 +83,7 @@ const RegisterForm = () => {
                 name="password"
                 id="password"
                 type="password"
+                placeholder="Enter your password"
                 touched={formik.touched.password}
                 errorMessage={formik.errors.password}
                 {...formik.getFieldProps('password')}
@@ -88,6 +93,7 @@ const RegisterForm = () => {
                 label={'Confirm Password'}
                 name="confirm_password"
                 id="confirm_password"
+                placeholder="Enter your password again"
                 type="password"
                 touched={formik.touched.confirm_password}
                 errorMessage={formik.errors.confirm_password}

@@ -9,15 +9,14 @@ export default NextAuth({
         CredentialsProvider({
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                await connectToDb()
+                const client = await connectToDb()
 
                 const user = await Artist.findOne({
                     email: credentials.email,
                 })
 
                 if (!user) {
-                    client.close()
-                    throw new Error('User not found')
+                    throw new Error('Incorrect username or password.')
                 }
 
                 const entered_password = credentials.password
@@ -28,8 +27,7 @@ export default NextAuth({
                 )
 
                 if (!isValid) {
-                    client.close()
-                    throw new Error('Password is incorrect')
+                    throw new Error('Incorrect username or password.')
                 }
 
                 return {

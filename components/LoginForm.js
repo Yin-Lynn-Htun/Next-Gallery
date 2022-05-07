@@ -20,7 +20,9 @@ const LoginForm = () => {
             ...values,
         })
 
-        console.log(response)
+        if (response.error) {
+            alert(response.error)
+        }
 
         if (!response.error) {
             window.location.href = '/profile'
@@ -48,6 +50,7 @@ const LoginForm = () => {
                 value={formik.values.email}
                 touched={formik.touched.email ? 1 : 0}
                 errorMessage={formik.errors.email}
+                placeholder="Enter your email"
             />
 
             <Input
@@ -60,6 +63,7 @@ const LoginForm = () => {
                 value={formik.values.password}
                 touched={formik.touched.password ? 1 : 0}
                 errorMessage={formik.errors.password}
+                placeholder="Enter your password"
             />
 
             <PrimaryButton>Login</PrimaryButton>
