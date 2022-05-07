@@ -37,7 +37,7 @@ module.exports = {
             },
 
             fontFamily: {
-                display: [],
+                sans: ['Urbanist', 'sans-serif'],
             },
         },
     },
