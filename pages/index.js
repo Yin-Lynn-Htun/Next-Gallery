@@ -12,6 +12,7 @@ export default function Home({ artists }) {
         <Wrapper>
             <HeroSection />
             <Features />
+            <TrendingArtist artists={artists} />
             <TodayPick />
             <Footer />
         </Wrapper>
