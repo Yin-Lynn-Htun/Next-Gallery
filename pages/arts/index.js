@@ -10,7 +10,7 @@ import FilterContextProvider from '../../context/FilterContext'
 import { useReducer, useState } from 'react'
 import Tag from '../../components/TagForFilter'
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     // const arts = dummy_arts
     await connectToDb()
     await Artist.find()
