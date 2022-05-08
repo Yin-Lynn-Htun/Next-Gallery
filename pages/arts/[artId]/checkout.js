@@ -1,14 +1,10 @@
 import Image from 'next/image'
-import { GiSelfLove } from 'react-icons/gi'
-import { AiFillEye } from 'react-icons/ai'
-import CtaButton from '../../../components/CtaButton'
 import Art from '../../../Models/Art'
-import Link from 'next/link'
-import Tag from '../../../components/Tag'
+import Artist from '../../../Models/Artist'
 import { connectToDb } from '../../../utils/db'
 import { countries } from '../../../dummy_data'
 import { useState } from 'react'
-import { useSession, getSession } from 'next-auth/react'
+import { getSession } from 'next-auth/react'
 
 const ArtItem = ({ art: { imgUrl, price } }) => {
     const [numbers, setNumbers] = useState('')

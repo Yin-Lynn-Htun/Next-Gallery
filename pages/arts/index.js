@@ -13,7 +13,6 @@ import Tag from '../../components/TagForFilter'
 export async function getStaticProps() {
     // const arts = dummy_arts
     await connectToDb()
-    await Artist.find()
     const data = await Art.find()
         .sort({ _id: 'desc' })
         .populate('artist', 'username firstName lastName imgUrl')

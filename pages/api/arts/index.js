@@ -1,5 +1,6 @@
 import { connectToDb } from '../../../utils/db'
 import Art from '../../../Models/Art'
+import Artist from '../../../Models/Artist'
 import { getSession } from 'next-auth/react'
 
 const handler = async (req, res) => {

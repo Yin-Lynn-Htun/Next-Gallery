@@ -1,4 +1,5 @@
 import Art from '../../../Models/Art'
+import Artist from '../../../Models/Artist'
 
 const handler = async (req, res) => {
     if (req.method === 'GET') {
