@@ -27,10 +27,10 @@ const Artists = ({ artists: artistsProps }) => {
 
     useEffect(() => {
         const getArtists = async () => {
-            const data = await fetch('/api/artists')
-            if (data.ok) {
-                const newArtists = await data.json()
-                setArtists(newArtists)
+            const request = await fetch('/api/artists')
+            if (request.ok) {
+                const { data } = await request.json()
+                setArtists(data)
             }
         }
 

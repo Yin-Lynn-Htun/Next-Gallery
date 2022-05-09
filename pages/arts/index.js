@@ -60,10 +60,10 @@ export default function Arts({ arts: artsProps }) {
 
     useEffect(() => {
         const getArts = async () => {
-            const data = await fetch('/api/arts')
-            if (data.ok) {
-                const artData = await data.json()
-                setArts(artData)
+            const request = await fetch('/api/arts')
+            if (request.ok) {
+                const { data } = await data.json()
+                setArts(data)
                 console.log('useEffect')
             }
         }
