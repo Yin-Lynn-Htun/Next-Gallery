@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     await connectToDb()
     const data = await Artist.find({ isArtist: true })
     const artists = JSON.parse(JSON.stringify(data))
@@ -17,6 +17,8 @@ export async function getServerSideProps() {
         props: {
             artists,
         },
+
+        revalidate: 10,
     }
 }
 

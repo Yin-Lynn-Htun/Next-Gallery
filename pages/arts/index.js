@@ -22,7 +22,7 @@ export async function getStaticProps() {
         props: {
             arts: newArts,
         },
-        revalidate: 10,
+        revalidate: 1,
     }
 }
 
