@@ -62,7 +62,7 @@ export default function Arts({ arts: artsProps }) {
         const getArts = async () => {
             const request = await fetch('/api/arts')
             if (request.ok) {
-                const { data } = await data.json()
+                const { data } = await request.json()
                 setArts(data)
                 console.log('useEffect')
             }

@@ -28,8 +28,9 @@ const handler = async (req, res) => {
 
     if (req.method === 'GET') {
         const arts = await Art.find()
-            .populate('artist', 'username')
-            .select('-__v')
+            .sort({ _id: 'desc' })
+            .populate('artist', 'username firstName lastName imgUrl')
+
         // const arts = await Art.find()
         return res.status(200).send({ ok: true, data: arts })
     }
