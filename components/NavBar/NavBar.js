@@ -30,7 +30,7 @@ const NavBar = () => {
                             Next Gallery
                         </h1>
                     </div>
-                    <div className="font-semibold text-xl flex gap-7 items-center ml-auto">
+                    <div className="hidden  font-semibold text-xl lg:flex gap-7 items-center ml-auto">
                         <Link href={'/'} passHref>
                             <a> Home</a>
                         </Link>

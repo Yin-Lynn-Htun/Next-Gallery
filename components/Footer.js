@@ -6,7 +6,7 @@ import Image from 'next/image'
 const Footer = () => {
     return (
         <footer className="text-white mt-20 my-10 w-full">
-            <div className="grid grid-cols-3 ">
+            <div className="flex flex-col gap-10 lg:grid lg:grid-cols-3 ">
                 <div className="flex flex-col gap-5">
                     <div className="flex items-center ">
                         <Link href="/">
