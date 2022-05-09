@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AristsItem from '../../components/AristsItem'
 import Wrapper from '../../components/Wrapper'
 import Link from 'next/link'
@@ -22,7 +22,21 @@ export async function getStaticProps() {
     }
 }
 
-const Artists = ({ artists }) => {
+const Artists = ({ artists: artistsProps }) => {
+    const [artists, setArtists] = useState(artistsProps)
+
+    useEffect(() => {
+        const getArtists = async () => {
+            const data = await fetch('/api/artists')
+            if (data.ok) {
+                const newArtists = await data.json()
+                setArtists(newArtists)
+            }
+        }
+
+        getArtists()
+    }, [])
+
     const router = useRouter()
     let letter = ''
 
