@@ -7,9 +7,10 @@ import { connectToDb } from '../../utils/db'
 import Art from '../../Models/Art'
 import Artist from '../../Models/Artist'
 import FilterContextProvider from '../../context/FilterContext'
-import { useReducer, useState, useEffect } from 'react'
+import { useReducer, useState, useEffect, useContext } from 'react'
 import Tag from '../../components/TagForFilter'
 import Head from 'next/head'
+import { ArtsContext } from '../../context/ArtsContext'
 
 export async function getStaticProps() {
     // const arts = dummy_arts
@@ -58,6 +59,7 @@ const filterReducer = (state, action) => {
 export default function Arts({ arts: artsProps }) {
     const [arts, setArts] = useState(artsProps)
     const [filter, dispatchFilter] = useReducer(filterReducer, initalFilter)
+    const { addArts } = useContext(ArtsContext)
 
     useEffect(() => {
         const getArts = async () => {
@@ -65,11 +67,11 @@ export default function Arts({ arts: artsProps }) {
             if (request.ok) {
                 const { data } = await request.json()
                 setArts(data)
-                console.log('useEffect')
+                addArts(data)
             }
         }
         getArts()
-    }, [])
+    }, [addArts])
 
     const handleCategory = (category) => {
         dispatchFilter({ type: 'category', payload: category })

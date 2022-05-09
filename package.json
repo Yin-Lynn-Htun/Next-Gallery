@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/react": "^18.0.9",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.29.0",
     "dotenv": "^16.0.0",

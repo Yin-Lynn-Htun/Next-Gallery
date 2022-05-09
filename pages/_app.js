@@ -2,6 +2,7 @@ import NavBar from '../components/NavBar/NavBar'
 import '../styles/globals.css'
 import { useRouter } from 'next/router'
 import { SessionProvider } from 'next-auth/react'
+import ArtsContextProvider from '../context/ArtsContext'
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     const router = useRouter()
@@ -10,10 +11,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
     return (
         <SessionProvider session={session}>
-            <section className="flex flex-col min-h-screen">
-                {showNav && <NavBar />}
-                <Component {...pageProps} />
-            </section>
+            <ArtsContextProvider>
+                <section className="flex flex-col min-h-screen">
+                    {showNav && <NavBar />}
+                    <Component {...pageProps} />
+                </section>
+            </ArtsContextProvider>
         </SessionProvider>
     )
 }

@@ -9,6 +9,8 @@ import Tag from '../../../components/Tag'
 import { connectToDb } from '../../../utils/db'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { useContext, useEffect, useState } from 'react'
+import { ArtsContext } from '../../../context/ArtsContext'
 
 const ArtistComponent = ({ _id, artist, love, watch }) => (
     <Link href={`/artists/${artist._id}`}>
@@ -43,8 +45,64 @@ const ArtistComponent = ({ _id, artist, love, watch }) => (
     </Link>
 )
 
-const ArtItem = ({
-    art: {
+const ArtItem = (
+    {
+        // art: {
+        //     _id,
+        //     title,
+        //     description,
+        //     price,
+        //     love,
+        //     watch,
+        //     imgUrl,
+        //     artist,
+        //     categories,
+        // },
+    }
+) => {
+    const {
+        asPath,
+        query: { artId },
+    } = useRouter()
+
+    let art
+    const { arts, addArts } = useContext(ArtsContext)
+    const [error, setError] = useState(null)
+    const { length } = arts
+
+    useEffect(() => {
+        const fetchArts = async () => {
+            try {
+                const request = await fetch('/api/arts')
+                if (request.ok) {
+                    const { data } = await request.json()
+                    addArts(data)
+                }
+            } catch (err) {
+                setError('Sorry, failed to load art right now.')
+            }
+        }
+
+        if (!length) {
+            fetchArts()
+        }
+    }, [length, addArts])
+
+    if (!length) {
+        return <p className="text-white">Loading...</p>
+    }
+
+    if (error) {
+        return <p className="text-white">{error}</p>
+    }
+
+    art = arts.find((art) => art._id === artId)
+
+    if (!art) {
+        return <p className="text-white">Sorry, art not found.</p>
+    }
+
+    const {
         _id,
         title,
         description,
@@ -54,9 +112,8 @@ const ArtItem = ({
         imgUrl,
         artist,
         categories,
-    },
-}) => {
-    const { asPath } = useRouter()
+    } = art
+
     return (
         <div className="flex-1 flex">
             <Head>
@@ -106,18 +163,18 @@ const ArtItem = ({
 
 export default ArtItem
 
-export async function getServerSideProps(context) {
-    await connectToDb()
-    const { artId } = context.query
-    const data = await Art.findById(artId).populate('artist', 'username imgUrl')
-    data.watch = data.watch + 1
-    await data.save()
-    const art = JSON.parse(JSON.stringify(data))
+// export async function getServerSideProps(context) {
+//     await connectToDb()
+//     const { artId } = context.query
+//     const data = await Art.findById(artId).populate('artist', 'username imgUrl')
+//     data.watch = data.watch + 1
+//     await data.save()
+//     const art = JSON.parse(JSON.stringify(data))
 
-    return {
-        props: {
-            // _id , title , description , price , love , watch, imgUrl, artist { _id , username , imgUrl }, categories
-            art: art,
-        }, // will be passed to the page component as props
-    }
-}
+//     return {
+//         props: {
+//             // _id , title , description , price , love , watch, imgUrl, artist { _id , username , imgUrl }, categories
+//             art: art,
+//         }, // will be passed to the page component as props
+//     }
+// }
