@@ -58,7 +58,7 @@ const PriceRange = ({ handlePrice }) => {
         <div className="relative" onClick={(e) => e.stopPropagation()}>
             <button
                 onClick={handleClickPriceButton}
-                className="ml-5 flex bg-button-blue px-5 py-2 rounded-md items-center gap-2"
+                className="lg:ml-5 flex bg-button-blue px-5 py-2 rounded-md items-center gap-2"
             >
                 <AiOutlineDollarCircle />
                 <span> Price range</span>
