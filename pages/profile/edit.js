@@ -23,10 +23,10 @@ const UserProfile = ({ artist }) => {
     const [location, setLocation] = useState(artist.location)
     const [bio, setBio] = useState(artist.bio)
 
-    const [twitter, setTwitter] = useState(artist.socials.twitter)
-    const [website, setWebsite] = useState(artist.socials.website)
-    const [instagram, setInstagram] = useState(artist.socials.instagram)
-    const [facebook, setFacebook] = useState(artist.socials.facebook)
+    const [twitter, setTwitter] = useState(artist.socials?.twitter)
+    const [website, setWebsite] = useState(artist.socials?.website)
+    const [instagram, setInstagram] = useState(artist.socials?.instagram)
+    const [facebook, setFacebook] = useState(artist.socials?.facebook)
 
     const [isArtist, setIsArtist] = useState(artist.isArtist ? 'yes' : 'no')
     const [loading, setLoading] = useState(false)
