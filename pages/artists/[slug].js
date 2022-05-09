@@ -1,5 +1,6 @@
 import Artist from '../../Models/Artist'
 import ArtistProfile from '../../components/Profile/Profile'
+import Head from 'next/head'
 
 // This function gets called at build time
 export async function getServerSideProps({ params }) {
@@ -20,7 +21,15 @@ export async function getServerSideProps({ params }) {
 }
 
 const ArtistItem = ({ artist }) => {
-    return <ArtistProfile artist={artist} />
+    return (
+        <>
+            <Head>
+                <title>{artist.username} | Profile</title>
+            </Head>
+
+            <ArtistProfile artist={artist} />
+        </>
+    )
 }
 
 export default ArtistItem

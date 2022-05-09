@@ -5,8 +5,9 @@ import { connectToDb } from '../../../utils/db'
 import { countries } from '../../../dummy_data'
 import { useState } from 'react'
 import { getSession } from 'next-auth/react'
+import Head from 'next/head'
 
-const ArtItem = ({ art: { imgUrl, price } }) => {
+const ArtItem = ({ art: { imgUrl, price, title } }) => {
     const [numbers, setNumbers] = useState('')
     const [monthAndYear, setMonthAndYear] = useState('')
     const [cvc, setCvc] = useState('')
@@ -59,12 +60,15 @@ const ArtItem = ({ art: { imgUrl, price } }) => {
     const handleSubmitForm = (e) => {
         e.preventDefault()
         alert(
-            'Thanks for your order. Buying an art real payment is in progress...'
+            'Thanks for your order. Buying an art with real payment is in progress. Stay tuned!'
         )
     }
 
     return (
         <div className="flex-1 flex">
+            <Head>
+                <title>{title} | Checkout</title>
+            </Head>
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
                 <div className="w-full h-full relative rounded-xl overflow-hidden">
                     <Image

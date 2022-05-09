@@ -117,6 +117,9 @@ const CreatArt = ({ user }) => {
 
     return (
         <Wrapper>
+            <Head>
+                <title>Next Gallery | Create new art</title>
+            </Head>
             {showCategoryModal && (
                 <CategoryModal
                     handleSaveCategory={handleSaveCategory}
@@ -277,6 +280,7 @@ const CreatArt = ({ user }) => {
 export default CreatArt
 
 import Artist from '../../Models/Artist'
+import Head from 'next/head'
 
 export async function getServerSideProps(context) {
     const session = await getSession(context)

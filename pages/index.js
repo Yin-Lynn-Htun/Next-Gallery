@@ -6,10 +6,18 @@ import Features from '../components/HomePage/Features'
 import Footer from '../components/Footer'
 import Artist from '../Models/Artist'
 import { connectToDb } from '../utils/db'
+import Head from 'next/head'
 
 export default function Home({ artists }) {
     return (
         <Wrapper>
+            <Head>
+                <title>Next Gallery | Homepage</title>
+                <meta
+                    name="description"
+                    content="We offers a beautiful selection of paintings, drawings, design, and photography in various price ranges from around the world. Enjoy the art."
+                />
+            </Head>
             <HeroSection />
             <Features />
             <TrendingArtist artists={artists} />

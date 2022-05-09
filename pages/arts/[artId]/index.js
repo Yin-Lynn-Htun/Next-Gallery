@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Tag from '../../../components/Tag'
 import { connectToDb } from '../../../utils/db'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const ArtistComponent = ({ _id, artist, love, watch }) => (
     <Link href={`/artists/${artist._id}`}>
@@ -58,6 +59,9 @@ const ArtItem = ({
     const { asPath } = useRouter()
     return (
         <div className="flex-1 flex">
+            <Head>
+                <title>Art | {title}</title>
+            </Head>
             <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
                 <div className="w-full h-full relative rounded-xl overflow-hidden">
                     <Image

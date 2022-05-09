@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Alert from '../components/Alert'
 import LoginForm from '../components/LoginForm'
+import Head from 'next/head'
 
 const Login = () => {
     const [alert, setAlert] = useState(null)
@@ -23,6 +24,9 @@ const Login = () => {
 
     return (
         <section className="w-full min-h-screen flex relative">
+            <Head>
+                <title>Next Gallery | Login</title>
+            </Head>
             <div className="flex flex-col fixed top-10 right-10 gap-3 ">
                 {alert && <Alert message={alert.message} />}
             </div>

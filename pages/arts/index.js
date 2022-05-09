@@ -9,6 +9,7 @@ import Artist from '../../Models/Artist'
 import FilterContextProvider from '../../context/FilterContext'
 import { useReducer, useState, useEffect } from 'react'
 import Tag from '../../components/TagForFilter'
+import Head from 'next/head'
 
 export async function getStaticProps() {
     // const arts = dummy_arts
@@ -106,6 +107,9 @@ export default function Arts({ arts: artsProps }) {
 
     return (
         <Wrapper>
+            <Head>
+                <title>Next Gallery | Explore Arts</title>
+            </Head>
             <h1 className="text-white text-center text-5xl mt-10">
                 Welcome to <span className="rays gradient_text">Explore</span>
             </h1>

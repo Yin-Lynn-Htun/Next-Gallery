@@ -8,6 +8,7 @@ import Artist from '../../Models/Artist'
 import 'react-image-crop/dist/ReactCrop.css'
 import ProfileImageCropModal from '../../components/Modals/ProfileImageCropModal'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const UserProfile = ({ artist }) => {
     const [selectedImageFile, setSelectedImageFile] = useState(null)
@@ -88,6 +89,9 @@ const UserProfile = ({ artist }) => {
 
     return (
         <>
+            <Head>
+                <title>{artist.username} | Edit Profile</title>
+            </Head>
             {showModal && (
                 <ProfileImageCropModal
                     imgSrc={selectedImageFile}

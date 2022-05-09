@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { connectToDb } from '../../utils/db'
 import Artist from '../../Models/Artist'
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 
 const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -56,6 +57,9 @@ const Artists = ({ artists: artistsProps }) => {
 
     return (
         <Wrapper>
+            <Head>
+                <title>Next Gallery | Artists</title>
+            </Head>
             <section className="text-white">
                 <h1 className="text-3xl text-center font-bold rays gradient_text">
                     All Artists
