@@ -7,16 +7,23 @@ export async function getServerSideProps({ params }) {
     // Get the paths we want to pre-render based on posts
 
     const id = params.slug
-    const data = await Artist.findById(id)
-    data.popularity = data.popularity + 1
-    await data.save()
+    try {
+        const data = await Artist.findById(id)
+        data.popularity = data.popularity + 1
+        await data.save()
+        const artist = JSON.parse(JSON.stringify(data))
 
-    const artist = JSON.parse(JSON.stringify(data))
-
-    return {
-        props: {
-            artist,
-        },
+        return {
+            props: {
+                artist,
+            },
+        }
+    } catch (err) {
+        return {
+            props: {
+                artist: {},
+            },
+        }
     }
 }
 
