@@ -5,6 +5,7 @@ import PrimaryButton from '../PrimaryButton'
 import Wrapper from '../Wrapper'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import SecondaryButton from '../SecondaryButton'
+import NavForMobile from './NavForMobile'
 
 const NavBar = () => {
     const router = useRouter()
@@ -26,7 +27,7 @@ const NavBar = () => {
                                 />
                             </a>
                         </Link>
-                        <h1 className="ml-5 font-bold text-3xl">
+                        <h1 className="hidden lg:block ml-5 font-bold text-3xl">
                             Next Gallery
                         </h1>
                     </div>
@@ -62,6 +63,9 @@ const NavBar = () => {
                                 </SecondaryButton>
                             </>
                         )}
+                    </div>
+                    <div className="ml-20">
+                        <NavForMobile />
                     </div>
                 </div>
             </Wrapper>

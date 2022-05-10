@@ -112,7 +112,7 @@ export default function Arts({ arts: artsProps }) {
             <Head>
                 <title>Next Gallery | Explore Arts</title>
             </Head>
-            <h1 className="text-white text-center text-3xl md:text-5xl mt-10">
+            <h1 className="text-white text-center text-3xl md:text-5xl my-10">
                 Welcome to <span className="rays gradient_text">Explore</span>
             </h1>
 
