@@ -74,18 +74,19 @@ const ArtistProfile = ({ artist, profile }) => {
                             <h3 className="text-text-blue text-xl">
                                 @{artist.username}
                             </h3>
+                            {profile && (
+                                <div className="flex items-center mt-10">
+                                    <PrimaryButton
+                                        onClick={() =>
+                                            router.push('/profile/edit')
+                                        }
+                                    >
+                                        <AiFillEdit className="inline mr-2 text-white" />
+                                        <span>Edit Profile</span>
+                                    </PrimaryButton>
+                                </div>
+                            )}
                         </div>
-
-                        {profile && (
-                            <div className="flex items-center gap-5">
-                                <PrimaryButton
-                                    onClick={() => router.push('/profile/edit')}
-                                >
-                                    <AiFillEdit className="inline mr-2 text-white" />
-                                    <span>Edit Profile</span>
-                                </PrimaryButton>
-                            </div>
-                        )}
                     </section>
 
                     <section className="flex w-full my-10 justify-center gap-10 text-xl">
