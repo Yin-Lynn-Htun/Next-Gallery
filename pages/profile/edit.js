@@ -100,7 +100,7 @@ const UserProfile = ({ artist }) => {
                 />
             )}
             <div className="text-white">
-                <div className="w-full h-72 relative">
+                <div className="hidden lg:block w-full h-72 relative">
                     <Image
                         src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
                         alt="cover photo"
@@ -110,7 +110,7 @@ const UserProfile = ({ artist }) => {
                 </div>
 
                 <Wrapper>
-                    <div className="flex my-10 w-full">
+                    <div className="flex my-10 w-full flex-col items-center lg:items-start lg:flex-row">
                         <div className="w-72 flex flex-col px-10">
                             <div className="relative w-52 h-52 mx-auto rounded-full my-2 overflow-hidden outline-2 outline-white">
                                 <Image
@@ -150,12 +150,12 @@ const UserProfile = ({ artist }) => {
                             )}
                         </div>
 
-                        <div className="flex-1  grid grid-cols-4 px-5 ">
+                        <div className="flex-1  grid grid-cols-4 lg:px-5 ">
                             <div className="col-span-4 my-5">
                                 <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
                                     General Information
                                 </h1>
-                                <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
+                                <div className="grid grid-cols-2 grid-rows-2 gap-5 lg:pl-5">
                                     <FormInput
                                         name={'First Name'}
                                         placeholder="Example: John"
@@ -213,7 +213,7 @@ const UserProfile = ({ artist }) => {
                                 <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
                                     Social Accounts
                                 </h1>
-                                <div className="grid grid-cols-2 grid-rows-2 gap-5 pl-5">
+                                <div className="grid grid-cols-2 grid-rows-2 gap-5 lg:pl-5">
                                     <FormInput
                                         name={'Your Website'}
                                         placeholder="Your website url"
@@ -250,8 +250,8 @@ const UserProfile = ({ artist }) => {
                             </div>
 
                             <div className="  flex col-span-4  flex-col my-10">
-                                <div className="flex text-2xl font-bold  items-center">
-                                    <span className="mr-10">
+                                <div className="flex text-xl md:text-2xl font-bold  items-center">
+                                    <span className="mr-3 lg:mr-10">
                                         Are you an artist?
                                     </span>
                                     <input
