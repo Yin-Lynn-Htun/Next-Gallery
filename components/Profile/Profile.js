@@ -51,7 +51,7 @@ const ArtistProfile = ({ artist, profile }) => {
                 />
             </div>
 
-            <div className="h-max px-10 ">
+            <div className="h-max lg:px-10 ">
                 <Wrapper>
                     <section className="flex justify-between">
                         <div className="flex mx-auto flex-col justify-center items-center">
