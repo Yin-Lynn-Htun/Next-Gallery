@@ -30,7 +30,7 @@ const ArtistComponent = ({ _id, artist, love, watch }) => (
                 </div>
                 <h1 className="text-xl font-bold w-max">{artist.username}</h1>
 
-                <div className="flex gap-20 w-full">
+                <div className="flex gap-5 md:gap-20 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-3" />
                         <span className="text-white">{love}</span>
@@ -45,21 +45,7 @@ const ArtistComponent = ({ _id, artist, love, watch }) => (
     </Link>
 )
 
-const ArtItem = (
-    {
-        // art: {
-        //     _id,
-        //     title,
-        //     description,
-        //     price,
-        //     love,
-        //     watch,
-        //     imgUrl,
-        //     artist,
-        //     categories,
-        // },
-    }
-) => {
+const ArtItem = () => {
     const {
         asPath,
         query: { artId },
@@ -132,7 +118,7 @@ const ArtItem = (
                     </div>
                 </div>
                 <div className="basis-4/12 mx-auto text-white pb-10 flex flex-col pl-10 pr-10 lg:pl-0 lg:pr-20 overflow-y-scroll overflow-x-hidden screen_with_nav  relative ">
-                    <div className="flex lg:justify-between gap-2 py-5 pt-10 sticky  z-10 top-0 bg-background-main">
+                    <div className="flex lg:justify-between gap-7 py-5 pt-10 sticky  z-10 top-0 bg-background-main">
                         <div className="flex flex-col ">
                             <h1 className="text-3xl font-bold">{title}</h1>
                             <h3 className="font-bold text-xl text-text-pink">
