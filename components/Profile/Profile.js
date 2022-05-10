@@ -54,7 +54,7 @@ const ArtistProfile = ({ artist, profile }) => {
             <div className="h-max px-10 ">
                 <Wrapper>
                     <section className="flex justify-between">
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex mx-auto flex-col justify-center items-center">
                             <div className="rounded-full w-60 h-60 relative overflow-hidden -mt-32 mb-5 outline-text-pink outline-2 outline-none">
                                 <Image
                                     src={
