@@ -112,12 +112,12 @@ export default function Arts({ arts: artsProps }) {
             <Head>
                 <title>Next Gallery | Explore Arts</title>
             </Head>
-            <h1 className="text-white text-center text-5xl mt-10">
+            <h1 className="text-white text-center text-3xl md:text-5xl my-10">
                 Welcome to <span className="rays gradient_text">Explore</span>
             </h1>
 
-            <div className="text-white w-full my-5 bg-red-900/0 h-12 flex justify-between items-center">
-                <div className="flex items-stretch">
+            <div className="text-white w-full my-5 bg-red-900/0 md:h-12 flex flex-col flex-start gap-5 md:flex-row md:justify-between md:items-center">
+                <div className="flex flex-col gap-5 md:flex-row items-stretch">
                     <FilterContextProvider>
                         <CategoryFilter handleCategory={handleCategory} />
                         <PriceRange handlePrice={handlePrice} />
@@ -127,7 +127,7 @@ export default function Arts({ arts: artsProps }) {
                 <SearchBar handleSearch={handleSearch} />
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
                 {filter.category && (
                     <Tag
                         name={filter.category}

@@ -52,13 +52,13 @@ const HeroSection = () => {
                     variants={contextVariants}
                     initial="hidden"
                     animate="visible"
-                    className="flex-1 self-start px-10 mt-40 leading-10"
+                    className="flex-1 self-start lg:px-10 mt-20 lg:mt-40 leading-10"
                 >
                     <div>
-                        <h1 className="font-bold text-6xl ">
+                        <h1 className="font-bold text-5xl lg:text-6xl ">
                             Discover, collect, and sell extraordinary
                         </h1>
-                        <h1 className="font-bold text-5xl text-[#FD1C68]">
+                        <h1 className="font-bold text-4xl lg:text-5xl text-[#FD1C68]">
                             Arts / Photographs
                         </h1>
                         <h3 className="text-base mt-10 font-light">
@@ -83,7 +83,7 @@ const HeroSection = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2, duration: 2 }}
-                    className="flex-1"
+                    className="hidden md:block md:flex-1"
                 >
                     <Image
                         src="/static/images/hero.svg"

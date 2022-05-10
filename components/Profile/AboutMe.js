@@ -15,7 +15,7 @@ const AboutMe = ({ artist }) => {
         <div>
             <div className="pb-10 border-b-2 border-gray-200">
                 <h1 className="font-bold text-3xl">General Information</h1>
-                <div className="flex w-full justify-between my-5">
+                <div className="flex flex-col md:flex-row w-full justify-center md:justify-between my-5">
                     <GeneralInfoItem
                         title="Phone Number"
                         info={artist.phoneNumber}

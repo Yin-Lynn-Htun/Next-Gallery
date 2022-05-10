@@ -28,7 +28,7 @@ const Signup = () => {
             <div className="flex flex-col fixed top-10 right-10 gap-3 ">
                 {alert && <Alert message={alert.message} />}
             </div>
-            <div className="flex-1 rays relative flex justify-center items-center">
+            <div className="flex-1 rays relative hidden lg:flex justify-center items-center">
                 <Image
                     src={'/static/images/signUp.svg'}
                     width={500}
@@ -37,7 +37,7 @@ const Signup = () => {
                 />
             </div>
             <div className="flex-1 p-5 text-white flex flex-col justify-center items-center ">
-                <h1 className="text-4xl py-2 font-bold mb-5 rays gradient_text w-[500px]">
+                <h1 className="text-4xl py-2 font-bold mb-5 rays gradient_text">
                     Sign Up
                 </h1>
 

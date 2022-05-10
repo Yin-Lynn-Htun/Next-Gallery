@@ -61,31 +61,33 @@ const Artists = ({ artists: artistsProps }) => {
                 <title>Next Gallery | Artists</title>
             </Head>
             <section className="text-white">
-                <h1 className="text-3xl text-center font-bold rays gradient_text">
-                    All Artists
+                <h1 className="text-3xl text-center font-bold rays gradient_text mt-10">
+                    Explore | Artists
                 </h1>
 
-                <div className="mbnpm-5 mt-10">
+                <div className="mb-5 mt-5 md:mt-10">
                     <h3 className="text-2xl my-3">
                         Search for artist containing the letter{' '}
                     </h3>
-                    {alphabets.map((alphabet) => (
-                        <Link
-                            href={`/artists?letter=${alphabet}`}
-                            key={alphabet}
-                        >
-                            <a
-                                className={`px-4 py-2 ${
-                                    alphabet === letter && 'bg-gray-400'
-                                }`}
+                    <div className="flex flex-wrap">
+                        {alphabets.map((alphabet) => (
+                            <Link
+                                href={`/artists?letter=${alphabet}`}
+                                key={alphabet}
                             >
-                                {alphabet}
-                            </a>
-                        </Link>
-                    ))}
+                                <a
+                                    className={`px-2 lg:px-4 py-2 ${
+                                        alphabet === letter && 'bg-gray-400'
+                                    }`}
+                                >
+                                    {alphabet}
+                                </a>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
 
-                <div className="flex flex-wrap justify-between gap-7 items-stretch">
+                <div className="flex flex-wrap justify-center md:justify-between gap-7 items-stretch">
                     {artistList.length ? (
                         artistList.map((artist) => (
                             <AristsItem key={artist._id} {...artist} />

@@ -54,7 +54,7 @@ const ArtistProfile = ({ artist, profile }) => {
             <div className="h-max px-10 ">
                 <Wrapper>
                     <section className="flex justify-between">
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex mx-auto flex-col justify-center items-center">
                             <div className="rounded-full w-60 h-60 relative overflow-hidden -mt-32 mb-5 outline-text-pink outline-2 outline-none">
                                 <Image
                                     src={
@@ -74,18 +74,19 @@ const ArtistProfile = ({ artist, profile }) => {
                             <h3 className="text-text-blue text-xl">
                                 @{artist.username}
                             </h3>
+                            {profile && (
+                                <div className="flex items-center mt-10">
+                                    <PrimaryButton
+                                        onClick={() =>
+                                            router.push('/profile/edit')
+                                        }
+                                    >
+                                        <AiFillEdit className="inline mr-2 text-white" />
+                                        <span>Edit Profile</span>
+                                    </PrimaryButton>
+                                </div>
+                            )}
                         </div>
-
-                        {profile && (
-                            <div className="flex items-center gap-5">
-                                <PrimaryButton
-                                    onClick={() => router.push('/profile/edit')}
-                                >
-                                    <AiFillEdit className="inline mr-2 text-white" />
-                                    <span>Edit Profile</span>
-                                </PrimaryButton>
-                            </div>
-                        )}
                     </section>
 
                     <section className="flex w-full my-10 justify-center gap-10 text-xl">

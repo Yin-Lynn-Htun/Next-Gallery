@@ -5,6 +5,7 @@ import PrimaryButton from '../PrimaryButton'
 import Wrapper from '../Wrapper'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import SecondaryButton from '../SecondaryButton'
+import NavForMobile from './NavForMobile'
 
 const NavBar = () => {
     const router = useRouter()
@@ -26,11 +27,11 @@ const NavBar = () => {
                                 />
                             </a>
                         </Link>
-                        <h1 className="ml-5 font-bold text-3xl">
+                        <h1 className="hidden lg:block ml-5 font-bold text-3xl">
                             Next Gallery
                         </h1>
                     </div>
-                    <div className="font-semibold text-xl flex gap-7 items-center ml-auto">
+                    <div className="hidden  font-semibold text-xl lg:flex gap-7 items-center ml-auto">
                         <Link href={'/'} passHref>
                             <a> Home</a>
                         </Link>
@@ -62,6 +63,9 @@ const NavBar = () => {
                                 </SecondaryButton>
                             </>
                         )}
+                    </div>
+                    <div className="lg:hidden ml-20">
+                        <NavForMobile />
                     </div>
                 </div>
             </Wrapper>

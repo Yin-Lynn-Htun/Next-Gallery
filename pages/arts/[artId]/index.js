@@ -15,7 +15,7 @@ import { ArtsContext } from '../../../context/ArtsContext'
 const ArtistComponent = ({ _id, artist, love, watch }) => (
     <Link href={`/artists/${artist._id}`}>
         <a>
-            <div className="my-5 grid grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
+            <div className="my-5 grid  grid-cols-[100px_minmax(200px,_1fr)] md:grid-cols-[100px_minmax(400px,_1fr)] grid-rows-2 text-white">
                 <div className="row-span-2 w-100 ml-2">
                     <div className="w-[70px] h-[70px] outline-none outline-text-pink rounded-full">
                         <Image
@@ -30,7 +30,7 @@ const ArtistComponent = ({ _id, artist, love, watch }) => (
                 </div>
                 <h1 className="text-xl font-bold w-max">{artist.username}</h1>
 
-                <div className="flex gap-20 w-full">
+                <div className="flex gap-5 md:gap-20 w-full">
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-3" />
                         <span className="text-white">{love}</span>
@@ -45,21 +45,7 @@ const ArtistComponent = ({ _id, artist, love, watch }) => (
     </Link>
 )
 
-const ArtItem = (
-    {
-        // art: {
-        //     _id,
-        //     title,
-        //     description,
-        //     price,
-        //     love,
-        //     watch,
-        //     imgUrl,
-        //     artist,
-        //     categories,
-        // },
-    }
-) => {
+const ArtItem = () => {
     const {
         asPath,
         query: { artId },
@@ -115,49 +101,52 @@ const ArtItem = (
     } = art
 
     return (
-        <div className="flex-1 flex">
+        <>
             <Head>
                 <title>Art | {title}</title>
             </Head>
-            <div className="relative mx-auto max-w-[1900px] py-10 px-16 flex-1 flex">
-                <div className="w-full h-full relative rounded-xl overflow-hidden">
-                    <Image
-                        src={imgUrl}
-                        alt="Title of the art"
-                        layout="fill"
-                        objectFit="contain"
-                    />
-                </div>
-            </div>
-            <div className="basis-4/12 text-white pb-10 flex flex-col pr-20 overflow-y-scroll overflow-x-hidden screen_with_nav  relative ">
-                <div className="flex justify-between  pt-10 py-5 sticky  z-10 top-0 bg-background-main">
-                    <div className="flex flex-col ">
-                        <h1 className="text-3xl font-bold">{title}</h1>
-                        <h3 className="font-bold text-xl text-text-pink">
-                            Price: {price}$
-                        </h3>
+
+            <div className="flex-1 flex flex-col lg:flex-row">
+                <div className="relative mx-auto w-11/12 h-[300px] lg:h-auto lg:max-w-[1900px] lg:py-10 lg:px-16 lg:flex-1 flex">
+                    <div className="w-full h-full relative rounded-xl overflow-hidden">
+                        <Image
+                            src={imgUrl}
+                            alt="Title of the art"
+                            layout="fill"
+                            objectFit="contain"
+                        />
                     </div>
-                    <Link href={`${asPath}/checkout`} passHref>
-                        <a>
-                            <CtaButton name="Buy Now" />
-                        </a>
-                    </Link>
                 </div>
+                <div className="basis-4/12 mx-auto text-white pb-10 flex flex-col pl-10 pr-10 lg:pl-0 lg:pr-20 overflow-y-scroll overflow-x-hidden screen_with_nav  relative ">
+                    <div className="flex lg:justify-between gap-7 py-5 pt-10 sticky  z-10 top-0 bg-background-main">
+                        <div className="flex flex-col ">
+                            <h1 className="text-3xl font-bold">{title}</h1>
+                            <h3 className="font-bold text-xl text-text-pink">
+                                Price: {price}$
+                            </h3>
+                        </div>
+                        <Link href={`${asPath}/checkout`} passHref>
+                            <a>
+                                <CtaButton name="Buy Now" />
+                            </a>
+                        </Link>
+                    </div>
 
-                <ArtistComponent {...{ _id, artist, love, watch }} />
+                    <ArtistComponent {...{ _id, artist, love, watch }} />
 
-                <div className="flex flex-wrap">
-                    {categories.map((category, idx) => (
-                        <Tag key={idx} name={category} />
-                    ))}
-                </div>
+                    <div className="flex flex-wrap">
+                        {categories.map((category, idx) => (
+                            <Tag key={idx} name={category} />
+                        ))}
+                    </div>
 
-                <div>
-                    <h1 className="text-2xl mt-10 mb-3">About Art</h1>
-                    {description}
+                    <div>
+                        <h1 className="text-2xl mt-10 mb-3">About Art</h1>
+                        {description}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

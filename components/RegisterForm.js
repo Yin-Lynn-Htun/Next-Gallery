@@ -65,7 +65,10 @@ const RegisterForm = ({ handleAddAlert }) => {
     })
 
     return (
-        <form className="w-[500px]" onSubmit={formik.handleSubmit}>
+        <form
+            className="w-11/12 max-w-[500px] lg:w-[500px]"
+            onSubmit={formik.handleSubmit}
+        >
             <Input
                 label={'Username'}
                 name="username"
@@ -115,8 +118,8 @@ const RegisterForm = ({ handleAddAlert }) => {
             </PrimaryButton>
 
             <p className="text-lg mt-10 border-t-2 border-gray-300 pt-2">
-                Already have an account?
-                <span className="cursor-pointer ml-5 py-2 rays gradient_text text-xl">
+                <span className="mr-5">Already have an account?</span>
+                <span className="cursor-pointer py-2 rays gradient_text text-xl">
                     <Link href="/login">
                         <a>Login</a>
                     </Link>

@@ -126,12 +126,12 @@ const CreatArt = ({ user }) => {
                     categories={categories}
                 />
             )}
-            <div>
-                <div className="text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
+            <div className="my-10">
+                <div className="text-4xl lg:text-5xl rays gradient_text font-bold text-center mx-auto mb-4 mt-10">
                     Upload Your Art
                 </div>
-                <div className="flex h-[1000px] ">
-                    <div className="h-full flex-1 p-10">
+                <div className="flex flex-col lg:flex-row  lg:h-[1000px] ">
+                    <div className="h-full flex-1 py-10 lg:p-10">
                         <div className="flex flex-col">
                             <div className="text-white border-dashed border-2 border-white h-60 w-full bg-black grid place-items-center">
                                 {!isFilePicked ? (
@@ -187,7 +187,7 @@ const CreatArt = ({ user }) => {
                                     <h1 className="bg-form-gray text-white py-3 text-xl px-10 w-full">
                                         Details
                                     </h1>
-                                    <div className="grid grid-cols-2 grid-rows-[100px] gap-5 px-10">
+                                    <div className="grid grid-cols-2 grid-rows-[100px] gap-5 lg:px-10">
                                         <FormInput
                                             name="Art Name"
                                             value={name}
@@ -256,7 +256,7 @@ const CreatArt = ({ user }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[320px] text-white h-max  pt-5 sticky top-0">
+                    <div className="w-[320px] mx-auto text-white h-max pt-5 lg:sticky lg:top-0">
                         <div>
                             <h1 className="my-5 font-bold text-2xl">
                                 Art Preview

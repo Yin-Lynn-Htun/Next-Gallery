@@ -4,9 +4,11 @@ import Image from 'next/image'
 const Features = () => {
     return (
         <section className="text-white my-20">
-            <h1 className="text-5xl font-bold text-center my-7">How it work</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold text-center my-7">
+                How it work
+            </h1>
 
-            <div className="flex gap-12 text-center mt-12">
+            <div className="flex flex-col md:flex-row gap-12 text-center mt-12">
                 <div className="my-5 flex flex-col flex-1 gap-5">
                     <Image
                         src="/static/images/art.svg"

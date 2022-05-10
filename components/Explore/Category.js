@@ -26,7 +26,7 @@ const CategoryFilter = ({ handleCategory }) => {
             <button
                 name="category"
                 id="category"
-                className="bg-button-blue h-full rounded-md px-3 flex items-center gap-2"
+                className="bg-button-blue h-full rounded-md px-3 py-2 flex items-center gap-2"
                 onClick={handleClickCategoryButton}
             >
                 <BiCategoryAlt />
