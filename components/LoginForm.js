@@ -45,7 +45,10 @@ const LoginForm = ({ handleAddAlert }) => {
     })
 
     return (
-        <form className="w-[500px]" onSubmit={formik.handleSubmit}>
+        <form
+            className="w-11/12 max-w-[500px] lg:w-[500px]"
+            onSubmit={formik.handleSubmit}
+        >
             <Input
                 label={'Email'}
                 name="email"
@@ -76,11 +79,11 @@ const LoginForm = ({ handleAddAlert }) => {
                 {loading ? 'Loading' : 'Login'}
             </PrimaryButton>
 
-            <p className="text-lg mt-10 border-t-2 border-gray-300 pt-2">
-                Create a new account?
-                <span className="cursor-pointer ml-5 py-2 rays gradient_text text-xl">
+            <p className="text-lg mt-10  border-t-2 border-gray-300 pt-2">
+                <span className="mr-5">Create a new account?</span>
+                <span className="cursor-pointer py-2 rays gradient_text text-xl">
                     <Link href="/signup">
-                        <a>Sign Up</a>
+                        <a className="whitespace-nowrap">Sign Up</a>
                     </Link>
                 </span>
             </p>
