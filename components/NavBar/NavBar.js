@@ -64,7 +64,7 @@ const NavBar = () => {
                             </>
                         )}
                     </div>
-                    <div className="ml-20">
+                    <div className="lg:hidden ml-20">
                         <NavForMobile />
                     </div>
                 </div>

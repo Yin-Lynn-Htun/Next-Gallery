@@ -29,7 +29,7 @@ const NavForMobile = () => {
             </div>
 
             {isOpen && (
-                <div className="grid place-items-center h-full fixed top-0 left-0 w-full z-40 bg-black">
+                <div className="grid place-items-center h-full fixed top-0 left-0 w-full z-40 bg-main-background">
                     <ul className="flex flex-col gap-10 font-bold text-2xl ">
                         <li
                             onClick={() => {
