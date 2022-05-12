@@ -62,15 +62,20 @@ export default function Arts({ arts: artsProps }) {
     const { addArts } = useContext(ArtsContext)
 
     useEffect(() => {
+        let isSubscribed = true
         const getArts = async () => {
             const request = await fetch('/api/arts')
             if (request.ok) {
                 const { data } = await request.json()
-                setArts(data)
-                addArts(data)
+                if (isSubscribed) {
+                    setArts(data)
+                    addArts(data)
+                }
             }
         }
         getArts()
+
+        return () => (isSubscribed = false)
     }, [addArts])
 
     const handleCategory = (category) => {

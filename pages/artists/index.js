@@ -26,20 +26,24 @@ export async function getStaticProps() {
 
 const Artists = ({ artists: artistsProps }) => {
     const [artists, setArtists] = useState(artistsProps)
-
     const { addArtists } = useContext(ArtistsContext)
 
     useEffect(() => {
+        let isSubscribed = true
         const getArtists = async () => {
             const request = await fetch('/api/artists')
             if (request.ok) {
                 const { data } = await request.json()
-                setArtists(data)
-                addArtists(data)
+                if (isSubscribed) {
+                    setArtists(data)
+                    addArtists(data)
+                }
             }
         }
 
         getArtists()
+
+        return () => (isSubscribed = false)
     }, [addArtists])
 
     const router = useRouter()
