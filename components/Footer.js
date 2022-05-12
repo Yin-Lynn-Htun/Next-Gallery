@@ -61,30 +61,30 @@ const Footer = () => {
                     </div> */}
                 </div>
 
-                <div className="list-none flex flex-col gap-2 justify-self-center text-lg text-yellow-300 ">
+                <div className="list-none flex flex-col gap-2 justify-self-center text-lg font-semibold text-[#FD1C68] ">
                     <li>
                         <Link href="/">
-                            <a> Home</a>
+                            <a className="hover:text-white"> Home</a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/arts">
-                            <a> Arts</a>
+                            <a className="hover:text-white"> Arts</a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/artists">
-                            <a> Artists</a>
+                            <a className="hover:text-white"> Artists</a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/signup">
-                            <a> Sign Up</a>
+                            <a className="hover:text-white"> Sign Up</a>
                         </Link>
                     </li>
                     <li>
                         <Link href="/login">
-                            <a> Login</a>
+                            <a className="hover:text-white"> Login</a>
                         </Link>
                     </li>
                 </div>

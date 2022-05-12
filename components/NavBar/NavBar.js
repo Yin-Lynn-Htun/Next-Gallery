@@ -33,13 +33,13 @@ const NavBar = () => {
                     </div>
                     <div className="hidden  font-semibold text-xl lg:flex gap-7 items-center ml-auto">
                         <Link href={'/'} passHref>
-                            <a> Home</a>
+                            <a className="hover:text-text-pink">Home</a>
                         </Link>
                         <Link href={'/arts'} passHref>
-                            <a>Explore</a>
+                            <a className="hover:text-text-pink">Explore</a>
                         </Link>
                         <Link href={'/artists'} passHref>
-                            <a>Artists</a>
+                            <a className="hover:text-text-pink">Artists</a>
                         </Link>
                         {!session && (
                             <PrimaryButton
@@ -51,7 +51,9 @@ const NavBar = () => {
                         {session && (
                             <>
                                 <Link href={'/profile'} passHref>
-                                    <a>Profile</a>
+                                    <a className="hover:text-text-pink">
+                                        Profile
+                                    </a>
                                 </Link>
                                 <PrimaryButton
                                     onClick={() => router.push('/arts/new')}
