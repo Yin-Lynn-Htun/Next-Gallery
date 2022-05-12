@@ -6,30 +6,6 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
-// This function gets called at build time
-// export async function getServerSideProps({ req }) {
-//     // Get the paths we want to pre-render based on posts
-//     const session = await getSession({ req })
-
-//     if (!session) {
-//         return {
-//             redirect: {
-//                 destination: '/login',
-//             },
-//         }
-//     }
-
-//     const id = session.userId
-//     const data = await Artist.findById(id)
-//     const artist = JSON.parse(JSON.stringify(data))
-
-//     return {
-//         props: {
-//             artist,
-//         },
-//     }
-// }
-
 const ArtistItem = () => {
     const { data: session, status } = useSession()
     const [artist, setArtist] = useState(null)
@@ -51,7 +27,7 @@ const ArtistItem = () => {
 
     if (status === 'unauthenticated') {
         router.replace('/login')
-        return
+        return null
     }
 
     if (status === 'authenticated') {
