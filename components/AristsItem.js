@@ -1,9 +1,25 @@
 import Image from 'next/image'
 import { GiSelfLove } from 'react-icons/gi'
-import { AiFillEye } from 'react-icons/ai'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
-const AristsItem = ({ _id, username, imgUrl, love, location }) => {
+const AristsItem = ({ _id, username, imgUrl, popularity, arts }) => {
+    const [artCount, setArtCount] = useState(0)
+
+    useEffect(() => {
+        const fetchArts = async () => {
+            const request = await fetch(`/api/artists/${_id}/arts`)
+            if (request.ok) {
+                const { data } = await request.json()
+                setArtCount(data.length)
+            }
+        }
+
+        if (!artCount) {
+            fetchArts()
+        }
+    }, [artCount, _id])
+
     return (
         <Link href={`/artists/${_id}`}>
             <a className="flex">
@@ -19,11 +35,11 @@ const AristsItem = ({ _id, username, imgUrl, love, location }) => {
                     </div>
                     <h1 className="text-2xl font-bold w-max ">{username}</h1>
                     <h1 className="text-xl font-bold w-max text-green-200">
-                        21 Artworks
+                        {artCount ? artCount : '0'} Artworks
                     </h1>
                     <div>
                         <GiSelfLove className="text-red-500 w-10 h-10 inline mr-5" />
-                        <span className="text-white">{love || 0}</span>
+                        <span className="text-white">{popularity || 12}</span>
                     </div>
                     {/* <h1 className="text-lg font-bold text-center w-full text-yellow-200 overflow-hidden whitespace-nowrap text-ellipsis ">
                         {location}
