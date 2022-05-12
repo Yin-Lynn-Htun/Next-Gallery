@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import AristsItem from '../../components/AristsItem'
 import Wrapper from '../../components/Wrapper'
 import Link from 'next/link'
@@ -6,6 +6,7 @@ import { connectToDb } from '../../utils/db'
 import Artist from '../../Models/Artist'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
+import { ArtistsContext } from '../../context/ArtistsContext'
 
 const alphabets = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -26,17 +27,20 @@ export async function getStaticProps() {
 const Artists = ({ artists: artistsProps }) => {
     const [artists, setArtists] = useState(artistsProps)
 
+    const { addArtists } = useContext(ArtistsContext)
+
     useEffect(() => {
         const getArtists = async () => {
             const request = await fetch('/api/artists')
             if (request.ok) {
                 const { data } = await request.json()
                 setArtists(data)
+                addArtists(data)
             }
         }
 
         getArtists()
-    }, [])
+    }, [addArtists])
 
     const router = useRouter()
     let letter = ''
