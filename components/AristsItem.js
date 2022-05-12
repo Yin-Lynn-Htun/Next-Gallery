@@ -23,7 +23,7 @@ const AristsItem = ({ _id, username, imgUrl, popularity, arts }) => {
     return (
         <Link href={`/artists/${_id}`}>
             <a className="flex">
-                <div className="p-10 rounded-xl gap-3 border-blue-400/0 border-2 my-10 items-center flex flex-col text-white cursor-pointer w-[250px] justify-center bg-transparent hover:bg-text-darker ">
+                <div className="p-5 rounded-xl gap-3 border-blue-400/0 border-2 my-5 items-center flex flex-col text-white cursor-pointer w-[250px] justify-center bg-transparent hover:bg-text-darker ">
                     <div className="row-span-2 w-[150px] h-[150px] justify-self-center self-center relative outline-text-pink outline-2 outline-none rounded-full">
                         <Image
                             src={imgUrl || '/static/images/defaultUser.svg'}
