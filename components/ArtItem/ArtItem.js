@@ -6,12 +6,12 @@ import Link from 'next/link'
 
 const ArtItem = (props) => {
     return (
-        <div className="w-72 h-min p-5  bg-white/10 rounded-2xl">
+        <div className="w-72 h-min  bg-white/10 rounded-2xl overflow-hidden">
             <div className="flex justify-center">
                 <Link href={`/arts/${props._id}`}>
                     <a>
                         <Image
-                            className="rounded-xl overflow-hidden"
+                            className="overflow-hidden"
                             src={
                                 props.imgUrl ||
                                 'https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1172&q=80'
@@ -24,7 +24,7 @@ const ArtItem = (props) => {
                     </a>
                 </Link>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 px-5 pb-4">
                 <Link href={`/arts/${props._id}`}>
                     <a>
                         <h1 className="hover:text-text-pink mt-5 text-white text-2xl font-bold w-full text-ellipsis overflow-hidden whitespace-nowrap">
