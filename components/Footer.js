@@ -100,7 +100,7 @@ const Footer = () => {
                             />
                         </div>
                         <p className="text-sm">Phone Number</p>
-                        <h4 className="text-lg">+959429047557</h4>
+                        <h4 className="text-lg">+959429007577</h4>
                     </div>
 
                     <div className="grid grid-rows-2 grid-cols-[repeat(2,max-content)] gap-x-5">
